@@ -1,5 +1,6 @@
 ﻿using Homework_13.Enums;
-using System.Collections.Generic;
+using Homework_13.Models;
+using System.Collections.ObjectModel;
 
 namespace Homework_13.Interfaces
 {
@@ -21,6 +22,6 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Лист клиентов банка
         /// </summary>
-        IList<IBankCustomer> BankCustomers { get; set; }
+        ObservableCollection<BankCustomer> BankCustomers { get; set; }
     }
 }

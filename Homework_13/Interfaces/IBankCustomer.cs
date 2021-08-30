@@ -1,5 +1,6 @@
 ﻿using Homework_13.Enums;
-using System.Collections.Generic;
+using Homework_13.Models;
+using System.Collections.ObjectModel;
 
 namespace Homework_13.Interfaces
 {
@@ -41,12 +42,12 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Лист депозитарных счетов
         /// </summary>
-        IList<DepositoryAccount> DepositoryAccounts { get; set; }
+        ObservableCollection<DepositoryAccount> DepositoryAccounts { get; set; }
 
         /// <summary>
         /// Лист кредитных счетов
         /// </summary>
-        IList<CreditAccount> CreditAccounts { get; set; }
+        ObservableCollection<CreditAccount> CreditAccounts { get; set; }
 
         /// <summary>
         /// Метод сравнения

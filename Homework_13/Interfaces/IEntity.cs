@@ -8,6 +8,6 @@
         /// <summary>
         /// Идентификатор
         /// </summary>
-        int Id { get; protected set; }
+        int Id { get; }
     }
 }
