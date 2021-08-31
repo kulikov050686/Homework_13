@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xaml.Behaviors;
 using System.Windows;
 using System.Windows.Controls;
-using Homework_13.Views;
 
 namespace Homework_13.Behaviors
 {
@@ -21,7 +20,7 @@ namespace Homework_13.Behaviors
         /// <summary>
         /// Обработчик события нажатия кнопки
         /// </summary>        
-        private void OnButtonClick(object sender, RoutedEventArgs e) => CurrentWindow()?.Close();
+        private void OnButtonClick(object sender, RoutedEventArgs e) => (AssociatedObject.FindLogicalRoot() as Window)?.Close();
 
         /// <summary>
         /// Вызывается когда поведение удаляется из коллекции
@@ -29,22 +28,6 @@ namespace Homework_13.Behaviors
         protected override void OnDetaching()
         {
             AssociatedObject.Click -= OnButtonClick;
-        }
-
-        /// <summary>
-        /// Определяет текущее окно
-        /// </summary>        
-        private Window CurrentWindow()
-        {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window is MainWindow)
-                {
-                    return window;
-                }
-            }
-
-            return null;
-        }
+        }  
     }
 }

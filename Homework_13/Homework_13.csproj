@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Behaviors\" />
     <Folder Include="Assets\" />
   </ItemGroup>
 
