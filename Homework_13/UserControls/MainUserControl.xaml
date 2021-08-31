@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Homework_13.UserControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" 
+             xmlns:converter="clr-namespace:Homework_13.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
              d:DesignWidth="800"
              DataContext="{Binding MainUserControlVM, Source={StaticResource Locator}}">
     <Grid>
@@ -124,56 +125,56 @@
                 <!--#region Название полей-->
 
                 <TextBlock Grid.Row="0" 
-                       Grid.Column="0"
-                       Text="Имя"/>
+                           Grid.Column="0"
+                           Text="Имя"/>
 
                 <TextBlock Grid.Row="1" 
-                       Grid.Column="0"
-                       Text="Фамилия"/>
+                           Grid.Column="0"
+                           Text="Фамилия"/>
 
                 <TextBlock Grid.Row="2" 
-                       Grid.Column="0"
-                       Text="Отчество"/>
+                           Grid.Column="0"
+                           Text="Отчество"/>
 
                 <TextBlock Grid.Row="3" 
-                       Grid.Column="0"
-                       Text="Дата рождения"/>
+                           Grid.Column="0"
+                           Text="Дата рождения"/>
 
                 <TextBlock Grid.Row="4" 
-                       Grid.Column="0"
-                       Text="Пол"/>
+                           Grid.Column="0"
+                           Text="Пол"/>
 
                 <TextBlock Grid.Row="5" 
-                       Grid.Column="0"
-                       Text="Место рождения"/>
+                           Grid.Column="0"
+                           Text="Надёжность"/>
 
                 <!--#endregion-->
 
                 <!--#region Отображение информации-->
 
                 <TextBlock Grid.Row="0" 
-                       Grid.Column="1"
-                       Text="{Binding Passport.Holder.Name}"/>
+                           Grid.Column="1"
+                           Text="{Binding Passport.Holder.Name}"/>
 
                 <TextBlock Grid.Row="1" 
-                       Grid.Column="1"
-                       Text="{Binding Passport.Holder.Surname}"/>
+                           Grid.Column="1"
+                           Text="{Binding Passport.Holder.Surname}"/>
 
                 <TextBlock Grid.Row="2"
-                       Grid.Column="1"
-                       Text="{Binding Passport.Holder.Patronymic}"/>
+                           Grid.Column="1"
+                           Text="{Binding Passport.Holder.Patronymic}"/>
 
                 <TextBlock Grid.Row="3"
-                       Grid.Column="1"
-                       Text="{Binding Passport.Holder.Birthday, StringFormat=dd.MM.yyyy}"/>
+                           Grid.Column="1"
+                           Text="{Binding Passport.Holder.Birthday, StringFormat=dd.MM.yyyy}"/>
 
                 <TextBlock Grid.Row="4"
-                       Grid.Column="1"
-                       Text="{Binding Passport.Holder.Gender}"/>
+                           Grid.Column="1"
+                           Text="{Binding Passport.Holder.Gender, Converter={converter:GenderToTextConverter}}"/>
 
                 <TextBlock Grid.Row="5"
-                       Grid.Column="1"
-                       Text="{Binding Passport.Holder.PlaceOfBirth}"/>
+                           Grid.Column="1"
+                           Text="{Binding Reliability, Converter={converter:ReliabilityToTextConverter}}"/>
 
                 <!--#endregion-->
 
@@ -181,7 +182,7 @@
         </GroupBox>
 
         <!--Депозитарные счета-->
-        <!--<GroupBox Grid.Column="3" 
+        <GroupBox Grid.Column="3" 
                   Header="Депозитарные счета">
             <ListBox ItemsSource="{Binding SelectedBankCustomer.DepositoryAccounts}"
                      SelectedItem="{Binding SelectedDepositoryAccount}"
@@ -205,21 +206,21 @@
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Добавить" 
-                                  Command="{Binding CreateNewDepositoryAccount}" 
-                                  CommandParameter="{Binding SelectedBankCustomer}"/>
+                                  Command="" 
+                                  CommandParameter=""/>
                         <MenuItem Header="Удалить"
-                                  Command="{Binding DeleteDepositoryAccount}"
-                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
+                                  Command=""
+                                  CommandParameter=""/>
                         <MenuItem Header="Редактировать"
-                                  Command="{Binding EditDepositoryAccount}"
-                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
+                                  Command=""
+                                  CommandParameter=""/>
                         <MenuItem Header="Объединить"
-                                  Command="{Binding CombiningDepositoryAccounts}"
-                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
+                                  Command=""
+                                  CommandParameter=""/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>
-        </GroupBox>-->
+        </GroupBox>
 
         <GridSplitter Grid.Column="0" 
                       HorizontalAlignment="Right" 

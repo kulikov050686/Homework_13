@@ -16,8 +16,10 @@ namespace Homework_13.Services
         {
             services.AddSingleton<BankCustomerRepository>();
             services.AddSingleton<DepartmentRepository>();
+            services.AddSingleton<DepositoryAccountRepository>();
 
-            services.AddSingleton<BankCustomersManager>();            
+            services.AddSingleton<BankCustomersManager>();
+            services.AddSingleton<DepositoryAccountsManager>();
 
             return services;
         }

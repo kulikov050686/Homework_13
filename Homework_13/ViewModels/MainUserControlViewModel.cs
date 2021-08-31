@@ -1,8 +1,6 @@
 ﻿using Homework_13.Models;
 using Homework_13.Services;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Homework_13.ViewModels
 {
@@ -13,7 +11,8 @@ namespace Homework_13.ViewModels
     {
         #region Закрытые поля
 
-        private readonly BankCustomersManager _bankCustomersManager;        
+        private readonly BankCustomersManager _bankCustomersManager;
+        private readonly DepositoryAccountsManager _depositoryAccountsManager;
         private Department _selectedDepartment;
         private BankCustomer _selectedBankCustomer;
         private DepositoryAccount _selectedDepositoryAccount;
@@ -31,6 +30,11 @@ namespace Homework_13.ViewModels
         /// Список всех клиентов банка
         /// </summary>
         public IEnumerable<BankCustomer> BankCustomers => _bankCustomersManager.BankCustomers;
+
+        /// <summary>
+        /// Список всех депозитарных счетов
+        /// </summary>
+        public IEnumerable<DepositoryAccount> DepositoryAccounts => _depositoryAccountsManager.DepositoryAccounts;
 
         /// <summary>
         /// Выбранный департамент
@@ -64,9 +68,11 @@ namespace Homework_13.ViewModels
         /// <summary>
         /// Конструктор
         /// </summary>
-        public MainUserControlViewModel(BankCustomersManager bankCustomersManager)
+        public MainUserControlViewModel(BankCustomersManager bankCustomersManager,
+                                        DepositoryAccountsManager depositoryAccountsManager)
         {
             _bankCustomersManager = bankCustomersManager;
+            _depositoryAccountsManager = depositoryAccountsManager;
         }
     }
 }
