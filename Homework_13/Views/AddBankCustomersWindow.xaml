@@ -1,0 +1,104 @@
+﻿<Window x:Class="Homework_13.Views.AddBankCustomersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Homework_13.Views"
+        xmlns:uc="clr-namespace:Homework_13.UserControls"
+        xmlns:cmd="clr-namespace:Homework_13.Commands"
+        mc:Ignorable="d"
+        Height="530"
+        Width="1085"
+        ResizeMode="NoResize"
+        Title="Добавить клиента банка"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    
+    <StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Телефон">
+                <TextBox Text="{Binding PhoneNumber, Mode=TwoWay}"/>
+            </GroupBox>
+
+            <GroupBox Header="Электронный адрес">
+                <TextBox Text="{Binding Email, Mode=TwoWay}"/>
+            </GroupBox>
+
+            <GroupBox Header="Рейтинг">
+                <ComboBox/>
+            </GroupBox>
+
+            <GroupBox Header="Описание">
+                <TextBox Text="{Binding Description, Mode=TwoWay}"/>
+            </GroupBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            
+            <!--Данные клиента-->
+            <uc:PersonUserControl TitleUC="Данные клиента"
+                                  NameUC="{Binding NameBankCustomer, Mode=TwoWay}"
+                                  SurnameUC="{Binding SurnameBankCustomer, Mode=TwoWay}"
+                                  PatronymicUC="{Binding PatronymicBankCustomer, Mode=TwoWay}"
+                                  DateOfBirthrUC="{Binding BirthdayBankCustomer, Mode=TwoWay}"
+                                  SelectedItemGenderUC="{Binding GenderBankCustomer, Mode=TwoWay}"
+                                  PlaceOfBirthUC="{Binding PlaceOfBirthBankCustomer, Mode=TwoWay}"/>
+
+            <!--Паспорт-->
+            <uc:PassportUserControl TitleUC="Паспорт"
+                                    SeriesUC="{Binding SeriesPassport, Mode=TwoWay}"
+                                    NumberUC="{Binding NumberPassport, Mode=TwoWay}"
+                                    DivisionCodeLeftUC="{Binding DivisionCodeLeftPassport, Mode=TwoWay}"
+                                    DivisionCodeRightUC="{Binding DivisionCodeRightPassport, Mode=TwoWay}"
+                                    DateOfIssueUC="{Binding DateOfIssuePassport, Mode=TwoWay}"
+                                    PlaceOfIssueUC="{Binding PlaceOfIssuePassport, Mode=TwoWay}"/>
+            
+            <!--Адрес прописки-->
+            <uc:AddressUserControl TitleUC="Адрес прописки"
+                                   RegionUC="{Binding RegionPlaceOfResidence, Mode=TwoWay}"
+                                   CityUC="{Binding CityPlaceOfResidence, Mode=TwoWay}"
+                                   DistrictUC="{Binding DistrictPlaceOfResidence, Mode=TwoWay}"
+                                   StreetUC="{Binding StreetPlaceOfResidence, Mode=TwoWay}"
+                                   HouseNumberUC="{Binding HouseNumberPlaceOfResidence, Mode=TwoWay}"
+                                   HousingUC="{Binding HousingPlaceOfResidence, Mode=TwoWay}"
+                                   ApartmentNumberUC="{Binding ApartmentNumberPlaceOfResidence, Mode=TwoWay}"
+                                   RegistrationDateUC="{Binding RegistrationDatePlaceOfResidence, Mode=TwoWay}"/>
+            
+            <!--Адрес регистрации-->
+            <uc:AddressUserControl TitleUC="Адрес регистрации"
+                                   RegionUC="{Binding RegionRegistration, Mode=TwoWay}"
+                                   CityUC="{Binding CityRegistration, Mode=TwoWay}"
+                                   DistrictUC="{Binding DistrictRegistration, Mode=TwoWay}"
+                                   StreetUC="{Binding StreetRegistration, Mode=TwoWay}"
+                                   HouseNumberUC="{Binding HouseNumberRegistration, Mode=TwoWay}"
+                                   HousingUC="{Binding HousingRegistration, Mode=TwoWay}"
+                                   ApartmentNumberUC="{Binding ApartmentNumberRegistration, Mode=TwoWay}"
+                                   RegistrationDateUC="{Binding RegistrationDateRegistration, Mode=TwoWay}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" 
+                    Height="50" 
+                    HorizontalAlignment="Right">
+
+            <!--Кнопка применить-->
+            <Button Content="Применить"
+                    Margin="5 0 5 0"
+                    Width="80"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=local:AddBankCustomersWindow}}">
+                <Button.Command>
+                    <cmd:CloseDialogCommand DialogResult="True"/>
+                </Button.Command>
+            </Button>
+            
+            <!--Кнопка отменить-->
+            <Button Content="Отмена"
+                    Margin=" 5 0 5 0"
+                    Width="80"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=local:AddBankCustomersWindow}}">
+                <Button.Command>
+                    <cmd:CloseDialogCommand DialogResult="False"/>
+                </Button.Command>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</Window>
