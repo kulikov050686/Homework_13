@@ -14,6 +14,11 @@ namespace Homework_13.Services
         /// <param name="services"></param>        
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
+            services.AddSingleton<BankCustomerRepository>();
+            services.AddSingleton<DepartmentRepository>();
+
+            services.AddSingleton<BankCustomersManager>();            
+
             return services;
         }
 
@@ -23,7 +28,10 @@ namespace Homework_13.Services
         /// <param name="services"></param>        
         public static IServiceCollection RegisterViewModels(this IServiceCollection services)
         {
-            services.AddSingleton<MainWindowViewModel>();            
+            services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<MainUserControlViewModel>();
+
+            services.AddTransient<MainMenuUserControlViewModel>();
 
             return services;
         }

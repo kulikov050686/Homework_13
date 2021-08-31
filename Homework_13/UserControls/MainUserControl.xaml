@@ -1,0 +1,236 @@
+﻿<UserControl x:Class="Homework_13.UserControls.MainUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Homework_13.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" 
+             d:DesignWidth="800"
+             DataContext="{Binding MainUserControlVM, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" MinWidth="200"/>
+            <ColumnDefinition Width="200" MinWidth="200"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--Отдел банка-->
+        <GroupBox Grid.Column="0" 
+                  Header="Отделы банка">
+
+            <ListBox ItemsSource="{Binding Departments}" 
+                     SelectedItem="{Binding SelectedDepartment}" 
+                     SelectedIndex="0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Right" 
+                                       Text="{Binding BankCustomers.Count, StringFormat=({0})}"/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <!--Клиенты отдела банка-->
+        <GroupBox Grid.Column="1" 
+                  Header="Клиеты отдела банка">
+
+            <ListBox ItemsSource="{Binding SelectedDepartment.BankCustomers}" 
+                     SelectedItem="{Binding SelectedBankCustomer}" 
+                     SelectedIndex="0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="m:BankCustomer">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Right" 
+                                       Text="{Binding Passport.Holder.Name}"/>
+                            <TextBlock Text="{Binding Passport.Holder.Surname}"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Добавить" 
+                                  Command="" 
+                                  CommandParameter=""/>
+                        <MenuItem Header="Удалить" 
+                                  Command=""
+                                  CommandParameter=""/>
+                        <MenuItem Header="Редактировать"
+                                  Command=""
+                                  CommandParameter=""/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </GroupBox>
+
+        <!--Информация о выбранном клиенте банка-->
+        <GroupBox Grid.Column="2" 
+                  Header="Информация"
+                  DataContext="{Binding SelectedBankCustomer}">
+            <Grid>
+
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <Trigger Property="Grid.Column"  Value="0">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Margin" Value="0 0 2 0"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+
+                            <Trigger Property="Grid.Column"  Value="1">
+                                <Setter Property="Margin" Value="2 0 0 0"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--#region Название полей-->
+
+                <TextBlock Grid.Row="0" 
+                       Grid.Column="0"
+                       Text="Имя"/>
+
+                <TextBlock Grid.Row="1" 
+                       Grid.Column="0"
+                       Text="Фамилия"/>
+
+                <TextBlock Grid.Row="2" 
+                       Grid.Column="0"
+                       Text="Отчество"/>
+
+                <TextBlock Grid.Row="3" 
+                       Grid.Column="0"
+                       Text="Дата рождения"/>
+
+                <TextBlock Grid.Row="4" 
+                       Grid.Column="0"
+                       Text="Пол"/>
+
+                <TextBlock Grid.Row="5" 
+                       Grid.Column="0"
+                       Text="Место рождения"/>
+
+                <!--#endregion-->
+
+                <!--#region Отображение информации-->
+
+                <TextBlock Grid.Row="0" 
+                       Grid.Column="1"
+                       Text="{Binding Passport.Holder.Name}"/>
+
+                <TextBlock Grid.Row="1" 
+                       Grid.Column="1"
+                       Text="{Binding Passport.Holder.Surname}"/>
+
+                <TextBlock Grid.Row="2"
+                       Grid.Column="1"
+                       Text="{Binding Passport.Holder.Patronymic}"/>
+
+                <TextBlock Grid.Row="3"
+                       Grid.Column="1"
+                       Text="{Binding Passport.Holder.Birthday, StringFormat=dd.MM.yyyy}"/>
+
+                <TextBlock Grid.Row="4"
+                       Grid.Column="1"
+                       Text="{Binding Passport.Holder.Gender}"/>
+
+                <TextBlock Grid.Row="5"
+                       Grid.Column="1"
+                       Text="{Binding Passport.Holder.PlaceOfBirth}"/>
+
+                <!--#endregion-->
+
+            </Grid>
+        </GroupBox>
+
+        <!--Депозитарные счета-->
+        <!--<GroupBox Grid.Column="3" 
+                  Header="Депозитарные счета">
+            <ListBox ItemsSource="{Binding SelectedBankCustomer.DepositoryAccounts}"
+                     SelectedItem="{Binding SelectedDepositoryAccount}"
+                     SelectedIndex="0">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Сумма "/>
+                                <TextBlock Text="{Binding Amount}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Процентная ставка "/>
+                                <TextBlock Text="{Binding InterestRate}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Добавить" 
+                                  Command="{Binding CreateNewDepositoryAccount}" 
+                                  CommandParameter="{Binding SelectedBankCustomer}"/>
+                        <MenuItem Header="Удалить"
+                                  Command="{Binding DeleteDepositoryAccount}"
+                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
+                        <MenuItem Header="Редактировать"
+                                  Command="{Binding EditDepositoryAccount}"
+                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
+                        <MenuItem Header="Объединить"
+                                  Command="{Binding CombiningDepositoryAccounts}"
+                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </GroupBox>-->
+
+        <GridSplitter Grid.Column="0" 
+                      HorizontalAlignment="Right" 
+                      Width="3"/>
+
+        <GridSplitter Grid.Column="1" 
+                      HorizontalAlignment="Right" 
+                      Width="3"/>
+
+        <GridSplitter Grid.Column="2"
+                      HorizontalAlignment="Right"
+                      Width="3"/>
+    </Grid>
+</UserControl>

@@ -8,11 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UserControls\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Extensions\" />
     <Folder Include="Converters\" />
-    <Folder Include="Commands\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Assets\" />
   </ItemGroup>

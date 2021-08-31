@@ -13,7 +13,7 @@ namespace Homework_13.Models
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public int Id { get; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Название

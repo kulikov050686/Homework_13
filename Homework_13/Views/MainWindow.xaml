@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_13"
+        xmlns:uc="clr-namespace:Homework_13.UserControls"
         mc:Ignorable="d"
         Title="{Binding Title}" 
         Height="450" 
         Width="800"
         DataContext="{Binding MainWindowVM, Source={StaticResource Locator}}">
-    <Grid>
-
-    </Grid>
+    <StackPanel>
+        <uc:MainMenuUserControl/>
+        <uc:MainUserControl/>
+    </StackPanel>
 </Window>
