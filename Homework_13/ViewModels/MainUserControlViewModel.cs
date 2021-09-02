@@ -16,6 +16,7 @@ namespace Homework_13.ViewModels
         private readonly BankCustomersManager _bankCustomersManager;
         private readonly DepositoryAccountsManager _depositoryAccountsManager;
         private BankCustomerDialog _bankCustomerDialog;
+        private DepositoryAccountDialog _depositoryAccountDialog;
         private Department _selectedDepartment;
         private BankCustomer _selectedBankCustomer;
         private DepositoryAccount _selectedDepositoryAccount;
@@ -130,7 +131,11 @@ namespace Homework_13.ViewModels
         {
             get => _createNewDepositoryAccount ??= new RelayCommand((obj) =>
             {
-                
+                var bankCustomer = (BankCustomer)obj;
+                var depositoryAccount = _depositoryAccountDialog.CreateNewBankAccount();
+                if (depositoryAccount is null) return;
+
+                _depositoryAccountsManager.CreateNewDepositoryAccount(depositoryAccount, bankCustomer);
             }, (obj) => obj is BankCustomer);
         }
 
@@ -180,11 +185,13 @@ namespace Homework_13.ViewModels
         /// </summary>
         public MainUserControlViewModel(BankCustomersManager bankCustomersManager,
                                         DepositoryAccountsManager depositoryAccountsManager,
-                                        BankCustomerDialog bankCustomerDialog)
+                                        BankCustomerDialog bankCustomerDialog, 
+                                        DepositoryAccountDialog depositoryAccountDialog)
         {
             _bankCustomersManager = bankCustomersManager;
             _depositoryAccountsManager = depositoryAccountsManager;
             _bankCustomerDialog = bankCustomerDialog;
+            _depositoryAccountDialog = depositoryAccountDialog;
         }
     }
 }

@@ -48,8 +48,8 @@ namespace Homework_13.Services
                 throw new ArgumentNullException(nameof(department), "Департамент не может быть null!!!");
 
             var selectedDepartment = _departments.Get(department.Name);
-
             if (selectedDepartment is null) return false;
+
             department.BankCustomers.Add(bankCustomer);
             _bankCustomers.Add(bankCustomer);
 
