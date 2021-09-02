@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Homework_13.Converters
 {
-    public class GenderToTextConverter : BaseValueConverter<GenderToTextConverter>
+    public class IntToGenderConverter : BaseValueConverter<IntToGenderConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -13,9 +13,9 @@ namespace Homework_13.Converters
                 switch (index)
                 {
                     case Gender.MAN:
-                        return "муж";
+                        return 0;
                     case Gender.WOMAN:
-                        return "жен";
+                        return 1;
                     default:
                         throw new ArgumentException();
                 }
@@ -26,13 +26,13 @@ namespace Homework_13.Converters
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is string index)
+            if (value is int index)
             {
                 switch (index)
                 {
-                    case "муж":
+                    case 0:
                         return Gender.MAN;
-                    case "жен":
+                    case 1:
                         return Gender.WOMAN;
                     default:
                         throw new ArgumentException();

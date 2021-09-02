@@ -4,18 +4,20 @@ using System.Globalization;
 
 namespace Homework_13.Converters
 {
-    public class GenderToTextConverter : BaseValueConverter<GenderToTextConverter>
+    public class IntToReliabilityConverter : BaseValueConverter<IntToReliabilityConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is Gender index)
+            if(value is Reliability index)
             {
                 switch (index)
                 {
-                    case Gender.MAN:
-                        return "муж";
-                    case Gender.WOMAN:
-                        return "жен";
+                    case Reliability.FIRST:
+                        return 0;                        
+                    case Reliability.SECOND:
+                        return 1;                        
+                    case Reliability.THIRD:
+                        return 2;                        
                     default:
                         throw new ArgumentException();
                 }
@@ -26,14 +28,16 @@ namespace Homework_13.Converters
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is string index)
+            if (value is int index)
             {
                 switch (index)
                 {
-                    case "муж":
-                        return Gender.MAN;
-                    case "жен":
-                        return Gender.WOMAN;
+                    case 0:
+                        return Reliability.FIRST;
+                    case 1:
+                        return Reliability.SECOND;
+                    case 2:
+                        return Reliability.THIRD;
                     default:
                         throw new ArgumentException();
                 }

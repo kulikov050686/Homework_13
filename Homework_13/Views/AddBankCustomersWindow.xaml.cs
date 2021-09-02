@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Homework_13.Enums;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 
@@ -50,17 +52,17 @@ namespace Homework_13.Views
 
         public static readonly DependencyProperty ReliabilityProperty =
             DependencyProperty.Register(nameof(Reliability),
-                                        typeof(byte?),
+                                        typeof(Reliability),
                                         typeof(AddBankCustomersWindow),
-                                        new PropertyMetadata(default(byte?)));
+                                        new PropertyMetadata(default(Reliability)));        
 
         /// <summary>
         /// Рейтинг
         /// </summary>
         [Description("Рейтинг")]
-        public byte? Reliability
+        public Reliability Reliability
         {
-            get => (byte?)GetValue(ReliabilityProperty);
+            get => (Reliability)GetValue(ReliabilityProperty);
             set => SetValue(ReliabilityProperty, value);
         }
 
@@ -150,17 +152,17 @@ namespace Homework_13.Views
 
         public static readonly DependencyProperty GenderBankCustomerProperty =
             DependencyProperty.Register(nameof(GenderBankCustomer),
-                                        typeof(string),
+                                        typeof(Gender),
                                         typeof(AddBankCustomersWindow),
-                                        new PropertyMetadata(default(string)));
+                                        new PropertyMetadata(default(Gender)));
 
         /// <summary>
         /// Пол
         /// </summary>
         [Description("Пол")]
-        public string GenderBankCustomer
+        public Gender GenderBankCustomer
         {
-            get => (string)GetValue(GenderBankCustomerProperty);
+            get => (Gender)GetValue(GenderBankCustomerProperty);
             set => SetValue(GenderBankCustomerProperty, value);
         }
 
@@ -646,6 +648,15 @@ namespace Homework_13.Views
 
         #endregion
 
+        #region Лист надёжности
+
+        [Description("Лист надёжности")]
+        public List<string> ReliabilityList { get; set; } = new List<string> { "Низкая",
+                                                                               "Средняя",
+                                                                               "Высокая" };
+
+        #endregion
+        
         public AddBankCustomersWindow() => InitializeComponent();        
     }
 }

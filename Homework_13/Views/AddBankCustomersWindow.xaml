@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Homework_13.Views"
         xmlns:uc="clr-namespace:Homework_13.UserControls"
         xmlns:cmd="clr-namespace:Homework_13.Commands"
+        xmlns:converter="clr-namespace:Homework_13.Converters"
         mc:Ignorable="d"
         Height="530"
         Width="1085"
@@ -25,7 +26,8 @@
             </GroupBox>
 
             <GroupBox Header="Рейтинг">
-                <ComboBox/>
+                <ComboBox ItemsSource="{Binding ReliabilityList}"
+                          SelectedIndex="{Binding Reliability, Converter={converter:IntToReliabilityConverter}}"/>
             </GroupBox>
 
             <GroupBox Header="Описание">
@@ -41,7 +43,7 @@
                                   SurnameUC="{Binding SurnameBankCustomer, Mode=TwoWay}"
                                   PatronymicUC="{Binding PatronymicBankCustomer, Mode=TwoWay}"
                                   DateOfBirthrUC="{Binding BirthdayBankCustomer, Mode=TwoWay}"
-                                  SelectedItemGenderUC="{Binding GenderBankCustomer, Mode=TwoWay}"
+                                  GenderUC="{Binding GenderBankCustomer, Mode=TwoWay}"
                                   PlaceOfBirthUC="{Binding PlaceOfBirthBankCustomer, Mode=TwoWay}"/>
 
             <!--Паспорт-->

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Homework_13.UserControls"
+             xmlns:converter ="clr-namespace:Homework_13.Converters"
              mc:Ignorable="d">
 
     <GroupBox Header="{Binding TitleUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}}">
@@ -42,10 +43,9 @@
                 
                 <!-- Пол -->
                 <GroupBox Header="Пол" Margin="15 0 0 0">
-                    <ComboBox FontSize="16"                                                         
-                              SelectedItem="{Binding SelectedItemGenderUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
-                              SelectedIndex="{Binding SelectedIndexGenderUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
-                              ItemsSource="{Binding GenderUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}}"/>
+                    <ComboBox FontSize="16" 
+                              ItemsSource="{Binding GenderListUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}}"
+                              SelectedIndex="{Binding GenderUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Converter={converter:IntToGenderConverter}}"/>
                 </GroupBox>
                 
             </StackPanel>

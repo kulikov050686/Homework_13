@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Collections.Generic;
 using System;
+using Homework_13.Enums;
 
 namespace Homework_13.UserControls
 {
@@ -93,43 +94,26 @@ namespace Homework_13.UserControls
 
         #endregion
 
-        #region Пол
+        #region Список полов
 
-        [Description("Пол")]
-        public List<string> GenderUC { get; set; } = new List<string> { "муж", "жен" };
-
-        #endregion
-
-        #region Выбор индекса пола
-
-        public static readonly DependencyProperty SelectedIndexGenderUCProperty =
-            DependencyProperty.Register(nameof(SelectedIndexGenderUC),
-                                        typeof(int),
-                                        typeof(PersonUserControl),
-                                        new PropertyMetadata(default(int)));
-
-        [Description("Выбранный индекс пола")]
-        public int SelectedIndexGenderUC
-        {
-            get => (int)GetValue(SelectedIndexGenderUCProperty);
-            set => SetValue(SelectedIndexGenderUCProperty, value);
-        }
+        [Description("Список полов")]
+        public List<string> GenderListUC { get; set; } = new List<string> { "муж", "жен" };
 
         #endregion
 
-        #region Выбор пола
+        #region Выбранный пол
 
-        public static readonly DependencyProperty SelectedItemGenderUCProperty =
-            DependencyProperty.Register(nameof(SelectedItemGenderUC),
-                                        typeof(string),
+        public static readonly DependencyProperty GenderUCProperty =
+            DependencyProperty.Register(nameof(GenderUC),
+                                        typeof(Gender),
                                         typeof(PersonUserControl),
-                                        new PropertyMetadata(default(string)));
+                                        new PropertyMetadata(default(Gender)));
 
         [Description("Выбранный пол")]
-        public string SelectedItemGenderUC
+        public Gender GenderUC
         {
-            get => (string)GetValue(SelectedItemGenderUCProperty);
-            set => SetValue(SelectedItemGenderUCProperty, value);
+            get => (Gender)GetValue(GenderUCProperty);
+            set => SetValue(GenderUCProperty, value);
         }
 
         #endregion
@@ -151,6 +135,6 @@ namespace Homework_13.UserControls
 
         #endregion
 
-        public PersonUserControl() => InitializeComponent();
+        public PersonUserControl() => InitializeComponent();        
     }
 }

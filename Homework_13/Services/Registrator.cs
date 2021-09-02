@@ -21,6 +21,8 @@ namespace Homework_13.Services
             services.AddSingleton<BankCustomersManager>();
             services.AddSingleton<DepositoryAccountsManager>();
 
+            services.AddTransient<BankCustomerDialog>();
+
             return services;
         }
 

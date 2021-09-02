@@ -68,8 +68,8 @@
                 <ListBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Добавить" 
-                                  Command="" 
-                                  CommandParameter=""/>
+                                  Command="{Binding CreateNewBankCustomer}" 
+                                  CommandParameter="{Binding SelectedDepartment}"/>
                         <MenuItem Header="Удалить" 
                                   Command=""
                                   CommandParameter=""/>
