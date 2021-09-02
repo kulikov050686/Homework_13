@@ -71,11 +71,11 @@
                                   Command="{Binding CreateNewBankCustomer}" 
                                   CommandParameter="{Binding SelectedDepartment}"/>
                         <MenuItem Header="Удалить" 
-                                  Command=""
-                                  CommandParameter=""/>
+                                  Command="{Binding DeleteBankCustomer}"
+                                  CommandParameter="{Binding SelectedBankCustomer}"/>
                         <MenuItem Header="Редактировать"
-                                  Command=""
-                                  CommandParameter=""/>
+                                  Command="{Binding EditDataBankCustomer}"
+                                  CommandParameter="{Binding SelectedBankCustomer}"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>

@@ -78,7 +78,10 @@ namespace Homework_13.ViewModels
                 var department = (Department)obj;
                 if (department is null) return;
 
-                _bankCustomerDialog.CreateNewBankCustomer(department.StatusDepartment);
+                var bankCustomer = _bankCustomerDialog.CreateNewBankCustomer(department.StatusDepartment);
+                if (bankCustomer is null) return;
+
+                _bankCustomersManager.CreateNewBankCustomer(bankCustomer, department);
             }, (obj) => obj is Department);
         }
 
@@ -91,7 +94,11 @@ namespace Homework_13.ViewModels
         {
             get => _deleteBankCustomer ??= new RelayCommand((obj) =>
             {
-                
+                var department = SelectedDepartment;
+                var bankCustomer = (BankCustomer)obj;
+
+                if (department is null || bankCustomer is null) return;
+                _bankCustomersManager.DeleteBankCustomer(bankCustomer, department);
             }, (obj) => obj is BankCustomer);
         }
 
@@ -104,7 +111,13 @@ namespace Homework_13.ViewModels
         {
             get => _editDataBankCustomer ??= new RelayCommand((obj) =>
             {
-                
+                var bankCustomer = (BankCustomer)obj;
+                if (bankCustomer is null) return;
+
+                var tempBankCustomer = _bankCustomerDialog.EditBankCustomerData(bankCustomer);
+                if (tempBankCustomer is null) return;
+
+                _bankCustomersManager.Update(tempBankCustomer);
             }, (obj) => obj is BankCustomer);
         }
 
