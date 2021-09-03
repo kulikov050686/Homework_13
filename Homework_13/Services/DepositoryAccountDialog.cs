@@ -7,12 +7,12 @@ using System.Collections.Generic;
 namespace Homework_13.Services
 {
     /// <summary>
-    /// 
+    /// Интерфейс сервиса диалоговых окон по работе с депозитарными счетами
     /// </summary>
     public class DepositoryAccountDialog : IBankAccountDialogService<DepositoryAccount>
     {
         /// <summary>
-        /// 
+        /// Создание нового депозитарного счёта
         /// </summary>        
         public DepositoryAccount CreateNewBankAccount()
         {
@@ -27,9 +27,9 @@ namespace Homework_13.Services
         }
 
         /// <summary>
-        /// 
+        /// Редактировать данные депозитарного счёта
         /// </summary>
-        /// <param name="bankAccount"></param>        
+        /// <param name="bankAccount"> Депозитарный счёт </param>        
         public DepositoryAccount EditBankAccountData(DepositoryAccount bankAccount)
         {
             if (bankAccount is null)
@@ -51,12 +51,19 @@ namespace Homework_13.Services
         }
 
         /// <summary>
-        /// 
+        /// Объединить депозитарные счета в один счёт
         /// </summary>
-        /// <param name="bankAccounts"></param>        
+        /// <param name="bankAccounts"> Список депозитарных счетов </param>        
         public DepositoryAccount CombiningBankAccounts(IEnumerable<DepositoryAccount> bankAccounts)
         {
-            throw new NotImplementedException();
+            if (bankAccounts is null)
+                throw new ArgumentNullException("Список счетов не может быть null!!!");
+
+            var dialog = new SelectedBankAccountWindow();
+            dialog.BankAccounts = bankAccounts;
+            if (dialog.ShowDialog() != true) return null;
+
+            return dialog.SelectedBankAccount as DepositoryAccount;
         }
     }
 }

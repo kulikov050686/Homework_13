@@ -165,7 +165,13 @@ namespace Homework_13.ViewModels
         {
             get => _editDepositoryAccount ??= new RelayCommand((obj) =>
             {
-                
+                var depositoryAccount = (DepositoryAccount)obj;
+                if (depositoryAccount is null) return;
+
+                var tempDepositoryAccount = _depositoryAccountDialog.EditBankAccountData(depositoryAccount);
+                if (tempDepositoryAccount is null) return;
+
+                _depositoryAccountsManager.Update(tempDepositoryAccount);
             }, (obj) => obj is DepositoryAccount);
         }
 
@@ -178,7 +184,13 @@ namespace Homework_13.ViewModels
         {
             get => _combiningDepositoryAccounts ??= new RelayCommand((obj) =>
             {
-                
+                var depositoryAccount = (DepositoryAccount)obj;
+                if (depositoryAccount is null) return;
+
+                var tempDepositoryAccount = _depositoryAccountDialog.CombiningBankAccounts(SelectedBankCustomer.DepositoryAccounts);
+                if (tempDepositoryAccount is null) return;
+
+                if (!_depositoryAccountsManager.CombiningDepositoryAccounts(depositoryAccount, tempDepositoryAccount, SelectedBankCustomer)) return;
             }, (obj) => obj is DepositoryAccount);
         }
 

@@ -212,11 +212,11 @@
                                   Command="{Binding DeleteDepositoryAccount}"
                                   CommandParameter="{Binding SelectedDepositoryAccount}"/>
                         <MenuItem Header="Редактировать"
-                                  Command=""
-                                  CommandParameter=""/>
+                                  Command="{Binding EditDepositoryAccount}"
+                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
                         <MenuItem Header="Объединить"
-                                  Command=""
-                                  CommandParameter=""/>
+                                  Command="{Binding CombiningDepositoryAccounts}"
+                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>
