@@ -23,6 +23,7 @@ namespace Homework_13.Services
             destination.AccountStatus = source.AccountStatus;
             destination.Amount = source.Amount;
             destination.InterestRate = source.InterestRate;
+            destination.DepositStatus = source.DepositStatus;
         }
     }
 }

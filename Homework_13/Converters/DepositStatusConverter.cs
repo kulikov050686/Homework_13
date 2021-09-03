@@ -8,28 +8,38 @@ namespace Homework_13.Converters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((DepositStatus)value)
+            if(value is DepositStatus index)
             {
-                case DepositStatus.WITHOUTCAPITALIZATION:
-                    return 0;
-                case DepositStatus.WITHCAPITALIZATION:
-                    return 1;                
-                default:
-                    return 0;
+                switch (index)
+                {
+                    case DepositStatus.WITHOUTCAPITALIZATION:
+                        return 0;
+                    case DepositStatus.WITHCAPITALIZATION:
+                        return 1;
+                    default:
+                        throw new ArgumentException();
+                }
             }
+
+            throw new ArgumentException();
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((int)value)
+            if(value is int index)
             {
-                case 0:
-                    return DepositStatus.WITHOUTCAPITALIZATION;
-                case 1:
-                    return DepositStatus.WITHCAPITALIZATION;
-                default:
-                    return 0;
+                switch (index)
+                {
+                    case 0:
+                        return DepositStatus.WITHOUTCAPITALIZATION;
+                    case 1:
+                        return DepositStatus.WITHCAPITALIZATION;
+                    default:
+                        throw new ArgumentException();
+                }
             }
+
+            throw new ArgumentException();
         }
     }
 }

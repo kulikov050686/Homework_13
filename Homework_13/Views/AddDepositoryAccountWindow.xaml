@@ -22,7 +22,7 @@
 
         <GroupBox Header="Начисление процентов">
             <ComboBox ItemsSource="{Binding DepositStatusList, RelativeSource={RelativeSource AncestorType=local:AddDepositoryAccountWindow}}"
-                      SelectedIndex="{Binding SelectedDepositStatus, RelativeSource={RelativeSource AncestorType=local:AddDepositoryAccountWindow}, Converter={converter:DepositStatusConverter}}"/>
+                      SelectedIndex="{Binding SelectedDepositStatus, RelativeSource={RelativeSource AncestorType=local:AddDepositoryAccountWindow}, Converter={converter:DepositStatusConverter}, Mode=TwoWay}"/>
         </GroupBox>
 
         <StackPanel Orientation="Horizontal" 
