@@ -6,7 +6,8 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Homework_13.UserControls"
              xmlns:bihaviors="clr-namespace:Homework_13.Behaviors"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             DataContext="{Binding MainMenuUserControlVM, Source={StaticResource Locator}}">
     <Grid>        
         <Menu>
             <MenuItem Header="Файл">
@@ -21,18 +22,28 @@
             </MenuItem>
 
             <MenuItem Header="Правка">
-                <MenuItem Header="Создать клиента банка" 
-                          Command=""/>
-                <MenuItem Header="Удалить клиента банка"
-                          Command=""/>
-                <MenuItem Header="Редактировать клиента банка" 
-                          Command=""/>
-                <MenuItem Header="Создать депозитарный счёт"
-                          Command=""/>
-                <MenuItem Header="Удалить депозитарный счёт"
-                          Command=""/>
-                <MenuItem Header="Редактировать депозитарный счёт"
-                          Command=""/>
+                <MenuItem Header="Клиент банка">
+                    <MenuItem Header="Добавить"
+                              Command="{Binding CreateNewBankCustomer}"/>
+                    <MenuItem Header="Удалить"
+                              Command="{Binding DeleteBankCustomer}"/>
+                    <MenuItem Header="Редактировать"
+                              Command="{Binding EditDataBankCustomer}"/>
+                </MenuItem>
+                <MenuItem Header="Счета">
+                    <MenuItem Header="Депозитарные">
+                        <MenuItem Header="Добавить"
+                                  Command="{Binding CreateNewDepositoryAccount}"/>
+                        <MenuItem Header="Удалить"
+                                  Command="{Binding DeleteDepositoryAccount}"/>
+                        <MenuItem Header="Редактировать"
+                                  Command="{Binding EditDepositoryAccount}"/>
+                        <MenuItem Header="Объединить"/>
+                    </MenuItem>
+                    <MenuItem Header="Кредитные">
+                        <!-- Реализовать работу с кредитными счетами -->
+                    </MenuItem>
+                </MenuItem>                                        
             </MenuItem>
         </Menu>
     </Grid>
