@@ -148,7 +148,11 @@ namespace Homework_13.ViewModels
         {
             get => _deleteDepositoryAccount ??= new RelayCommand((obj) =>
             {
-                
+                var bankCustomer = SelectedBankCustomer;
+                var depositoryAccount = (DepositoryAccount)obj;
+                if (bankCustomer is null || depositoryAccount is null) return;
+
+                _depositoryAccountsManager.DeleteDepositoryAccount(depositoryAccount, bankCustomer);
             }, (obj) => obj is DepositoryAccount);
         }
 

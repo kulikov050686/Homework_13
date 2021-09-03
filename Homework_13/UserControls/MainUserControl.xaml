@@ -209,8 +209,8 @@
                                   Command="{Binding CreateNewDepositoryAccount}" 
                                   CommandParameter="{Binding SelectedBankCustomer}"/>
                         <MenuItem Header="Удалить"
-                                  Command=""
-                                  CommandParameter=""/>
+                                  Command="{Binding DeleteDepositoryAccount}"
+                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
                         <MenuItem Header="Редактировать"
                                   Command=""
                                   CommandParameter=""/>

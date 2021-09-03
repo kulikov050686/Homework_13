@@ -13,11 +13,11 @@ namespace Homework_13.Converters
                 switch (index)
                 {
                     case Reliability.FIRST:
-                        return "Надёжность низкая";
+                        return "Низкая";
                     case Reliability.SECOND:
-                        return "Надёжность средняя";
+                        return "Средняя";
                     case Reliability.THIRD:
-                        return "Надёжность высокая";
+                        return "Высокая";
                     default:
                         throw new ArgumentException();
                 }
@@ -32,11 +32,11 @@ namespace Homework_13.Converters
             {
                 switch (index)
                 {
-                    case "Надёжность низкая":
+                    case "Низкая":
                         return Reliability.FIRST;
-                    case "Надёжность средняя":
+                    case "Средняя":
                         return Reliability.SECOND;
-                    case "Надёжность высокая":
+                    case "Высокая":
                         return Reliability.THIRD;
                     default:
                         throw new ArgumentException();
