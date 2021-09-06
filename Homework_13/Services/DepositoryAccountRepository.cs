@@ -10,7 +10,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
-        public DepositoryAccountRepository() : base() { }
+        public DepositoryAccountRepository() : base(TestData.DepositoryAccounts) { }
                 
         /// <summary>
         /// Обновление данных 

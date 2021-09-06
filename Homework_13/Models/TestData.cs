@@ -39,7 +39,7 @@ namespace Homework_13.Models
             
             return departments;
         }
-
+        
         /// <summary>
         /// Заполнение клиентами банка депортаментов
         /// </summary>
@@ -123,7 +123,16 @@ namespace Homework_13.Models
                 }
             }
 
-            return null;            
+            var t = bankCustomers.SelectMany(d => d.DepositoryAccounts);
+
+            ObservableCollection<DepositoryAccount> m = new ObservableCollection<DepositoryAccount>();
+
+            foreach (var item in t)
+            {
+                m.Add((DepositoryAccount)item);
+            }
+
+            return m;            
         }
 
         /// <summary>
