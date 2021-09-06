@@ -1,8 +1,7 @@
 ﻿using Homework_13.Commands;
 using Homework_13.Models;
-using System;
+using Homework_13.Services;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace Homework_13.ViewModels
@@ -15,13 +14,14 @@ namespace Homework_13.ViewModels
         #region Закрытые поля
 
         private MainUserControlViewModel _mainUserControlViewModel;
+        private FileDialog _fileDialog;
 
         #endregion
 
         /// <summary>
         /// Список всех департаментов банка
         /// </summary>
-        public IEnumerable<Department> Departments => _mainUserControlViewModel.Departments;
+        public IList<Department> Departments => _mainUserControlViewModel.Departments;
 
         #region Команда сохранить в файл
 
@@ -31,6 +31,20 @@ namespace Homework_13.ViewModels
             get => _saveToFile ??= new RelayCommand((obj) =>
             {
                 /// Сохранение в файл департаментов
+                _fileDialog.SaveFileDialog(Departments);
+            }, (obj) => _mainUserControlViewModel.Departments != null);
+        }
+
+        #endregion
+
+        #region Команда получить данные из файла
+
+        private ICommand _openFile = default!;
+        public ICommand OpenFile
+        {
+            get => _openFile ??= new RelayCommand((obj) => 
+            {
+                /// Открыть
             });
         }
 
@@ -117,9 +131,11 @@ namespace Homework_13.ViewModels
         /// <summary>
         /// Конструктор
         /// </summary>        
-        public MainMenuUserControlViewModel(MainUserControlViewModel mainUserControlViewModel)
+        public MainMenuUserControlViewModel(MainUserControlViewModel mainUserControlViewModel,
+                                            FileDialog fileDialog)
         {
             _mainUserControlViewModel = mainUserControlViewModel;
+            _fileDialog = fileDialog;
         }
     }
 }

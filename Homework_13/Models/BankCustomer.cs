@@ -1,6 +1,7 @@
 ﻿using Homework_13.Enums;
 using Homework_13.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Homework_13.Models
@@ -48,12 +49,12 @@ namespace Homework_13.Models
         /// <summary>
         /// Лист депозитарных счетов
         /// </summary>
-        public ObservableCollection<DepositoryAccount> DepositoryAccounts { get; set; } = new ObservableCollection<DepositoryAccount>();
+        public IList<IBankAccount> DepositoryAccounts { get; set; } = new ObservableCollection<IBankAccount>();
 
         /// <summary>
         /// Лист кредитных счетов
         /// </summary>
-        public ObservableCollection<CreditAccount> CreditAccounts { get; set; } = new ObservableCollection<CreditAccount>();
+        public IList<IBankAccount> CreditAccounts { get; set; } = new ObservableCollection<IBankAccount>();
 
         /// <summary>
         /// Конструктор

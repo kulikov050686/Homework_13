@@ -1,6 +1,7 @@
 ﻿using Homework_13.Enums;
 using Homework_13.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Homework_13.Models
@@ -8,7 +9,7 @@ namespace Homework_13.Models
     /// <summary>
     /// Класс департамент
     /// </summary>
-    public class Department : IDepartment
+    public class Department : IDepartment<BankCustomer>
     {
         /// <summary>
         /// Идентификатор
@@ -28,7 +29,7 @@ namespace Homework_13.Models
         /// <summary>
         /// Лист клиентов банка
         /// </summary>
-        public ObservableCollection<BankCustomer> BankCustomers { get; set; } = new ObservableCollection<BankCustomer>();
+        public IList<BankCustomer> BankCustomers { get; set; } = new ObservableCollection<BankCustomer>();
 
         /// <summary>
         /// Описание

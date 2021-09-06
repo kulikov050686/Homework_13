@@ -11,7 +11,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
-        public DepartmentRepository() : base(TestData.Departments) { }
+        public DepartmentRepository() : base() { }
 
         /// <summary>
         /// Поиск департамента по имени

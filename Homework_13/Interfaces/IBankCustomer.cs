@@ -1,6 +1,5 @@
 ﻿using Homework_13.Enums;
-using Homework_13.Models;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace Homework_13.Interfaces
 {
@@ -42,12 +41,12 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Лист депозитарных счетов
         /// </summary>
-        ObservableCollection<DepositoryAccount> DepositoryAccounts { get; set; }
+        IList<IBankAccount> DepositoryAccounts { get; set; }
 
         /// <summary>
         /// Лист кредитных счетов
         /// </summary>
-        ObservableCollection<CreditAccount> CreditAccounts { get; set; }
+        IList<IBankAccount> CreditAccounts { get; set; }
 
         /// <summary>
         /// Метод сравнения
@@ -56,6 +55,7 @@ namespace Homework_13.Interfaces
         bool Equals(IBankCustomer obj)
         {
             if (obj is null) return false;
+            if (this == obj) return true;
 
             bool key = true;
 

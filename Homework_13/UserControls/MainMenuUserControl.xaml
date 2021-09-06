@@ -12,7 +12,7 @@
         <Menu>
             <MenuItem Header="Файл">
                 <MenuItem Header="Сохранить" 
-                          Command=""/>
+                          Command="{Binding SaveToFile}"/>
                 <MenuItem Header="Открыть"/>
                 <MenuItem Header="Выход">
                     <i:Interaction.Behaviors>

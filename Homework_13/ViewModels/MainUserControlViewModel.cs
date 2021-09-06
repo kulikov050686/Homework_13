@@ -28,17 +28,17 @@ namespace Homework_13.ViewModels
         /// <summary>
         /// Список всех департаментов банка
         /// </summary>
-        public IEnumerable<Department> Departments => _bankCustomersManager.Departments;
+        public IList<Department> Departments => _bankCustomersManager.Departments;
 
         /// <summary>
         /// Список всех клиентов банка
         /// </summary>
-        public IEnumerable<BankCustomer> BankCustomers => _bankCustomersManager.BankCustomers;
+        public IList<BankCustomer> BankCustomers => _bankCustomersManager.BankCustomers;
 
         /// <summary>
         /// Список всех депозитарных счетов
         /// </summary>
-        public IEnumerable<DepositoryAccount> DepositoryAccounts => _depositoryAccountsManager.DepositoryAccounts;
+        public IList<DepositoryAccount> DepositoryAccounts => _depositoryAccountsManager.DepositoryAccounts;
 
         /// <summary>
         /// Выбранный департамент
@@ -187,10 +187,10 @@ namespace Homework_13.ViewModels
                 var depositoryAccount = (DepositoryAccount)obj;
                 if (depositoryAccount is null) return;
 
-                var tempDepositoryAccount = _depositoryAccountDialog.CombiningBankAccounts(SelectedBankCustomer.DepositoryAccounts);
-                if (tempDepositoryAccount is null) return;
+                //var tempDepositoryAccount = _depositoryAccountDialog.CombiningBankAccounts(SelectedBankCustomer.DepositoryAccounts);
+                //if (tempDepositoryAccount is null) return;
 
-                if (!_depositoryAccountsManager.CombiningDepositoryAccounts(depositoryAccount, tempDepositoryAccount, SelectedBankCustomer)) return;
+                //if (!_depositoryAccountsManager.CombiningDepositoryAccounts(depositoryAccount, tempDepositoryAccount, SelectedBankCustomer)) return;
             }, (obj) => obj is DepositoryAccount);
         }
 

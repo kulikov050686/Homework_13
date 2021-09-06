@@ -55,6 +55,7 @@ namespace Homework_13.Interfaces
         bool Equals(IPerson obj)
         {
             if (obj is null) return false;
+            if (this == obj) return true;
 
             return Surname == obj.Surname &&
                    Name == obj.Name &&

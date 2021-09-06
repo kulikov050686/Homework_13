@@ -19,7 +19,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Получить список всех депозитарных счетов клиентов банка
         /// </summary>
-        public IEnumerable<DepositoryAccount> DepositoryAccounts => _depositoryAccounts.GetAll();
+        public IList<DepositoryAccount> DepositoryAccounts => _depositoryAccounts.GetAll();
 
         /// <summary>
         /// Обновление данных депозитарного счёта клиента банка и сохранение в репозитории

@@ -19,12 +19,12 @@ namespace Homework_13.Services
         /// <summary>
         /// Получить список всех клиентов
         /// </summary>
-        public IEnumerable<BankCustomer> BankCustomers => _bankCustomers.GetAll();
+        public IList<BankCustomer> BankCustomers => _bankCustomers.GetAll();
 
         /// <summary>
         /// Получить список всех департаментов
         /// </summary>
-        public IEnumerable<Department> Departments => _departments.GetAll();
+        public IList<Department> Departments => _departments.GetAll();
 
         /// <summary>
         /// Обновление данных клиента банка и сохранение в репозитории

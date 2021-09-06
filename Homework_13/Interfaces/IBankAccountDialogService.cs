@@ -22,6 +22,6 @@ namespace Homework_13.Interfaces
         /// Объединить банковские счета в один счёт
         /// </summary>
         /// <param name="bankAccounts"> Список банковских счетов </param>        
-        T CombiningBankAccounts(IEnumerable<T> bankAccounts);
+        T CombiningBankAccounts(IList<T> bankAccounts);
     }
 }

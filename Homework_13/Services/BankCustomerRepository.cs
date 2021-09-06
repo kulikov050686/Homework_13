@@ -10,7 +10,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Констрктор по умолчанию
         /// </summary>
-        public BankCustomerRepository() : base(TestData.BankCustomers) { }
+        public BankCustomerRepository() : base() { }
         
         /// <summary>
         /// Обновление данных клиента банка

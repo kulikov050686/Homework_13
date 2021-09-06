@@ -54,6 +54,7 @@ namespace Homework_13.Interfaces
         bool Equals(IAddress obj)
         {
             if (obj is null) return false;
+            if (this == obj) return true;
 
             return RegistrationDate == obj.RegistrationDate &&
                    Region == obj.Region &&

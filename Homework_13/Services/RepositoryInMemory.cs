@@ -13,7 +13,7 @@ namespace Homework_13.Services
     {
         #region Закрытые поля
 
-        private readonly List<T> _items = new List<T>();
+        private readonly IList<T> _items = new List<T>();
         private int _lastId;
 
         #endregion
@@ -29,7 +29,7 @@ namespace Homework_13.Services
         /// Конструктор
         /// </summary>
         /// <param name="items"> Список элементов </param>
-        protected RepositoryInMemory(IEnumerable<T> items)
+        protected RepositoryInMemory(IList<T> items)
         {
             foreach (var item in items) Add(item);
         }
@@ -57,7 +57,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Получить все элементы
         /// </summary>        
-        public IEnumerable<T> GetAll() => _items;
+        public IList<T> GetAll() => _items;
 
         /// <summary>
         /// Удалить элемент из репозитория

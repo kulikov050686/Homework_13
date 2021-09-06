@@ -54,7 +54,7 @@ namespace Homework_13.Services
         /// Объединить депозитарные счета в один счёт
         /// </summary>
         /// <param name="bankAccounts"> Список депозитарных счетов </param>        
-        public DepositoryAccount CombiningBankAccounts(IEnumerable<DepositoryAccount> bankAccounts)
+        public DepositoryAccount CombiningBankAccounts(IList<DepositoryAccount> bankAccounts)
         {
             if (bankAccounts is null)
                 throw new ArgumentNullException("Список счетов не может быть null!!!");

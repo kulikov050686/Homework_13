@@ -23,6 +23,8 @@ namespace Homework_13.Services
 
             services.AddTransient<BankCustomerDialog>();
             services.AddTransient<DepositoryAccountDialog>();
+            services.AddTransient<FileIOService>();
+            services.AddTransient<FileDialog>();
 
             return services;
         }

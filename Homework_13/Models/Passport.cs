@@ -31,7 +31,7 @@ namespace Homework_13.Models
         /// <summary>
         /// Код подразделения
         /// </summary>
-        public DivisionCode DivisionCode { get; }
+        public IDivisionCode DivisionCode { get; }
 
         /// <summary>
         /// Владелец
@@ -51,7 +51,7 @@ namespace Homework_13.Models
                         long? number,
                         string placeOfIssue,
                         DateTime? dateOfIssue,
-                        DivisionCode divisionCode,
+                        IDivisionCode divisionCode,
                         IPerson holder)
         {
             if(holder is null) 

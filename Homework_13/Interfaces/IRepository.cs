@@ -34,6 +34,6 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Получить все сущности
         /// </summary>
-        IEnumerable<T> GetAll();
+        IList<T> GetAll();
     }
 }

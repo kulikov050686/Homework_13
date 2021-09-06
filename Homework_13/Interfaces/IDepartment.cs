@@ -1,13 +1,12 @@
 ﻿using Homework_13.Enums;
-using Homework_13.Models;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace Homework_13.Interfaces
 {
     /// <summary>
     /// Интерфейс департамент
     /// </summary>    
-    public interface IDepartment : IEntity
+    public interface IDepartment<T> : IEntity where T: IBankCustomer
     {
         /// <summary>
         /// Название
@@ -22,6 +21,6 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Лист клиентов банка
         /// </summary>
-        ObservableCollection<BankCustomer> BankCustomers { get; set; }
+        IList<T> BankCustomers { get; set; }
     }
 }

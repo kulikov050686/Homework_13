@@ -1,5 +1,4 @@
 ﻿using System;
-using Homework_13.Models;
 
 namespace Homework_13.Interfaces
 {
@@ -31,7 +30,7 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Код подразделения
         /// </summary>
-        DivisionCode DivisionCode { get; }
+        IDivisionCode DivisionCode { get; }
 
         /// <summary>
         /// Владелец
@@ -45,6 +44,7 @@ namespace Homework_13.Interfaces
         bool Equals(IPassport obj)
         {
             if (obj is null) return false;
+            if (this == obj) return true;
 
             return Number == obj.Number &&
                    Series == obj.Series &&

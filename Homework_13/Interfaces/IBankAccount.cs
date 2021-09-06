@@ -29,6 +29,7 @@ namespace Homework_13.Interfaces
         bool Equals(IBankAccount obj)
         {
             if (obj is null) return false;
+            if (this == obj) return true;
 
             return (Id == obj.Id) && 
                    (Amount == obj.Amount) &&

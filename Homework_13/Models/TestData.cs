@@ -1,5 +1,7 @@
 ﻿using Homework_13.Enums;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Homework_13.Models
@@ -12,35 +14,29 @@ namespace Homework_13.Models
         /// <summary>
         /// Департаменты банка
         /// </summary>
-        public static Department[] Departments = CreateDepartments();
+        public static ObservableCollection<Department> Departments { get; set; } = CreateDepartments();
 
         /// <summary>
         /// Клиенты банка
         /// </summary>
-        public static BankCustomer[] BankCustomers = CreateBankCustomers(Departments);
+        public static ObservableCollection<BankCustomer> BankCustomers { get; set; } = CreateBankCustomers(Departments);
 
         /// <summary>
         /// Депозитарные счета клиентов банка
         /// </summary>
-        public static DepositoryAccount[] DepositoryAccount = CreateDepositoryAccount(BankCustomers);
+        public static ObservableCollection<DepositoryAccount> DepositoryAccounts { get; set; } = CreateDepositoryAccount(BankCustomers);
 
         /// <summary>
         /// Создание департаментов банка
         /// </summary>        
-        private static Department[] CreateDepartments()
+        public static ObservableCollection<Department> CreateDepartments()
         {
-            Department[] departments = new Department[3];
+            ObservableCollection<Department> departments = new ObservableCollection<Department>();
 
-            for(int i = 0; i < 3; i++)
-            {
-                if(i == 0)
-                    departments[i] = new Department(i, $"Департамент { i }", Status.USUAL);
-                if(i == 1)
-                    departments[i] = new Department(i, $"Департамент { i }", Status.VIP);
-                if(i == 2)
-                    departments[i] = new Department(i, $"Департамент { i }", Status.JURIDICAL);
-            }
-
+            departments.Add(new Department(1, $"Департамент { 1 }", Status.USUAL));
+            departments.Add(new Department(2, $"Департамент { 2 }", Status.VIP));
+            departments.Add(new Department(3, $"Департамент { 3 }", Status.JURIDICAL));
+            
             return departments;
         }
 
@@ -48,7 +44,7 @@ namespace Homework_13.Models
         /// Заполнение клиентами банка депортаментов
         /// </summary>
         /// <param name="departments"> Департаменты </param>
-        private static BankCustomer[] CreateBankCustomers(Department[] departments)
+        private static ObservableCollection<BankCustomer> CreateBankCustomers(ObservableCollection<Department> departments)
         {
             var index = 1;
             var gender = Gender.MAN;
@@ -81,14 +77,23 @@ namespace Homework_13.Models
                 }
             }
 
-            return departments.SelectMany(d => d.BankCustomers).ToArray();
+            var t = departments.SelectMany(d => d.BankCustomers);
+
+            ObservableCollection<BankCustomer> m = new ObservableCollection<BankCustomer>();
+
+            foreach (var item in t)
+            {
+                m.Add(item);
+            }
+
+            return m;
         }
 
         /// <summary>
         /// Заполнение депозитарными счетами клиентов банка
         /// </summary>
         /// <param name="bankCustomers"> Клиенты банка </param>        
-        private static DepositoryAccount[] CreateDepositoryAccount(BankCustomer[] bankCustomers)
+        private static ObservableCollection<DepositoryAccount> CreateDepositoryAccount(IList<BankCustomer> bankCustomers)
         {
             var index = 1;
             bool key = false;
@@ -118,7 +123,7 @@ namespace Homework_13.Models
                 }
             }
 
-            return bankCustomers.SelectMany(d => d.DepositoryAccounts).ToArray();
+            return null;            
         }
 
         /// <summary>
