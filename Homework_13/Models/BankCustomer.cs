@@ -49,12 +49,12 @@ namespace Homework_13.Models
         /// <summary>
         /// Лист депозитарных счетов
         /// </summary>
-        public IList<IBankAccount> DepositoryAccounts { get; set; } = new ObservableCollection<IBankAccount>();
+        public IList<IDepositoryAccount> DepositoryAccounts { get; set; } = new ObservableCollection<IDepositoryAccount>();
 
         /// <summary>
         /// Лист кредитных счетов
         /// </summary>
-        public IList<IBankAccount> CreditAccounts { get; set; } = new ObservableCollection<IBankAccount>();
+        public IList<ICreditAccount> CreditAccounts { get; set; } = new ObservableCollection<ICreditAccount>();
 
         /// <summary>
         /// Конструктор

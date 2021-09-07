@@ -6,7 +6,7 @@ namespace Homework_13.Interfaces
     /// <summary>
     /// Интерфейс департамент
     /// </summary>    
-    public interface IDepartment<T> : IEntity where T: IBankCustomer
+    public interface IDepartment : IEntity
     {
         /// <summary>
         /// Название
@@ -21,6 +21,6 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Лист клиентов банка
         /// </summary>
-        IList<T> BankCustomers { get; set; }
+        IList<IBankCustomer> BankCustomers { get; set; }
     }
 }

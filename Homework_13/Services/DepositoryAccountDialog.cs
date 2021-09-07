@@ -9,12 +9,12 @@ namespace Homework_13.Services
     /// <summary>
     /// Интерфейс сервиса диалоговых окон по работе с депозитарными счетами
     /// </summary>
-    public class DepositoryAccountDialog : IBankAccountDialogService<DepositoryAccount>
+    public class DepositoryAccountDialog : IBankAccountDialogService<IDepositoryAccount>
     {
         /// <summary>
         /// Создание нового депозитарного счёта
         /// </summary>        
-        public DepositoryAccount CreateNewBankAccount()
+        public IDepositoryAccount CreateNewBankAccount()
         {
             var dialog = new AddDepositoryAccountWindow();
             if (dialog.ShowDialog() != true) return null;
@@ -30,7 +30,7 @@ namespace Homework_13.Services
         /// Редактировать данные депозитарного счёта
         /// </summary>
         /// <param name="bankAccount"> Депозитарный счёт </param>        
-        public DepositoryAccount EditBankAccountData(DepositoryAccount bankAccount)
+        public IDepositoryAccount EditBankAccountData(IDepositoryAccount bankAccount)
         {
             if (bankAccount is null)
                 throw new ArgumentNullException("Депозитарный счёт не может быть null!!!");
@@ -54,7 +54,7 @@ namespace Homework_13.Services
         /// Объединить депозитарные счета в один счёт
         /// </summary>
         /// <param name="bankAccounts"> Список депозитарных счетов </param>        
-        public DepositoryAccount CombiningBankAccounts(IList<DepositoryAccount> bankAccounts)
+        public IDepositoryAccount CombiningBankAccounts(IList<IDepositoryAccount> bankAccounts)
         {
             if (bankAccounts is null)
                 throw new ArgumentNullException("Список счетов не может быть null!!!");

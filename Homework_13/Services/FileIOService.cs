@@ -9,14 +9,14 @@ namespace Homework_13.Services
     /// <summary>
     /// Класс загрузки и выгрузки данных из файла
     /// </summary>    
-    public class FileIOService : IFileIOService<IList<Department>>
+    public class FileIOService : IFileIOService<IList<IDepartment>>
     {
         /// <summary>
         /// Сохранить данные в файл формата JSON
         /// </summary>
         /// <param name="pathFile"> Путь к файлу </param>
         /// <param name="data"> Сохраняемые данные </param>
-        public void SaveAsJSON(string pathFile, IList<Department> data)
+        public void SaveAsJSON(string pathFile, IList<IDepartment> data)
         {
             using (StreamWriter writer = new StreamWriter(pathFile, false))
             {
@@ -29,12 +29,12 @@ namespace Homework_13.Services
         /// Загрузить данные из файла формата JSON
         /// </summary>
         /// <param name="pathFile"> Путь к файлу </param>
-        public IList<Department> OpenAsJSON(string pathFile)
+        public IList<IDepartment> OpenAsJSON(string pathFile)
         {
             using (var reader = File.OpenText(pathFile))
             {
                 var fileTaxt = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<IList<Department>>(fileTaxt);
+                return JsonConvert.DeserializeObject<IList<IDepartment>>(fileTaxt);
             }
         }        
     }

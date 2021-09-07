@@ -1,6 +1,7 @@
 ﻿using Homework_13.Models;
 using System.Collections.Generic;
 using System;
+using Homework_13.Interfaces;
 
 namespace Homework_13.Services
 {
@@ -19,18 +20,18 @@ namespace Homework_13.Services
         /// <summary>
         /// Получить список всех клиентов
         /// </summary>
-        public IList<BankCustomer> BankCustomers => _bankCustomers.GetAll();
+        public IList<IBankCustomer> BankCustomers => _bankCustomers.GetAll();
 
         /// <summary>
         /// Получить список всех департаментов
         /// </summary>
-        public IList<Department> Departments => _departments.GetAll();
+        public IList<IDepartment> Departments => _departments.GetAll();
 
         /// <summary>
         /// Обновление данных клиента банка и сохранение в репозитории
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>
-        public void Update(BankCustomer bankCustomer)
+        public void Update(IBankCustomer bankCustomer)
         {
             _bankCustomers.Update(bankCustomer.Id, bankCustomer);
         }
@@ -40,7 +41,7 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>
         /// <param name="department"> Департамент </param>        
-        public bool CreateNewBankCustomer(BankCustomer bankCustomer, Department department)
+        public bool CreateNewBankCustomer(IBankCustomer bankCustomer, IDepartment department)
         {
             if (bankCustomer is null) 
                 throw new ArgumentNullException(nameof(bankCustomer), "Добавляемый клиент банка не может быть null!!!");
@@ -61,7 +62,7 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>
         /// <param name="department"> Департамент </param>        
-        public bool DeleteBankCustomer(BankCustomer bankCustomer, Department department)
+        public bool DeleteBankCustomer(IBankCustomer bankCustomer, IDepartment department)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Добавляемый клиент банка не может быть null!!!");

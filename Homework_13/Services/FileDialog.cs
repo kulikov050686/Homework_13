@@ -10,7 +10,7 @@ namespace Homework_13.Services
     /// <summary>
     /// Класс сервиса диалоговых окон по сохранению и выгрузки данных из файла
     /// </summary>    
-    public class FileDialog : IFileDialogService<IList<Department>>
+    public class FileDialog : IFileDialogService<IList<IDepartment>>
     {
         #region Закрытые поля
 
@@ -28,7 +28,7 @@ namespace Homework_13.Services
         /// Открывает диалоговое окно для сохранения в файл
         /// </summary>
         /// <param name="data"> Сохраняемые данные </param>
-        public void SaveFileDialog(IList<Department> data)
+        public void SaveFileDialog(IList<IDepartment> data)
         {
             SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
 
@@ -50,7 +50,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Открывает диалоговое окно для чтения из файла
         /// </summary>  
-        public IList<Department> OpenFileDialog()
+        public IList<IDepartment> OpenFileDialog()
         {
             OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
 

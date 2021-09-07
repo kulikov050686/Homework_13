@@ -22,6 +22,7 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Обновление сущности в репозитории
         /// </summary>
+        /// <param name="id"> Идентификатор сущности </param>
         /// <param name="item"> Обноляемая сущность </param>
         void Update(int id, T item);
 

@@ -1,4 +1,5 @@
-﻿using Homework_13.Models;
+﻿using Homework_13.Interfaces;
+using Homework_13.Models;
 using System.Linq;
 
 namespace Homework_13.Services
@@ -6,7 +7,7 @@ namespace Homework_13.Services
     /// <summary>
     /// Хранилище департаментов банка
     /// </summary>
-    public class DepartmentRepository : RepositoryInMemory<Department>
+    public class DepartmentRepository : RepositoryInMemory<IDepartment>
     {
         /// <summary>
         /// Конструктор по умолчанию
@@ -17,7 +18,7 @@ namespace Homework_13.Services
         /// Поиск департамента по имени
         /// </summary>
         /// <param name="nameDepartment"> Имя департамента </param>
-        public Department Get(string nameDepartment)
+        public IDepartment Get(string nameDepartment)
         {
             return GetAll().FirstOrDefault(d => d.Name == nameDepartment);
         }
@@ -27,10 +28,9 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="source"> Новые данные департамента </param>
         /// <param name="destination"> Обновляемый департамент </param>
-        protected override void Update(Department source, Department destination)
+        protected override void Update(IDepartment source, IDepartment destination)
         {
-            destination.BankCustomers = source.BankCustomers;
-            destination.Description = source.Description;
+            destination.BankCustomers = source.BankCustomers;            
             destination.Id = source.Id;
             destination.Name = source.Name;
         }

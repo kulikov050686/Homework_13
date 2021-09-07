@@ -1,4 +1,5 @@
 ﻿using Homework_13.Commands;
+using Homework_13.Interfaces;
 using Homework_13.Models;
 using Homework_13.Services;
 using System.Collections.Generic;
@@ -28,17 +29,17 @@ namespace Homework_13.ViewModels
         /// <summary>
         /// Список всех департаментов банка
         /// </summary>
-        public IList<Department> Departments => _bankCustomersManager.Departments;
+        public IList<IDepartment> Departments => _bankCustomersManager.Departments;
 
         /// <summary>
         /// Список всех клиентов банка
         /// </summary>
-        public IList<BankCustomer> BankCustomers => _bankCustomersManager.BankCustomers;
+        public IList<IBankCustomer> BankCustomers => _bankCustomersManager.BankCustomers;
 
         /// <summary>
         /// Список всех депозитарных счетов
         /// </summary>
-        public IList<DepositoryAccount> DepositoryAccounts => _depositoryAccountsManager.DepositoryAccounts;
+        public IList<IDepositoryAccount> DepositoryAccounts => _depositoryAccountsManager.DepositoryAccounts;
 
         /// <summary>
         /// Выбранный департамент
@@ -187,10 +188,10 @@ namespace Homework_13.ViewModels
                 var depositoryAccount = (DepositoryAccount)obj;
                 if (depositoryAccount is null) return;
 
-                //var tempDepositoryAccount = _depositoryAccountDialog.CombiningBankAccounts(SelectedBankCustomer.DepositoryAccounts);
-                //if (tempDepositoryAccount is null) return;
+                var tempDepositoryAccount = _depositoryAccountDialog.CombiningBankAccounts(SelectedBankCustomer.DepositoryAccounts);
+                if (tempDepositoryAccount is null) return;
 
-                //if (!_depositoryAccountsManager.CombiningDepositoryAccounts(depositoryAccount, tempDepositoryAccount, SelectedBankCustomer)) return;
+                if (!_depositoryAccountsManager.CombiningDepositoryAccounts(depositoryAccount, tempDepositoryAccount, SelectedBankCustomer)) return;
             }, (obj) => obj is DepositoryAccount);
         }
 

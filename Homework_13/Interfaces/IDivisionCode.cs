@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Homework_13.Interfaces
+﻿namespace Homework_13.Interfaces
 {
     /// <summary>
     /// Интерфейс код подразделения

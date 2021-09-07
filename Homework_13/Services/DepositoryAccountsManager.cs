@@ -1,6 +1,7 @@
 ﻿using Homework_13.Models;
 using System.Collections.Generic;
 using System;
+using Homework_13.Interfaces;
 
 namespace Homework_13.Services
 {
@@ -19,13 +20,13 @@ namespace Homework_13.Services
         /// <summary>
         /// Получить список всех депозитарных счетов клиентов банка
         /// </summary>
-        public IList<DepositoryAccount> DepositoryAccounts => _depositoryAccounts.GetAll();
+        public IList<IDepositoryAccount> DepositoryAccounts => _depositoryAccounts.GetAll();
 
         /// <summary>
         /// Обновление данных депозитарного счёта клиента банка и сохранение в репозитории
         /// </summary>
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
-        public void Update(DepositoryAccount depositoryAccount)
+        public void Update(IDepositoryAccount depositoryAccount)
         {
             _depositoryAccounts.Update(depositoryAccount.Id, depositoryAccount);
         }
@@ -35,8 +36,8 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool CreateNewDepositoryAccount(DepositoryAccount depositoryAccount, 
-                                               BankCustomer bankCustomer)
+        public bool CreateNewDepositoryAccount(IDepositoryAccount depositoryAccount, 
+                                               IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Клиент банка не может быть null!!!");
@@ -57,8 +58,8 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool DeleteDepositoryAccount(DepositoryAccount depositoryAccount, 
-                                            BankCustomer bankCustomer)
+        public bool DeleteDepositoryAccount(IDepositoryAccount depositoryAccount, 
+                                            IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Клиент банка не может быть null!!!");
@@ -83,9 +84,9 @@ namespace Homework_13.Services
         /// <param name="depositoryAccount1"> Депозитарный счёт 1 </param>
         /// <param name="depositoryAccount2"> Депозитарный счёт 2 </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool CombiningDepositoryAccounts(DepositoryAccount depositoryAccount1,
-                                                DepositoryAccount depositoryAccount2,
-                                                BankCustomer bankCustomer)
+        public bool CombiningDepositoryAccounts(IDepositoryAccount depositoryAccount1,
+                                                IDepositoryAccount depositoryAccount2,
+                                                IBankCustomer bankCustomer)
         {
             if(depositoryAccount1 is null)
                 throw new ArgumentNullException(nameof(depositoryAccount1), "Счёт не может быть null!!!");

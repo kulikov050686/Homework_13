@@ -9,7 +9,7 @@ namespace Homework_13.Models
     /// <summary>
     /// Класс департамент
     /// </summary>
-    public class Department : IDepartment<BankCustomer>
+    public class Department : IDepartment
     {
         /// <summary>
         /// Идентификатор
@@ -29,13 +29,8 @@ namespace Homework_13.Models
         /// <summary>
         /// Лист клиентов банка
         /// </summary>
-        public IList<BankCustomer> BankCustomers { get; set; } = new ObservableCollection<BankCustomer>();
-
-        /// <summary>
-        /// Описание
-        /// </summary>
-        public string Description { get; set; }
-
+        public IList<IBankCustomer> BankCustomers { get; set; } = new ObservableCollection<IBankCustomer>();
+        
         /// <summary>
         /// Конструктор
         /// </summary>

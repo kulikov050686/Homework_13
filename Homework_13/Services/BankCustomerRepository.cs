@@ -1,11 +1,12 @@
-﻿using Homework_13.Models;
+﻿using Homework_13.Interfaces;
+using Homework_13.Models;
 
 namespace Homework_13.Services
 {
     /// <summary>
     /// Хранилище клиентов банка
     /// </summary>
-    public class BankCustomerRepository : RepositoryInMemory<BankCustomer>
+    public class BankCustomerRepository : RepositoryInMemory<IBankCustomer>
     {
         /// <summary>
         /// Констрктор по умолчанию
@@ -17,7 +18,7 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="source"> Новые данные клиента </param>
         /// <param name="destination"> Обновляемый клиент </param>
-        protected override void Update(BankCustomer source, BankCustomer destination)
+        protected override void Update(IBankCustomer source, IBankCustomer destination)
         {
             destination.Id = source.Id;
             destination.Passport = source.Passport;

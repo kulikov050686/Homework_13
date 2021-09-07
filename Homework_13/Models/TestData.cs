@@ -1,6 +1,6 @@
 ﻿using Homework_13.Enums;
+using Homework_13.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -14,24 +14,24 @@ namespace Homework_13.Models
         /// <summary>
         /// Департаменты банка
         /// </summary>
-        public static ObservableCollection<Department> Departments { get; set; } = CreateDepartments();
+        public static ObservableCollection<IDepartment> Departments { get; set; } = CreateDepartments();
 
         /// <summary>
         /// Клиенты банка
         /// </summary>
-        public static ObservableCollection<BankCustomer> BankCustomers { get; set; } = CreateBankCustomers(Departments);
+        public static ObservableCollection<IBankCustomer> BankCustomers { get; set; } = CreateBankCustomers(Departments);
 
         /// <summary>
         /// Депозитарные счета клиентов банка
         /// </summary>
-        public static ObservableCollection<DepositoryAccount> DepositoryAccounts { get; set; } = CreateDepositoryAccount(BankCustomers);
+        public static ObservableCollection<IDepositoryAccount> DepositoryAccounts { get; set; } = CreateDepositoryAccount(BankCustomers);
 
         /// <summary>
         /// Создание департаментов банка
         /// </summary>        
-        public static ObservableCollection<Department> CreateDepartments()
+        public static ObservableCollection<IDepartment> CreateDepartments()
         {
-            ObservableCollection<Department> departments = new ObservableCollection<Department>();
+            ObservableCollection<IDepartment> departments = new ObservableCollection<IDepartment>();
 
             departments.Add(new Department(1, $"Департамент { 1 }", Status.USUAL));
             departments.Add(new Department(2, $"Департамент { 2 }", Status.VIP));
@@ -44,7 +44,7 @@ namespace Homework_13.Models
         /// Заполнение клиентами банка депортаментов
         /// </summary>
         /// <param name="departments"> Департаменты </param>
-        private static ObservableCollection<BankCustomer> CreateBankCustomers(ObservableCollection<Department> departments)
+        private static ObservableCollection<IBankCustomer> CreateBankCustomers(ObservableCollection<IDepartment> departments)
         {
             var index = 1;
             var gender = Gender.MAN;
@@ -79,7 +79,7 @@ namespace Homework_13.Models
 
             var t = departments.SelectMany(d => d.BankCustomers);
 
-            ObservableCollection<BankCustomer> m = new ObservableCollection<BankCustomer>();
+            ObservableCollection<IBankCustomer> m = new ObservableCollection<IBankCustomer>();
 
             foreach (var item in t)
             {
@@ -93,7 +93,7 @@ namespace Homework_13.Models
         /// Заполнение депозитарными счетами клиентов банка
         /// </summary>
         /// <param name="bankCustomers"> Клиенты банка </param>        
-        private static ObservableCollection<DepositoryAccount> CreateDepositoryAccount(IList<BankCustomer> bankCustomers)
+        private static ObservableCollection<IDepositoryAccount> CreateDepositoryAccount(ObservableCollection<IBankCustomer> bankCustomers)
         {
             var index = 1;
             bool key = false;
@@ -125,7 +125,7 @@ namespace Homework_13.Models
 
             var t = bankCustomers.SelectMany(d => d.DepositoryAccounts);
 
-            ObservableCollection<DepositoryAccount> m = new ObservableCollection<DepositoryAccount>();
+            ObservableCollection<IDepositoryAccount> m = new ObservableCollection<IDepositoryAccount>();
 
             foreach (var item in t)
             {

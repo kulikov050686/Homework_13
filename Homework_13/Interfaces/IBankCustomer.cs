@@ -41,12 +41,12 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Лист депозитарных счетов
         /// </summary>
-        IList<IBankAccount> DepositoryAccounts { get; set; }
+        IList<IDepositoryAccount> DepositoryAccounts { get; set; }
 
         /// <summary>
         /// Лист кредитных счетов
         /// </summary>
-        IList<IBankAccount> CreditAccounts { get; set; }
+        IList<ICreditAccount> CreditAccounts { get; set; }
 
         /// <summary>
         /// Метод сравнения

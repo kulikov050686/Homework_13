@@ -15,7 +15,7 @@ namespace Homework_13.Services
         /// Создание нового клиента банка
         /// </summary>
         /// <param name="clientStatus"> Статус клиента банка </param>        
-        public BankCustomer CreateNewBankCustomer(Status clientStatus)
+        public IBankCustomer CreateNewBankCustomer(Status clientStatus)
         {
             var dialog = new AddBankCustomersWindow();
 
@@ -28,7 +28,7 @@ namespace Homework_13.Services
         /// Редактировать данные клиента банка
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public BankCustomer EditBankCustomerData(BankCustomer bankCustomer)
+        public IBankCustomer EditBankCustomerData(IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException("Клиент банка не может быть null!!!");
@@ -52,8 +52,8 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="dialog"> Окно диалога </param>
         /// <param name="clientStatus"> Статус клиента </param>
-        private BankCustomer CreateBankCustomer(AddBankCustomersWindow dialog,
-                                                Status clientStatus)
+        private IBankCustomer CreateBankCustomer(AddBankCustomersWindow dialog,
+                                                 Status clientStatus)
         {
             if (dialog is null)
                 throw new ArgumentNullException(nameof(dialog));
@@ -177,7 +177,7 @@ namespace Homework_13.Services
         /// <param name="apartmentNumber"> Номер квартиры </param>
         /// <param name="housing"> Корпус дома </param>
         /// <param name="district"> Район города </param>        
-        private Address CreateAddress(DateTime? registrationDate,
+        private IAddress CreateAddress(DateTime? registrationDate,
                                        string region,
                                        string city,
                                        string street,
@@ -214,7 +214,7 @@ namespace Homework_13.Services
         /// <param name="placeOfBirth"> Место рождения </param>
         /// <param name="placeOfResidence"> Место жительства (прописка) </param>
         /// <param name="placeOfRegistration"> Место регистрации </param>
-        private Person CreatePersone(string surname,
+        private IPerson CreatePersone(string surname,
                                       string name,
                                       string patronymic,
                                       Gender gender,
@@ -249,12 +249,12 @@ namespace Homework_13.Services
         /// <param name="dateOfIssue"> Дата выпуска </param>
         /// <param name="divisionCode"> Код подразделения </param>
         /// <param name="holder"> Владелец </param>
-        private Passport CreatePassport(long? series,
-                                        long? number,
-                                        string placeOfIssue,
-                                        DateTime? dateOfIssue,
-                                        DivisionCode divisionCode,
-                                        IPerson holder)
+        private IPassport CreatePassport(long? series,
+                                         long? number,
+                                         string placeOfIssue,
+                                         DateTime? dateOfIssue,
+                                         IDivisionCode divisionCode,
+                                         IPerson holder)
         {
             try
             {
@@ -276,7 +276,7 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="left"> Левая чать кода </param>
         /// <param name="right"> Правая часть кода </param>        
-        private DivisionCode CreateDivisionCode(int? left, int? right)
+        private IDivisionCode CreateDivisionCode(int? left, int? right)
         {
             try
             {
