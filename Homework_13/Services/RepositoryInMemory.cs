@@ -1,6 +1,7 @@
 ﻿using Homework_13.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Homework_13.Services
@@ -13,7 +14,7 @@ namespace Homework_13.Services
     {
         #region Закрытые поля
 
-        private readonly IList<T> _items = new List<T>();
+        private IList<T> _items = new ObservableCollection<T>();
         private int _lastId;
 
         #endregion

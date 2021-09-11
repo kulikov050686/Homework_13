@@ -13,7 +13,8 @@
             <MenuItem Header="Файл">
                 <MenuItem Header="Сохранить" 
                           Command="{Binding SaveToFile}"/>
-                <MenuItem Header="Открыть"/>
+                <MenuItem Header="Открыть"
+                          Command="{Binding OpenFile}"/>
                 <MenuItem Header="Выход">
                     <i:Interaction.Behaviors>
                         <bihaviors:CloseWindowItemMenu/>

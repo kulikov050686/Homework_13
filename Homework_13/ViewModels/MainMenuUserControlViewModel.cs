@@ -16,6 +16,7 @@ namespace Homework_13.ViewModels
 
         private MainUserControlViewModel _mainUserControlViewModel;
         private FileDialog _fileDialog;
+        private DepartmentRepository _departmentRepository;
 
         #endregion
 
@@ -30,8 +31,7 @@ namespace Homework_13.ViewModels
         public ICommand SaveToFile
         {
             get => _saveToFile ??= new RelayCommand((obj) =>
-            {
-                /// Сохранение в файл департаментов
+            {                
                 _fileDialog.SaveFileDialog(Departments);
             }, (obj) => _mainUserControlViewModel.Departments != null);
         }
@@ -44,8 +44,8 @@ namespace Homework_13.ViewModels
         public ICommand OpenFile
         {
             get => _openFile ??= new RelayCommand((obj) => 
-            {
-                /// Открыть
+            {               
+                var departments = _fileDialog.OpenFileDialog();                
             });
         }
 
@@ -133,10 +133,12 @@ namespace Homework_13.ViewModels
         /// Конструктор
         /// </summary>        
         public MainMenuUserControlViewModel(MainUserControlViewModel mainUserControlViewModel,
-                                            FileDialog fileDialog)
+                                            FileDialog fileDialog,
+                                            DepartmentRepository departmentRepository)
         {
             _mainUserControlViewModel = mainUserControlViewModel;
             _fileDialog = fileDialog;
+            _departmentRepository = departmentRepository;
         }
     }
 }
