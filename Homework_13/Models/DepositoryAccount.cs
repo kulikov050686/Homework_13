@@ -1,5 +1,6 @@
 ﻿using Homework_13.Enums;
 using Homework_13.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace Homework_13.Models
 {
@@ -7,25 +8,29 @@ namespace Homework_13.Models
     /// Класс Депозитарный счёт
     /// </summary>
     public class DepositoryAccount : IDepositoryAccount
-    {        
+    {
         /// <summary>
         /// Идентификатор
         /// </summary>
+        [JsonPropertyName("Id")]
         public int Id { get; set; }
 
         /// <summary>
         /// Статус депозита
         /// </summary>
+        [JsonPropertyName("DepositStatus")]
         public DepositStatus DepositStatus { get; set; }
 
         /// <summary>
         /// Сумма на счёте
         /// </summary>
+        [JsonPropertyName("Amount")]
         public double? Amount { get; set; }
 
         /// <summary>
         /// Процентная ставка
         /// </summary>
+        [JsonPropertyName("InterestRate")]
         public double? InterestRate { get; set; }
 
         /// <summary>

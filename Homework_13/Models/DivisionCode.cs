@@ -1,5 +1,6 @@
 ﻿using Homework_13.Interfaces;
 using System;
+using System.Text.Json.Serialization;
 
 namespace Homework_13.Models
 {
@@ -11,11 +12,13 @@ namespace Homework_13.Models
         /// <summary>
         /// Левая часть кода подразделения
         /// </summary>
+        [JsonPropertyName("Left")]
         public int? Left { get; }
-        
+
         /// <summary>
         /// Правая часть кода подразделения
         /// </summary>
+        [JsonPropertyName("Right")]
         public int? Right { get; }
         
         /// <summary>

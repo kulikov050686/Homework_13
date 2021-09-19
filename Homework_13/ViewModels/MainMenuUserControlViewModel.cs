@@ -23,7 +23,7 @@ namespace Homework_13.ViewModels
         /// <summary>
         /// Список всех департаментов банка
         /// </summary>
-        public IList<IDepartment> Departments => _mainUserControlViewModel.Departments;
+        public IList<IDepartment> Departments { get; set; }
 
         #region Команда сохранить в файл
 
@@ -45,7 +45,7 @@ namespace Homework_13.ViewModels
         {
             get => _openFile ??= new RelayCommand((obj) => 
             {               
-                var departments = _fileDialog.OpenFileDialog();                
+                Departments = _fileDialog.OpenFileDialog();
             });
         }
 
@@ -139,6 +139,8 @@ namespace Homework_13.ViewModels
             _mainUserControlViewModel = mainUserControlViewModel;
             _fileDialog = fileDialog;
             _departmentRepository = departmentRepository;
+
+            Departments = _mainUserControlViewModel.Departments;
         }
     }
 }

@@ -10,6 +10,6 @@ namespace Homework_13.Interfaces
         /// <summary>
         /// Статус кредита
         /// </summary>
-        public CreditStatus CreditStatus { get; }
+        public CreditStatus CreditStatus { get; set; }
     }
 }
