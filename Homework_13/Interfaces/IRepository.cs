@@ -36,5 +36,11 @@ namespace Homework_13.Interfaces
         /// Получить все сущности
         /// </summary>
         IList<T> GetAll();
+
+        /// <summary>
+        /// Задать список сущностей в репозитории
+        /// </summary>
+        /// <param name="items"> Список сущностей  </param>
+        void SetAll(IList<T> items);
     }
 }

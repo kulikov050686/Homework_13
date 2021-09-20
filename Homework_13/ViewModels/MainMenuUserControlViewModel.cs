@@ -18,6 +18,8 @@ namespace Homework_13.ViewModels
         private MainUserControlViewModel _mainUserControlViewModel;
         private FileDialog _fileDialog;
         private DepartmentRepository _departmentRepository;
+        private BankCustomerRepository _bankCustomerRepository;
+        private DepositoryAccountRepository _depositoryAccountRepository;
 
         #endregion
 
@@ -55,12 +57,30 @@ namespace Homework_13.ViewModels
         public ICommand OpenFile
         {
             get => _openFile ??= new RelayCommand((obj) => 
-            {               
-                Departments = _fileDialog.OpenFileDialog();
+            {
+                var departments = _fileDialog.OpenFileDialog();
 
-                BankCustomers = Departments.SelectMany(d => d.BankCustomers).ToList();
+                if (departments != null)
+                {
+                    Departments = departments;
+                    _departmentRepository.SetAll(Departments);
 
-                DepositoryAccounts = BankCustomers.SelectMany(d => d.DepositoryAccounts).ToList();
+                    var bankCustomers = Departments.SelectMany(d => d.BankCustomers).ToList();
+
+                    if(bankCustomers != null)
+                    {
+                        BankCustomers = bankCustomers;
+                        _bankCustomerRepository.SetAll(BankCustomers);
+
+                        var depositoryAccounts = BankCustomers.SelectMany(d => d.DepositoryAccounts).ToList();
+
+                        if (depositoryAccounts != null)
+                        {
+                            DepositoryAccounts = depositoryAccounts;
+                            _depositoryAccountRepository.SetAll(DepositoryAccounts);
+                        }
+                    }             
+                }               
             });
         }
 
@@ -149,11 +169,15 @@ namespace Homework_13.ViewModels
         /// </summary>        
         public MainMenuUserControlViewModel(MainUserControlViewModel mainUserControlViewModel,
                                             FileDialog fileDialog,
-                                            DepartmentRepository departmentRepository)
+                                            DepartmentRepository departmentRepository,
+                                            BankCustomerRepository bankCustomerRepository,
+                                            DepositoryAccountRepository depositoryAccountRepository)
         {
             _mainUserControlViewModel = mainUserControlViewModel;
             _fileDialog = fileDialog;
             _departmentRepository = departmentRepository;
+            _bankCustomerRepository = bankCustomerRepository;
+            _depositoryAccountRepository = depositoryAccountRepository;
 
             Departments = _mainUserControlViewModel.Departments;            
         }

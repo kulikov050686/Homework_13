@@ -61,6 +61,25 @@ namespace Homework_13.Services
         public IList<T> GetAll() => _items;
 
         /// <summary>
+        /// Задать список сущностей в репозитории
+        /// </summary>
+        /// <param name="items"> Список сущностей  </param>
+        public void SetAll(IList<T> items)
+        {
+            if (items is null)
+                throw new ArgumentNullException(nameof(items));
+
+            _items.Clear();
+
+            foreach (var item in items)
+            {
+                _items.Add(item);
+            }
+
+            _lastId = _items[_items.Count - 1].Id;
+        }
+
+        /// <summary>
         /// Удалить элемент из репозитория
         /// </summary>
         /// <param name="item"> Удаляемый элемент </param>        
