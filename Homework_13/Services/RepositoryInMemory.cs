@@ -15,7 +15,7 @@ namespace Homework_13.Services
         #region Закрытые поля
 
         private IList<T> _items = new ObservableCollection<T>();
-        private int _lastId;
+        private int _lastId = 0;
 
         #endregion
 
@@ -70,13 +70,9 @@ namespace Homework_13.Services
                 throw new ArgumentNullException(nameof(items));
 
             _items.Clear();
+            _lastId = 0;
 
-            foreach (var item in items)
-            {
-                _items.Add(item);
-            }
-
-            _lastId = _items[_items.Count - 1].Id;
+            foreach (var item in items) Add(item);                      
         }
 
         /// <summary>
