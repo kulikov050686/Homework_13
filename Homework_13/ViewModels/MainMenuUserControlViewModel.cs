@@ -3,6 +3,7 @@ using Homework_13.Interfaces;
 using Homework_13.Models;
 using Homework_13.Services;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Homework_13.ViewModels
@@ -25,6 +26,16 @@ namespace Homework_13.ViewModels
         /// </summary>
         public IList<IDepartment> Departments { get; set; }
 
+        /// <summary>
+        /// Список всех клиентов банка
+        /// </summary>
+        public IList<IBankCustomer> BankCustomers { get; set; }
+
+        /// <summary>
+        /// Список всех депозитарных счетов
+        /// </summary>
+        public IList<IDepositoryAccount> DepositoryAccounts { get; set; }
+
         #region Команда сохранить в файл
 
         private ICommand _saveToFile = default!;
@@ -46,6 +57,10 @@ namespace Homework_13.ViewModels
             get => _openFile ??= new RelayCommand((obj) => 
             {               
                 Departments = _fileDialog.OpenFileDialog();
+
+                BankCustomers = Departments.SelectMany(d => d.BankCustomers).ToList();
+
+                DepositoryAccounts = BankCustomers.SelectMany(d => d.DepositoryAccounts).ToList();
             });
         }
 
@@ -140,7 +155,7 @@ namespace Homework_13.ViewModels
             _fileDialog = fileDialog;
             _departmentRepository = departmentRepository;
 
-            Departments = _mainUserControlViewModel.Departments;
+            Departments = _mainUserControlViewModel.Departments;            
         }
     }
 }
