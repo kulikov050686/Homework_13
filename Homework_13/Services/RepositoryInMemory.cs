@@ -1,4 +1,6 @@
-﻿using Homework_13.Interfaces;
+﻿using Homework_13.Enums;
+using Homework_13.Infrastructure;
+using Homework_13.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,6 +20,11 @@ namespace Homework_13.Services
         private int _lastId = 0;
 
         #endregion
+
+        /// <summary>
+        /// Событие возникающее при действиях в репозитории
+        /// </summary>
+        public event RepositoryEventHandler RepositoryEvent;
 
         /// <summary>
         /// Конструктор по умолчанию
@@ -47,6 +54,7 @@ namespace Homework_13.Services
 
             item.Id = ++_lastId;
             _items.Add(item);
+            RepositoryEvent?.Invoke(RepositoryArgs.ADD);
         }
 
         /// <summary>
@@ -79,7 +87,14 @@ namespace Homework_13.Services
         /// Удалить элемент из репозитория
         /// </summary>
         /// <param name="item"> Удаляемый элемент </param>        
-        public bool Remove(T item) => _items.Remove(item);
+        public bool Remove(T item)
+        { 
+            var result = _items.Remove(item);
+
+            if (result) RepositoryEvent?.Invoke(RepositoryArgs.DELETE);
+
+            return result;
+        }
         
         /// <summary>
         /// Обновление данных элемента
@@ -101,6 +116,7 @@ namespace Homework_13.Services
                 throw new InvalidOperationException("Редактируемый элемент не найден в репозитории");
 
             Update(item, db_item);
+            RepositoryEvent?.Invoke(RepositoryArgs.UPDATE);
         }
         
         /// <summary>

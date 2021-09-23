@@ -119,7 +119,7 @@ namespace Homework_13.Services
                                          BankCustomerRepository bankCustomerRepository)
         {
             _bankCustomers = bankCustomerRepository;
-            _depositoryAccounts = depositoryAccountRepository;
+            _depositoryAccounts = depositoryAccountRepository;           
         }
     }
 }

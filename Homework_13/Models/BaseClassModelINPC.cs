@@ -3,7 +3,10 @@ using System.Runtime.CompilerServices;
 
 namespace Homework_13.Models
 {
-    public class BaseClassModelINPC : INotifyPropertyChanged
+    /// <summary>
+    /// Базовый класс модели
+    /// </summary>
+    public abstract class BaseClassModelINPC : INotifyPropertyChanged
     {
         /// <summary>
         /// Событие для извещения об изменения свойства
