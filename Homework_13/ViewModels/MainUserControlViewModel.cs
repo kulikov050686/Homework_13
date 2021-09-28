@@ -21,6 +21,7 @@ namespace Homework_13.ViewModels
         private Department _selectedDepartment;
         private BankCustomer _selectedBankCustomer;
         private DepositoryAccount _selectedDepositoryAccount;
+        private CreditAccount _selectedCreditAccount;
 
         #endregion
 
@@ -42,6 +43,11 @@ namespace Homework_13.ViewModels
         public IList<IDepositoryAccount> DepositoryAccounts => _depositoryAccountsManager.DepositoryAccounts;
 
         /// <summary>
+        /// Список всех кредитных счетов
+        /// </summary>
+        public IList<ICreditAccount> CreditAccounts;
+
+        /// <summary>
         /// Выбранный департамент
         /// </summary>
         public Department SelectedDepartment
@@ -60,12 +66,21 @@ namespace Homework_13.ViewModels
         }
 
         /// <summary>
-        /// Выбранный дпозитарный счёт
+        /// Выбранный депозитарный счёт
         /// </summary>
         public DepositoryAccount SelectedDepositoryAccount
         {
             get => _selectedDepositoryAccount;
             set => Set(ref _selectedDepositoryAccount, value);
+        }
+
+        /// <summary>
+        /// Выбранный кредитный счёт
+        /// </summary>
+        public CreditAccount SelectedCreditAccount
+        {
+            get => _selectedCreditAccount;
+            set => Set(ref _selectedCreditAccount, value);
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using Homework_13.Enums;
 using Homework_13.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -14,22 +15,27 @@ namespace Homework_13.Models
         /// <summary>
         /// Департаменты банка
         /// </summary>
-        public static ObservableCollection<IDepartment> Departments { get; set; } = CreateDepartments();
+        public static IList<IDepartment> Departments { get; set; } = CreateDepartments();
 
         /// <summary>
         /// Клиенты банка
         /// </summary>
-        public static ObservableCollection<IBankCustomer> BankCustomers { get; set; } = CreateBankCustomers(Departments);
+        public static IList<IBankCustomer> BankCustomers { get; set; } = CreateBankCustomers(Departments);
 
         /// <summary>
         /// Депозитарные счета клиентов банка
         /// </summary>
-        public static ObservableCollection<IDepositoryAccount> DepositoryAccounts { get; set; } = CreateDepositoryAccount(BankCustomers);
+        public static IList<IDepositoryAccount> DepositoryAccounts { get; set; } = CreateDepositoryAccounts(BankCustomers);
+
+        /// <summary>
+        /// Кредитные счета клиентов банка
+        /// </summary>
+        public static IList<ICreditAccount> CreditAccounts { get; set; } = CreateCreditAccounts(BankCustomers);
 
         /// <summary>
         /// Создание департаментов банка
         /// </summary>        
-        public static ObservableCollection<IDepartment> CreateDepartments()
+        public static IList<IDepartment> CreateDepartments()
         {
             ObservableCollection<IDepartment> departments = new ObservableCollection<IDepartment>();
 
@@ -44,7 +50,7 @@ namespace Homework_13.Models
         /// Заполнение клиентами банка депортаментов
         /// </summary>
         /// <param name="departments"> Департаменты </param>
-        private static ObservableCollection<IBankCustomer> CreateBankCustomers(ObservableCollection<IDepartment> departments)
+        private static IList<IBankCustomer> CreateBankCustomers(IList<IDepartment> departments)
         {
             var index = 1;
             var gender = Gender.MAN;
@@ -76,24 +82,15 @@ namespace Homework_13.Models
                     index++;
                 }
             }
-
-            var t = departments.SelectMany(d => d.BankCustomers);
-
-            ObservableCollection<IBankCustomer> m = new ObservableCollection<IBankCustomer>();
-
-            foreach (var item in t)
-            {
-                m.Add(item);
-            }
-
-            return m;
+            
+            return departments.SelectMany(d => d.BankCustomers).ToList();            
         }
 
         /// <summary>
         /// Заполнение депозитарными счетами клиентов банка
         /// </summary>
-        /// <param name="bankCustomers"> Клиенты банка </param>        
-        private static ObservableCollection<IDepositoryAccount> CreateDepositoryAccount(ObservableCollection<IBankCustomer> bankCustomers)
+        /// <param name="bankCustomers"> Клиенты банка </param>
+        private static IList<IDepositoryAccount> CreateDepositoryAccounts(IList<IBankCustomer> bankCustomers)
         {
             var index = 1;
             bool key = false;
@@ -122,17 +119,41 @@ namespace Homework_13.Models
                     index++;
                 }
             }
+                        
+            return bankCustomers.SelectMany(d => d.DepositoryAccounts).ToList();                       
+        }
 
-            var t = bankCustomers.SelectMany(d => d.DepositoryAccounts);
+        /// <summary>
+        /// Заполнение кредитными счетами лиентов банка
+        /// </summary>
+        /// <param name="bankCustomers"> Клиенты банка </param>        
+        private static IList<ICreditAccount> CreateCreditAccounts(IList<IBankCustomer> bankCustomers)
+        {
+            var index = 1;
+            bool key = false;
+            CreditAccount creditAccount;
 
-            ObservableCollection<IDepositoryAccount> m = new ObservableCollection<IDepositoryAccount>();
-
-            foreach (var item in t)
+            foreach (var item in bankCustomers)
             {
-                m.Add((DepositoryAccount)item);
+                for (int i = 0; i < 2; i++)
+                {
+                    if(key)
+                    {
+                        creditAccount = new CreditAccount(index, 300000, 10, 12, CreditStatus.ANNUITY);
+                        key = !key;
+                    }
+                    else
+                    {
+                        creditAccount = new CreditAccount(index, 300000, 10, 12, CreditStatus.DIFFERENTIATED);
+                        key = !key;
+                    }
+
+                    item.CreditAccounts.Add(creditAccount);
+                    index++;
+                }
             }
 
-            return m;            
+            return bankCustomers.SelectMany(d => d.CreditAccounts).ToList();
         }
 
         /// <summary>

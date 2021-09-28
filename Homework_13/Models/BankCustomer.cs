@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 namespace Homework_13.Models
 {
     /// <summary>
-    /// Базовый класс Клиент Банка
+    /// Класс Клиент Банка
     /// </summary>
     public class BankCustomer : IBankCustomer
     {

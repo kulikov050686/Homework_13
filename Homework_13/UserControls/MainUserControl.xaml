@@ -15,6 +15,7 @@
             <ColumnDefinition Width="200" MinWidth="200"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <!--Отдел банка-->
@@ -219,6 +220,14 @@
                                   CommandParameter="{Binding SelectedDepositoryAccount}"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
+            </ListBox>
+        </GroupBox>
+        
+        <!-- Кредитные счета -->        
+        <GroupBox Grid.Column="4"
+                  Header="Кредитные счета">
+            <ListBox ItemsSource="{Binding SelectedBankCustomer.CreditAccounts}">
+                
             </ListBox>
         </GroupBox>
 

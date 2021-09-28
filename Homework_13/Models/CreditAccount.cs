@@ -1,8 +1,6 @@
 ﻿using Homework_13.Enums;
 using Homework_13.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Homework_13.Models
 {
@@ -15,6 +13,11 @@ namespace Homework_13.Models
         /// Идентификатор
         /// </summary>        
         public int Id { get; set; }
+
+        /// <summary>
+        /// Срок кредита
+        /// </summary>
+        public byte? CreditTerm { get; set; }
 
         /// <summary>
         /// Статус кредита
@@ -37,20 +40,17 @@ namespace Homework_13.Models
         public AccountStatus AccountStatus => AccountStatus.CREDIT;
 
         /// <summary>
-        /// Список платежей
-        /// </summary>        
-        public IList<IPayment> Payments { get; set; } = new ObservableCollection<IPayment>();
-
-        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="id"> Идентификатор </param>
         /// <param name="amount"> Сумма кредита </param>
         /// <param name="interestRate"> Процентная ставка </param>
+        /// <param name="creditTerm"> Срок кредитования </param>
         /// <param name="creditStatus"> Статус кредита </param>
-        public CreditAccount(int id, 
+        public CreditAccount(int id,
                              double amount, 
                              double interestRate,
+                             byte creditTerm,
                              CreditStatus creditStatus)
         {
             if (id < 0)
@@ -59,10 +59,13 @@ namespace Homework_13.Models
                 throw new ArgumentException("Невозможная сумма кредита!!!");
             if(interestRate <= 0)
                 throw new ArgumentException("Невозможная процентная ставка!!!");
+            if(creditTerm == 0)
+                throw new ArgumentException("Невозможный срок кредита!!!");
 
-            Id = id;                       
+            Id = id;
             Amount = amount;
             InterestRate = interestRate;
+            CreditTerm = creditTerm;
             CreditStatus = creditStatus;
         }
     }
