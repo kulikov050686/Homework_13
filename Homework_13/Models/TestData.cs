@@ -139,12 +139,12 @@ namespace Homework_13.Models
                 {
                     if(key)
                     {
-                        creditAccount = new CreditAccount(index, 300000, 10, 12, CreditStatus.ANNUITY);
+                        creditAccount = new CreditAccount(index, 300000, 12, 12, CreditStatus.ANNUITY);
                         key = !key;
                     }
                     else
                     {
-                        creditAccount = new CreditAccount(index, 300000, 10, 12, CreditStatus.DIFFERENTIATED);
+                        creditAccount = new CreditAccount(index, 300000, 12, 12, CreditStatus.DIFFERENTIATED);
                         key = !key;
                     }
 

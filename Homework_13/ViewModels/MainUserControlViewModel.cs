@@ -16,8 +16,9 @@ namespace Homework_13.ViewModels
 
         private readonly BankCustomersManager _bankCustomersManager;
         private readonly DepositoryAccountsManager _depositoryAccountsManager;
+        private readonly CreditAccountsManager _creditAccountsManager;
         private BankCustomerDialog _bankCustomerDialog;
-        private DepositoryAccountDialog _depositoryAccountDialog;
+        private DepositoryAccountDialog _depositoryAccountDialog;        
         private Department _selectedDepartment;
         private BankCustomer _selectedBankCustomer;
         private DepositoryAccount _selectedDepositoryAccount;
@@ -45,7 +46,7 @@ namespace Homework_13.ViewModels
         /// <summary>
         /// Список всех кредитных счетов
         /// </summary>
-        public IList<ICreditAccount> CreditAccounts;
+        public IList<ICreditAccount> CreditAccounts => _creditAccountsManager.СreditAccounts;
 
         /// <summary>
         /// Выбранный департамент
@@ -217,11 +218,13 @@ namespace Homework_13.ViewModels
         /// </summary>
         public MainUserControlViewModel(BankCustomersManager bankCustomersManager,
                                         DepositoryAccountsManager depositoryAccountsManager,
+                                        CreditAccountsManager creditAccountsManager,
                                         BankCustomerDialog bankCustomerDialog, 
                                         DepositoryAccountDialog depositoryAccountDialog)
         {
             _bankCustomersManager = bankCustomersManager;
             _depositoryAccountsManager = depositoryAccountsManager;
+            _creditAccountsManager = creditAccountsManager;
             _bankCustomerDialog = bankCustomerDialog;
             _depositoryAccountDialog = depositoryAccountDialog;
         }

@@ -226,8 +226,27 @@
         <!-- Кредитные счета -->        
         <GroupBox Grid.Column="4"
                   Header="Кредитные счета">
-            <ListBox ItemsSource="{Binding SelectedBankCustomer.CreditAccounts}">
-                
+            <ListBox ItemsSource="{Binding SelectedBankCustomer.CreditAccounts}"
+                     SelectedItem="{Binding SelectedCreditAccount}"
+                     SelectedIndex="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Сумма долга "/>
+                                <TextBlock Text="{Binding Amount}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Процентная ставка "/>
+                                <TextBlock Text="{Binding InterestRate}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Схема выплат "/>
+                                <TextBlock Text="{Binding CreditStatus, Converter={converter:CreditStatusToTextConverter}}"/>
+                            </StackPanel>
+                        </StackPanel>                     
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </GroupBox>
 
