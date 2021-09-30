@@ -11,15 +11,15 @@ namespace Homework_13.Services
     {
         #region Закрытые поля
 
-        DepositoryAccountRepository _depositoryAccounts;
-        BankCustomerRepository _bankCustomers;
+        DepositoryAccountRepository _depositoryAccountRepository;
+        BankCustomerRepository _bankCustomerRepository;
 
         #endregion
 
         /// <summary>
         /// Получить список всех депозитарных счетов клиентов банка
         /// </summary>
-        public IList<IDepositoryAccount> DepositoryAccounts => _depositoryAccounts.GetAll();
+        public IList<IDepositoryAccount> DepositoryAccounts => _depositoryAccountRepository.GetAll();
 
         /// <summary>
         /// Обновление данных депозитарного счёта клиента банка и сохранение в репозитории
@@ -27,7 +27,7 @@ namespace Homework_13.Services
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
         public void Update(IDepositoryAccount depositoryAccount)
         {
-            _depositoryAccounts.Update(depositoryAccount.Id, depositoryAccount);
+            _depositoryAccountRepository.Update(depositoryAccount.Id, depositoryAccount);
         }
 
         /// <summary>
@@ -43,11 +43,11 @@ namespace Homework_13.Services
             if (depositoryAccount is null)
                 throw new ArgumentNullException(nameof(depositoryAccount), "Счёт не может быть null!!!");
 
-            var selectedBankCustomer = _bankCustomers.Get(bankCustomer.Id);
+            var selectedBankCustomer = _bankCustomerRepository.Get(bankCustomer.Id);
             if (selectedBankCustomer is null) return false;
 
             bankCustomer.DepositoryAccounts.Add(depositoryAccount);
-            _depositoryAccounts.Add(depositoryAccount);
+            _depositoryAccountRepository.Add(depositoryAccount);
 
             return true;
         }
@@ -65,12 +65,12 @@ namespace Homework_13.Services
             if (depositoryAccount is null)
                 throw new ArgumentNullException(nameof(depositoryAccount), "Счёт не может быть null!!!");
 
-            var selectedBankCustomer = _bankCustomers.Get(bankCustomer.Id);
+            var selectedBankCustomer = _bankCustomerRepository.Get(bankCustomer.Id);
             if (selectedBankCustomer is null) return false;
 
             if(bankCustomer.DepositoryAccounts.Remove(depositoryAccount))
             {
-                _depositoryAccounts.Remove(depositoryAccount);
+                _depositoryAccountRepository.Remove(depositoryAccount);
                 return true;
             }
 
@@ -94,13 +94,13 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Клиент банка не может быть null!!!");
 
-            var selectedBankCustomer = _bankCustomers.Get(bankCustomer.Id);
+            var selectedBankCustomer = _bankCustomerRepository.Get(bankCustomer.Id);
             if (selectedBankCustomer is null) return false;
 
-            var selectedDepositoryAccount1 = _depositoryAccounts.Get(depositoryAccount1.Id);
+            var selectedDepositoryAccount1 = _depositoryAccountRepository.Get(depositoryAccount1.Id);
             if (selectedDepositoryAccount1 is null) return false;
 
-            var selectedDepositoryAccount2 = _depositoryAccounts.Get(depositoryAccount2.Id);
+            var selectedDepositoryAccount2 = _depositoryAccountRepository.Get(depositoryAccount2.Id);
             if (selectedDepositoryAccount2 is null) return false;
 
             if (selectedDepositoryAccount1.Id == selectedDepositoryAccount2.Id) return false;
@@ -118,8 +118,8 @@ namespace Homework_13.Services
         public DepositoryAccountsManager(DepositoryAccountRepository depositoryAccountRepository,
                                          BankCustomerRepository bankCustomerRepository)
         {
-            _bankCustomers = bankCustomerRepository;
-            _depositoryAccounts = depositoryAccountRepository;           
+            _bankCustomerRepository = bankCustomerRepository;
+            _depositoryAccountRepository = depositoryAccountRepository;           
         }
     }
 }

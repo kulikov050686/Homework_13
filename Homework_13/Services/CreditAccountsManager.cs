@@ -11,15 +11,15 @@ namespace Homework_13.Services
     {
         #region Закрытые поля
 
-        CreditAccountRepository _creditAccounts;
-        BankCustomerRepository _bankCustomers;
+        CreditAccountRepository _creditAccountRepository;
+        BankCustomerRepository _bankCustomerRepository;
 
         #endregion
 
         /// <summary>
         /// Получить список всех крединных счетов клиентов банка
         /// </summary>
-        public IList<ICreditAccount> СreditAccounts => _creditAccounts.GetAll();
+        public IList<ICreditAccount> СreditAccounts => _creditAccountRepository.GetAll();
 
         /// <summary>
         /// Обновление данных кредитного счёта клиента банка и сохранение в репозитории
@@ -27,7 +27,7 @@ namespace Homework_13.Services
         /// <param name="creditAccount"> Креитный счёт </param>
         public void Update(ICreditAccount creditAccount)
         {
-            _creditAccounts.Update(creditAccount.Id, creditAccount);
+            _creditAccountRepository.Update(creditAccount.Id, creditAccount);
         }
 
         /// <summary>
@@ -43,10 +43,10 @@ namespace Homework_13.Services
             if (creditAccount is null)
                 throw new ArgumentNullException(nameof(creditAccount), "Счёт не может быть null!!!");
 
-            var selectedBankCustomer = _bankCustomers.Get(bankCustomer.Id);
+            var selectedBankCustomer = _bankCustomerRepository.Get(bankCustomer.Id);
             if (selectedBankCustomer is null) return false;
 
-            _creditAccounts.Add(creditAccount);
+            _creditAccountRepository.Add(creditAccount);
             bankCustomer.CreditAccounts.Add(creditAccount);
 
             return true;
@@ -65,12 +65,12 @@ namespace Homework_13.Services
             if (creditAccount is null)
                 throw new ArgumentNullException(nameof(creditAccount), "Счёт не может быть null!!!");
 
-            var selectedBankCustomer = _bankCustomers.Get(bankCustomer.Id);
+            var selectedBankCustomer = _bankCustomerRepository.Get(bankCustomer.Id);
             if (selectedBankCustomer is null) return false;
 
             if(bankCustomer.CreditAccounts.Remove(creditAccount))
             {
-                _creditAccounts.Remove(creditAccount);
+                _creditAccountRepository.Remove(creditAccount);
                 return true;
             }
 
@@ -85,8 +85,8 @@ namespace Homework_13.Services
         public CreditAccountsManager(CreditAccountRepository creditAccountRepository,
                                      BankCustomerRepository bankCustomerRepository)
         {
-            _creditAccounts = creditAccountRepository;
-            _bankCustomers = bankCustomerRepository;
+            _creditAccountRepository = creditAccountRepository;
+            _bankCustomerRepository = bankCustomerRepository;
         }
     }
 }

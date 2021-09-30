@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Homework_13.UserControls"
+             xmlns:cmd="clr-namespace:Homework_13.Commands"
              xmlns:bihaviors="clr-namespace:Homework_13.Behaviors"
              mc:Ignorable="d"
              DataContext="{Binding MainMenuUserControlVM, Source={StaticResource Locator}}">
     <Grid>        
         <Menu>
             <MenuItem Header="Файл">
-                <MenuItem Header="Сохранить" 
+                <MenuItem Header="Сохранить"
                           Command="{Binding SaveToFile}"/>
                 <MenuItem Header="Открыть"
                           Command="{Binding OpenFile}"/>

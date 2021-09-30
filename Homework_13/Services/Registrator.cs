@@ -14,19 +14,20 @@ namespace Homework_13.Services
         /// <param name="services"></param>        
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            services.AddSingleton<BankCustomerRepository>();
             services.AddSingleton<DepartmentRepository>();
+            services.AddSingleton<BankCustomerRepository>();            
             services.AddSingleton<DepositoryAccountRepository>();
             services.AddSingleton<CreditAccountRepository>();
 
+            services.AddSingleton<DepartmentsManager>();
             services.AddSingleton<BankCustomersManager>();
             services.AddSingleton<DepositoryAccountsManager>();
             services.AddSingleton<CreditAccountsManager>();
 
-            services.AddTransient<BankCustomerDialog>();
-            services.AddTransient<DepositoryAccountDialog>();
             services.AddTransient<FileIOService>();
             services.AddTransient<FileDialog>();
+            services.AddTransient<BankCustomerDialog>();
+            services.AddTransient<DepositoryAccountDialog>();            
 
             return services;
         }

@@ -11,20 +11,15 @@ namespace Homework_13.Services
     {
         #region Закрытые поля
 
-        BankCustomerRepository _bankCustomers;
-        DepartmentRepository _departments;
+        BankCustomerRepository _bankCustomerRepository;
+        DepartmentRepository _departmentRepository;
 
         #endregion
 
         /// <summary>
         /// Получить список всех клиентов
         /// </summary>
-        public IList<IBankCustomer> BankCustomers => _bankCustomers.GetAll();
-
-        /// <summary>
-        /// Получить список всех департаментов
-        /// </summary>
-        public IList<IDepartment> Departments => _departments.GetAll();
+        public IList<IBankCustomer> BankCustomers => _bankCustomerRepository.GetAll();
 
         /// <summary>
         /// Обновление данных клиента банка и сохранение в репозитории
@@ -32,7 +27,7 @@ namespace Homework_13.Services
         /// <param name="bankCustomer"> Клиент банка </param>
         public void Update(IBankCustomer bankCustomer)
         {
-            _bankCustomers.Update(bankCustomer.Id, bankCustomer);
+            _bankCustomerRepository.Update(bankCustomer.Id, bankCustomer);
         }
 
         /// <summary>
@@ -47,11 +42,11 @@ namespace Homework_13.Services
             if (department is null)
                 throw new ArgumentNullException(nameof(department), "Департамент не может быть null!!!");
 
-            var selectedDepartment = _departments.Get(department.Name);
+            var selectedDepartment = _departmentRepository.Get(department.Name);
             if (selectedDepartment is null) return false;
 
             department.BankCustomers.Add(bankCustomer);
-            _bankCustomers.Add(bankCustomer);
+            _bankCustomerRepository.Add(bankCustomer);
 
             return true;
         }
@@ -60,7 +55,7 @@ namespace Homework_13.Services
         /// Удалить клиента банка из департамента
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>
-        /// <param name="department"> Департамент </param>        
+        /// <param name="department"> Департамент </param>
         public bool DeleteBankCustomer(IBankCustomer bankCustomer, IDepartment department)
         {
             if (bankCustomer is null)
@@ -68,13 +63,13 @@ namespace Homework_13.Services
             if (department is null)
                 throw new ArgumentNullException(nameof(department), "Департамент не может быть null!!!");
 
-            var selectedDepartment = _departments.Get(department.Name);
+            var selectedDepartment = _departmentRepository.Get(department.Name);
 
             if (selectedDepartment is null) return false;
             
             if(department.BankCustomers.Remove(bankCustomer))
             {
-                _bankCustomers.Remove(bankCustomer);
+                _bankCustomerRepository.Remove(bankCustomer);
                 return true;
             }
 
@@ -89,8 +84,8 @@ namespace Homework_13.Services
         public BankCustomersManager(BankCustomerRepository bankCustomerRepository, 
                                     DepartmentRepository departmentRepository)
         {
-            _bankCustomers = bankCustomerRepository;
-            _departments = departmentRepository;
+            _bankCustomerRepository = bankCustomerRepository;
+            _departmentRepository = departmentRepository;
         }
     }
 }

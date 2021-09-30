@@ -14,9 +14,11 @@ namespace Homework_13.ViewModels
     {
         #region Закрытые поля
 
+        private readonly DepartmentsManager _departmentsManager;
         private readonly BankCustomersManager _bankCustomersManager;
         private readonly DepositoryAccountsManager _depositoryAccountsManager;
         private readonly CreditAccountsManager _creditAccountsManager;
+        
         private BankCustomerDialog _bankCustomerDialog;
         private DepositoryAccountDialog _depositoryAccountDialog;        
         private Department _selectedDepartment;
@@ -25,13 +27,13 @@ namespace Homework_13.ViewModels
         private CreditAccount _selectedCreditAccount;
 
         #endregion
-
+        
         #region Открытые свойства
 
         /// <summary>
         /// Список всех департаментов банка
         /// </summary>
-        public IList<IDepartment> Departments => _bankCustomersManager.Departments;
+        public IList<IDepartment> Departments => _departmentsManager.Departments;
 
         /// <summary>
         /// Список всех клиентов банка
@@ -217,11 +219,13 @@ namespace Homework_13.ViewModels
         /// Конструктор
         /// </summary>
         public MainUserControlViewModel(BankCustomersManager bankCustomersManager,
+                                        DepartmentsManager departmentsManager,
                                         DepositoryAccountsManager depositoryAccountsManager,
                                         CreditAccountsManager creditAccountsManager,
                                         BankCustomerDialog bankCustomerDialog, 
                                         DepositoryAccountDialog depositoryAccountDialog)
         {
+            _departmentsManager = departmentsManager;
             _bankCustomersManager = bankCustomersManager;
             _depositoryAccountsManager = depositoryAccountsManager;
             _creditAccountsManager = creditAccountsManager;
