@@ -9,22 +9,24 @@
         mc:Ignorable="d"        
         ResizeMode="NoResize"
         Height="240" 
-        Width="200">
+        Width="200"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <StackPanel>
         <GroupBox Header="Сумма">
-            <TextBox Text=""/>
+            <TextBox Text="{Binding Amount, Mode=TwoWay}"/>
         </GroupBox>
 
         <GroupBox Header="Процентная ставка">
-            <TextBox Text=""/>
+            <TextBox Text="{Binding InterestRate, Mode=TwoWay}"/>
         </GroupBox>
 
         <GroupBox Header="Срок">
-            <TextBox Text=""/>
+            <TextBox Text="{Binding CreditTerm, Mode=TwoWay}"/>
         </GroupBox>
 
         <GroupBox Header="Схема выплат">
-            <ComboBox/>
+            <ComboBox ItemsSource="{Binding CreditStatusList}"
+                      SelectedIndex="{Binding SelectedCreditStatus, Converter={converter:CreditStatusConverter}, Mode=TwoWay}"/>
         </GroupBox>
 
         <StackPanel Orientation="Horizontal" 

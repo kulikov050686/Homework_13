@@ -5,10 +5,38 @@
     /// </summary>
     public interface IProcessingOfAccounts<T> where T: IBankAccount
     {
-        void OpenAccount();
+        /// <summary>
+        /// Открыть счёт
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>        
+        bool OpenAccount(IBankCustomer bankCustomer);
 
-        void CloseAccount();
+        /// <summary>
+        /// Закрыть счёт
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>        
+        bool CloseAccount(IBankCustomer bankCustomer);
 
-        void EditAccount();
+        /// <summary>
+        /// Редактировать счёт
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>
+        bool EditAccount(IBankCustomer bankCustomer);
+
+        /// <summary>
+        /// Объединить счета
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>               
+        bool CombiningAccounts(IBankCustomer bankCustomer);
+
+        /// <summary>
+        /// Перевод на счёт
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>
+        void TransferToAccount(IBankCustomer bankCustomer);
+
+        void StartCalculate();
+
+        void StopCalculate();
     }
 }

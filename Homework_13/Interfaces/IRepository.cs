@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Homework_13.Infrastructure;
+using System.Collections.Generic;
 
 namespace Homework_13.Interfaces
 {
@@ -7,6 +8,11 @@ namespace Homework_13.Interfaces
     /// </summary>
     public interface IRepository<T> where T : IEntity
     {
+        /// <summary>
+        /// Событие возникающее при действиях в репозитории
+        /// </summary>
+        event RepositoryEventHandler RepositoryEvent;
+
         /// <summary>
         /// Добавить сущность в репозиторий
         /// </summary>

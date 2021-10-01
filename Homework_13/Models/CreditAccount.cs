@@ -1,6 +1,7 @@
 ﻿using Homework_13.Enums;
 using Homework_13.Interfaces;
 using System;
+using System.Text.Json.Serialization;
 
 namespace Homework_13.Models
 {
@@ -12,26 +13,31 @@ namespace Homework_13.Models
         /// <summary>
         /// Идентификатор
         /// </summary>        
+        [JsonPropertyName("Id")]
         public int Id { get; set; }
 
         /// <summary>
         /// Срок кредита
         /// </summary>
+        [JsonPropertyName("CreditTerm")]
         public byte? CreditTerm { get; set; }
 
         /// <summary>
         /// Статус кредита
         /// </summary>        
+        [JsonPropertyName("CreditStatus")]
         public CreditStatus CreditStatus { get; set; }
 
         /// <summary>
         /// Сумма на счёте
         /// </summary>        
+        [JsonPropertyName("Amount")]
         public double? Amount { get; set; }
 
         /// <summary>
         /// Процентная ставка
         /// </summary>        
+        [JsonPropertyName("InterestRate")]
         public double? InterestRate { get; set; }
 
         /// <summary>
@@ -48,9 +54,9 @@ namespace Homework_13.Models
         /// <param name="creditTerm"> Срок кредитования </param>
         /// <param name="creditStatus"> Статус кредита </param>
         public CreditAccount(int id,
-                             double amount, 
-                             double interestRate,
-                             byte creditTerm,
+                             double? amount, 
+                             double? interestRate,
+                             byte? creditTerm,
                              CreditStatus creditStatus)
         {
             if (id < 0)

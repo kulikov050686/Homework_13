@@ -102,16 +102,12 @@ namespace Homework_13.Models
                 {
                     if (key)
                     {
-                        bankAccount = new DepositoryAccount(index, DepositStatus.WITHOUTCAPITALIZATION);
-                        bankAccount.Amount = 1000;
-                        bankAccount.InterestRate = InterestRate(item.ClientStatus);
+                        bankAccount = new DepositoryAccount(index, 1000, InterestRate(item.ClientStatus), DepositStatus.WITHOUTCAPITALIZATION);                        
                         key = !key;
                     }
                     else
                     {
-                        bankAccount = new DepositoryAccount(index, DepositStatus.WITHCAPITALIZATION);
-                        bankAccount.Amount = 2000;
-                        bankAccount.InterestRate = InterestRate(item.ClientStatus);
+                        bankAccount = new DepositoryAccount(index, 2000, InterestRate(item.ClientStatus), DepositStatus.WITHCAPITALIZATION);                        
                         key = !key;
                     }
 

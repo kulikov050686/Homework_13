@@ -19,11 +19,7 @@ namespace Homework_13.Services
             var dialog = new AddDepositoryAccountWindow();
             if (dialog.ShowDialog() != true) return null;
 
-            var depositoryAccount = new DepositoryAccount(0, dialog.SelectedDepositStatus);
-            depositoryAccount.Amount = dialog.Amount;
-            depositoryAccount.InterestRate = dialog.InterestRate;
-
-            return depositoryAccount;
+            return new DepositoryAccount(0, dialog.Amount, dialog.InterestRate, dialog.SelectedDepositStatus);
         }
 
         /// <summary>
@@ -42,19 +38,14 @@ namespace Homework_13.Services
 
             if (dialog.ShowDialog() != true) return null;
 
-            var tempDepositoryAccount = new DepositoryAccount(bankAccount.Id, bankAccount.DepositStatus);
-            tempDepositoryAccount.Amount = dialog.Amount;
-            tempDepositoryAccount.InterestRate = dialog.InterestRate;
-            tempDepositoryAccount.DepositStatus = dialog.SelectedDepositStatus;
-
-            return tempDepositoryAccount;
+            return new DepositoryAccount(bankAccount.Id, dialog.Amount, dialog.InterestRate, dialog.SelectedDepositStatus);
         }
 
         /// <summary>
-        /// Объединить депозитарные счета в один счёт
+        /// Выбрать дипозитарный счёт из списка депозитарных счетов
         /// </summary>
         /// <param name="bankAccounts"> Список депозитарных счетов </param>        
-        public IDepositoryAccount CombiningBankAccounts(IList<IDepositoryAccount> bankAccounts)
+        public IDepositoryAccount SelectedBankAccounts(IList<IDepositoryAccount> bankAccounts)
         {
             if (bankAccounts is null)
                 throw new ArgumentNullException("Список счетов не может быть null!!!");

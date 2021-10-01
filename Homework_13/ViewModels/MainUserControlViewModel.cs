@@ -15,12 +15,12 @@ namespace Homework_13.ViewModels
         #region Закрытые поля
 
         private readonly DepartmentsManager _departmentsManager;
-        private readonly BankCustomersManager _bankCustomersManager;
-        private readonly DepositoryAccountsManager _depositoryAccountsManager;
+        private readonly BankCustomersManager _bankCustomersManager;        
         private readonly CreditAccountsManager _creditAccountsManager;
-        
-        private BankCustomerDialog _bankCustomerDialog;
-        private DepositoryAccountDialog _depositoryAccountDialog;        
+
+        private ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;
+
+        private BankCustomerDialog _bankCustomerDialog;              
         private Department _selectedDepartment;
         private BankCustomer _selectedBankCustomer;
         private DepositoryAccount _selectedDepositoryAccount;
@@ -39,11 +39,6 @@ namespace Homework_13.ViewModels
         /// Список всех клиентов банка
         /// </summary>
         public IList<IBankCustomer> BankCustomers => _bankCustomersManager.BankCustomers;
-
-        /// <summary>
-        /// Список всех депозитарных счетов
-        /// </summary>
-        public IList<IDepositoryAccount> DepositoryAccounts => _depositoryAccountsManager.DepositoryAccounts;
 
         /// <summary>
         /// Список всех кредитных счетов
@@ -150,11 +145,8 @@ namespace Homework_13.ViewModels
         {
             get => _createNewDepositoryAccount ??= new RelayCommand((obj) =>
             {
-                var bankCustomer = (BankCustomer)obj;
-                var depositoryAccount = _depositoryAccountDialog.CreateNewBankAccount();
-                if (depositoryAccount is null) return;
-
-                _depositoryAccountsManager.CreateNewDepositoryAccount(depositoryAccount, bankCustomer);
+                if(obj is BankCustomer bankCustomer)
+                    _processingOfDepositoryAccounts.OpenAccount(bankCustomer);                
             }, (obj) => obj is BankCustomer);
         }
 
@@ -167,11 +159,7 @@ namespace Homework_13.ViewModels
         {
             get => _deleteDepositoryAccount ??= new RelayCommand((obj) =>
             {
-                var bankCustomer = SelectedBankCustomer;
-                var depositoryAccount = (DepositoryAccount)obj;
-                if (bankCustomer is null || depositoryAccount is null) return;
-
-                _depositoryAccountsManager.DeleteDepositoryAccount(depositoryAccount, bankCustomer);
+                _processingOfDepositoryAccounts.CloseAccount(SelectedBankCustomer);                
             }, (obj) => obj is DepositoryAccount);
         }
 
@@ -184,13 +172,7 @@ namespace Homework_13.ViewModels
         {
             get => _editDepositoryAccount ??= new RelayCommand((obj) =>
             {
-                var depositoryAccount = (DepositoryAccount)obj;
-                if (depositoryAccount is null) return;
-
-                var tempDepositoryAccount = _depositoryAccountDialog.EditBankAccountData(depositoryAccount);
-                if (tempDepositoryAccount is null) return;
-
-                _depositoryAccountsManager.Update(tempDepositoryAccount);
+                _processingOfDepositoryAccounts.EditAccount(SelectedBankCustomer);                
             }, (obj) => obj is DepositoryAccount);
         }
 
@@ -203,13 +185,7 @@ namespace Homework_13.ViewModels
         {
             get => _combiningDepositoryAccounts ??= new RelayCommand((obj) =>
             {
-                var depositoryAccount = (DepositoryAccount)obj;
-                if (depositoryAccount is null) return;
-
-                var tempDepositoryAccount = _depositoryAccountDialog.CombiningBankAccounts(SelectedBankCustomer.DepositoryAccounts);
-                if (tempDepositoryAccount is null) return;
-
-                if (!_depositoryAccountsManager.CombiningDepositoryAccounts(depositoryAccount, tempDepositoryAccount, SelectedBankCustomer)) return;
+                _processingOfDepositoryAccounts.CombiningAccounts(SelectedBankCustomer);                
             }, (obj) => obj is DepositoryAccount);
         }
 
@@ -219,18 +195,16 @@ namespace Homework_13.ViewModels
         /// Конструктор
         /// </summary>
         public MainUserControlViewModel(BankCustomersManager bankCustomersManager,
-                                        DepartmentsManager departmentsManager,
-                                        DepositoryAccountsManager depositoryAccountsManager,
+                                        DepartmentsManager departmentsManager,                                        
                                         CreditAccountsManager creditAccountsManager,
-                                        BankCustomerDialog bankCustomerDialog, 
-                                        DepositoryAccountDialog depositoryAccountDialog)
+                                        BankCustomerDialog bankCustomerDialog,
+                                        ProcessingOfDepositoryAccounts processingOfDepositoryAccounts)
         {
             _departmentsManager = departmentsManager;
-            _bankCustomersManager = bankCustomersManager;
-            _depositoryAccountsManager = depositoryAccountsManager;
+            _bankCustomersManager = bankCustomersManager;            
             _creditAccountsManager = creditAccountsManager;
-            _bankCustomerDialog = bankCustomerDialog;
-            _depositoryAccountDialog = depositoryAccountDialog;
+            _bankCustomerDialog = bankCustomerDialog;            
+            _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
         }
     }
 }

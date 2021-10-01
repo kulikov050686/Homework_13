@@ -17,6 +17,7 @@ namespace Homework_13.Services
             destination.Id = source.Id;
             destination.Amount = source.Amount;
             destination.InterestRate = source.InterestRate;
+            destination.CreditTerm = source.CreditTerm;
             destination.CreditStatus = source.CreditStatus;
         }
     }
