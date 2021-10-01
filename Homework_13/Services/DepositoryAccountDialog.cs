@@ -56,5 +56,27 @@ namespace Homework_13.Services
 
             return dialog.SelectedBankAccount as DepositoryAccount;
         }
+
+        /// <summary>
+        /// Выбрать два дипозитарных счёта из списка депозитарных счетов
+        /// </summary>
+        /// <param name="bankAccounts"> Список депозитарных счетов </param>
+        /// <param name="bankAccounts1"> Депозитарный счёт 1 </param>
+        /// <param name="bankAccounts2"> Депозитарный счёт 2 </param>
+        public void SelectTwoBankAccounts(IList<IDepositoryAccount> bankAccounts, out IDepositoryAccount bankAccounts1, out IDepositoryAccount bankAccounts2)
+        {
+            if (bankAccounts is null)
+                throw new ArgumentNullException("Список счетов не может быть null!!!");
+
+            bankAccounts1 = null;
+            bankAccounts2 = null;
+
+            var dialog = new SelectTwoBankAccountsWindow();
+            dialog.BankAccounts = bankAccounts;
+            if (dialog.ShowDialog() != true) return;
+
+            bankAccounts1 = dialog.SelectedBankAccount1 as DepositoryAccount;
+            bankAccounts2 = dialog.SelectedBankAccount2 as DepositoryAccount;
+        }
     }
 }

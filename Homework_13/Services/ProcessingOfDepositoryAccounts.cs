@@ -42,10 +42,13 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var tempDepositoryAccount = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
-            if (tempDepositoryAccount is null) return false;
+            IDepositoryAccount account1;
+            IDepositoryAccount account2;
 
-            return _depositoryAccountsManager.CombiningDepositoryAccounts(account, tempDepositoryAccount, bankCustomer);
+            _depositoryAccountDialog.SelectTwoBankAccounts(bankCustomer.DepositoryAccounts, out account1, out account2);
+            if (account1 is null || account2 is null) return false;
+
+            return _depositoryAccountsManager.CombiningDepositoryAccounts(account1, account2, bankCustomer);            
         }
 
         /// <summary>
