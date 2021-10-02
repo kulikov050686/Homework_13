@@ -9,27 +9,31 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Height="220" 
-        Width="200">
+        Width="200"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <StackPanel>
-        <GroupBox Header="Сумма">
-            <TextBox Text="{Binding Amount, RelativeSource={RelativeSource AncestorType=local:AddDepositoryAccountWindow},Mode=TwoWay}"/>
+        <GroupBox Header="Сумма"
+                  Visibility="{Binding AmountVisibility, Mode=TwoWay}">
+            <TextBox Text="{Binding Amount, Mode=TwoWay}"/>
         </GroupBox>
 
-        <GroupBox Header="Процентная ставка">
-            <TextBox Text="{Binding InterestRate, RelativeSource={RelativeSource AncestorType=local:AddDepositoryAccountWindow},Mode=TwoWay}"/>
+        <GroupBox Header="Процентная ставка"
+                  Visibility="{Binding InterestRateVisibility}">
+            <TextBox Text="{Binding InterestRate, Mode=TwoWay}"/>
         </GroupBox>
 
-        <GroupBox Header="Начисление процентов">
-            <ComboBox ItemsSource="{Binding DepositStatusList, RelativeSource={RelativeSource AncestorType=local:AddDepositoryAccountWindow}}"
-                      SelectedIndex="{Binding SelectedDepositStatus, RelativeSource={RelativeSource AncestorType=local:AddDepositoryAccountWindow}, Converter={converter:DepositStatusConverter}, Mode=TwoWay}"/>
+        <GroupBox Header="Начисление процентов"
+                  Visibility="{Binding DepositStatusVisibility}">
+            <ComboBox ItemsSource="{Binding DepositStatusList}"
+                      SelectedIndex="{Binding SelectedDepositStatus, Converter={converter:DepositStatusConverter}, Mode=TwoWay}"/>
         </GroupBox>
-
+        
         <StackPanel Orientation="Horizontal" 
                     HorizontalAlignment="Right" 
                     Height="30">
 
-            <Button Content="Добавить" 
+            <Button Content="{Binding TextOfInputButton}" 
                     Margin="5 0 5 0" 
                     Width="80"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=local:AddDepositoryAccountWindow}}">

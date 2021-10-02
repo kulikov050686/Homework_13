@@ -17,6 +17,7 @@ namespace Homework_13.Services
         public IDepositoryAccount CreateNewBankAccount()
         {
             var dialog = new AddDepositoryAccountWindow();
+            dialog.TextOfInputButton = "Добавить";
             if (dialog.ShowDialog() != true) return null;
 
             return new DepositoryAccount(0, dialog.Amount, dialog.InterestRate, dialog.SelectedDepositStatus);
@@ -32,7 +33,8 @@ namespace Homework_13.Services
                 throw new ArgumentNullException("Депозитарный счёт не может быть null!!!");
 
             var dialog = new AddDepositoryAccountWindow();
-            dialog.Amount = bankAccount.Amount;
+            dialog.TextOfInputButton = "Применить";
+            dialog.AmountVisibility = System.Windows.Visibility.Collapsed;
             dialog.InterestRate = bankAccount.InterestRate;
             dialog.SelectedDepositStatus = bankAccount.DepositStatus;
 
@@ -77,6 +79,29 @@ namespace Homework_13.Services
 
             bankAccounts1 = dialog.SelectedBankAccount1 as DepositoryAccount;
             bankAccounts2 = dialog.SelectedBankAccount2 as DepositoryAccount;
+        }
+
+        /// <summary>
+        /// Пополнить счёт
+        /// </summary>
+        /// <param name="bankAccounts"> Список депозитарных счетов </param>        
+        public bool TransferToAccount(IList<IDepositoryAccount> bankAccounts)
+        {
+            var depositoryAccount = SelectedBankAccounts(bankAccounts);
+            if (depositoryAccount is null) return false;
+
+            var dialog = new AddDepositoryAccountWindow();
+            dialog.TextOfInputButton = "Применить";
+            dialog.InterestRateVisibility = System.Windows.Visibility.Collapsed;
+            dialog.DepositStatusVisibility = System.Windows.Visibility.Collapsed;
+
+            if (dialog.ShowDialog() != true) return false;
+
+            var result = dialog.Amount;
+            if (result < 0) return false;
+
+            depositoryAccount.Amount += result;
+            return true;
         }
     }
 }

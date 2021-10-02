@@ -90,6 +90,27 @@ namespace Homework_13.Services
         }
 
         /// <summary>
+        /// Перевести на счёт
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>        
+        public bool TransferToAccount(IBankCustomer bankCustomer)
+        {
+            if (bankCustomer is null)
+                throw new ArgumentNullException();
+
+            return _depositoryAccountDialog.TransferToAccount(bankCustomer.DepositoryAccounts);
+        }
+
+        /// <summary>
+        /// Вывести средства со счета
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>        
+        public double WithdrawFromAccount(IBankCustomer bankCustomer)
+        {
+            return 0;
+        }
+
+        /// <summary>
         /// Начать расчёт по депозитарным счетам
         /// </summary>
         public void StartCalculate()

@@ -191,6 +191,19 @@ namespace Homework_13.ViewModels
 
         #endregion
 
+        #region Команда пополнить депозитарный счёт
+
+        private ICommand _transferToDepositoryAccount = default!;
+        public ICommand TransferToDepositoryAccount
+        {
+            get => _transferToDepositoryAccount ??= new RelayCommand((obj) =>
+            {
+                _processingOfDepositoryAccounts.TransferToAccount(SelectedBankCustomer);
+            }, (obj) => obj is DepositoryAccount);
+        }
+
+        #endregion
+
         /// <summary>
         /// Конструктор
         /// </summary>

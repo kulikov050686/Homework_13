@@ -74,6 +74,86 @@ namespace Homework_13.Views
 
         #endregion
 
+        #region Отображение поля для ввода суммы
+
+        public static readonly DependencyProperty AmountVisibilityProperty =
+            DependencyProperty.Register(nameof(AmountVisibility),
+                                        typeof(Visibility),
+                                        typeof(AddDepositoryAccountWindow),
+                                        new PropertyMetadata(Visibility.Visible));
+
+        /// <summary>
+        /// Отображение поля для ввода суммы
+        /// </summary>
+        [Description("Отображение поля для ввода суммы")]
+        public Visibility AmountVisibility
+        {
+            get => (Visibility)GetValue(AmountVisibilityProperty);
+            set => SetValue(AmountVisibilityProperty, value);
+        }
+
+        #endregion
+
+        #region Отображение поля для ввода процентной ставки
+
+        public static readonly DependencyProperty InterestRateVisibilityProperty =
+            DependencyProperty.Register(nameof(InterestRateVisibility),
+                                        typeof(Visibility),
+                                        typeof(AddDepositoryAccountWindow),
+                                        new PropertyMetadata(Visibility.Visible));
+
+        /// <summary>
+        /// Отображение поля для ввода процентной ставки
+        /// </summary>
+        [Description("Отображение поля для ввода процентной ставки")]
+        public Visibility InterestRateVisibility
+        {
+            get => (Visibility)GetValue(InterestRateVisibilityProperty);
+            set => SetValue(InterestRateVisibilityProperty, value);
+        }
+
+        #endregion
+
+        #region Отображение поля для ввода процентной ставки
+
+        public static readonly DependencyProperty DepositStatusVisibilityProperty =
+            DependencyProperty.Register(nameof(DepositStatusVisibility),
+                                        typeof(Visibility),
+                                        typeof(AddDepositoryAccountWindow),
+                                        new PropertyMetadata(Visibility.Visible));
+
+        /// <summary>
+        /// Отображение поля выбора статуса депозита
+        /// </summary>
+        [Description("Отображение поля для ввода процентной ставки")]
+        public Visibility DepositStatusVisibility
+        {
+            get => (Visibility)GetValue(DepositStatusVisibilityProperty);
+            set => SetValue(DepositStatusVisibilityProperty, value);
+        }
+
+        #endregion
+
+        #region Текст кнопки ввода
+
+        public static readonly DependencyProperty TextOfInputButtonProperty =
+            DependencyProperty.Register(nameof(TextOfInputButton),
+                                        typeof(string),
+                                        typeof(AddDepositoryAccountWindow),
+                                        new PropertyMetadata("Ok"));
+
+        /// <summary>
+        /// Текст кнопки ввода
+        /// </summary>
+        [Description("Текст кнопки ввода")]
+        public string TextOfInputButton
+        {
+            get => (string)GetValue(TextOfInputButtonProperty);
+            set => SetValue(TextOfInputButtonProperty, value);
+        }
+
+        #endregion
+
         public AddDepositoryAccountWindow() => InitializeComponent();        
     }
 }

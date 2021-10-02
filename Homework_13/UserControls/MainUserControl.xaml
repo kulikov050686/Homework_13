@@ -218,6 +218,9 @@
                         <MenuItem Header="Объединить"
                                   Command="{Binding CombiningDepositoryAccounts}"
                                   CommandParameter="{Binding SelectedDepositoryAccount}"/>
+                        <MenuItem Header="Пополнить"
+                                  Command="{Binding TransferToDepositoryAccount}"
+                                  CommandParameter="{Binding SelectedDepositoryAccount}"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>
