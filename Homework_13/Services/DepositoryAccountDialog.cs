@@ -82,26 +82,18 @@ namespace Homework_13.Services
         }
 
         /// <summary>
-        /// Пополнить счёт
-        /// </summary>
-        /// <param name="bankAccounts"> Список депозитарных счетов </param>        
-        public bool TransferToAccount(IList<IDepositoryAccount> bankAccounts)
+        /// Изменить сумму банковского счета
+        /// </summary>                
+        public double? ChangeAmountOfBankAccount()
         {
-            var depositoryAccount = SelectedBankAccounts(bankAccounts);
-            if (depositoryAccount is null) return false;
-
             var dialog = new AddDepositoryAccountWindow();
             dialog.TextOfInputButton = "Применить";
             dialog.InterestRateVisibility = System.Windows.Visibility.Collapsed;
             dialog.DepositStatusVisibility = System.Windows.Visibility.Collapsed;
 
-            if (dialog.ShowDialog() != true) return false;
+            if (dialog.ShowDialog() != true) return null;
 
-            var result = dialog.Amount;
-            if (result < 0) return false;
-
-            depositoryAccount.Amount += result;
-            return true;
-        }
+            return dialog.Amount;
+        }        
     }
 }

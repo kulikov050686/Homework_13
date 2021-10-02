@@ -2,6 +2,7 @@
 using Homework_13.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace Homework_13.Services
@@ -98,13 +99,28 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            return _depositoryAccountDialog.TransferToAccount(bankCustomer.DepositoryAccounts);
+            var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
+            if (account is null) return false;
+
+            var result = _depositoryAccountDialog.ChangeAmountOfBankAccount();
+            if (result is null) return false;
+
+            if (result < 0)
+            {
+                MessageBox.Show("Сумма не может быть меньше нуля!!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            account.Amount += result;
+
+            _depositoryAccountsManager.Update(account);
+            return true;
         }
 
         /// <summary>
         /// Вывести средства со счета
         /// </summary>
-        /// <param name="bankCustomer"> Клиент банка </param>        
+        /// <param name="bankCustomer"> Клиент банка </param>
         public double WithdrawFromAccount(IBankCustomer bankCustomer)
         {
             return 0;
