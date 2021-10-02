@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Homework_13.Views"
         xmlns:cmd="clr-namespace:Homework_13.Commands"
         mc:Ignorable="d"        
-        Height="450" 
+        Height="200" 
         Width="300"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     

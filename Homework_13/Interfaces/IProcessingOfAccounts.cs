@@ -3,7 +3,7 @@
     /// <summary>
     /// Обработка Счетов
     /// </summary>
-    public interface IProcessingOfAccounts<T> where T: IBankAccount
+    public interface IProcessingOfAccounts
     {
         /// <summary>
         /// Открыть счёт
@@ -30,13 +30,13 @@
         bool CombiningAccounts(IBankCustomer bankCustomer);
 
         /// <summary>
-        /// Перевод на счёт
+        /// Начать расчёт по счетам
         /// </summary>
-        /// <param name="bankCustomer"> Клиент банка </param>
-        void TransferToAccount(IBankCustomer bankCustomer);
-
         void StartCalculate();
 
+        /// <summary>
+        /// Остановить расчёт по счетам
+        /// </summary>
         void StopCalculate();
     }
 }

@@ -1,15 +1,19 @@
-﻿using Homework_13.Interfaces;
+﻿using Homework_13.Enums;
+using Homework_13.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Windows.Threading;
 
 namespace Homework_13.Services
 {
-    public class ProcessingOfDepositoryAccounts : IProcessingOfAccounts<IDepositoryAccount>
+    public class ProcessingOfDepositoryAccounts : IProcessingOfAccounts
     {
         #region Закрытые поля
 
         DepositoryAccountsManager _depositoryAccountsManager;
         DepositoryAccountDialog _depositoryAccountDialog;
+        DispatcherTimer _timer;
+        byte _k = 1;
 
         #endregion
 
@@ -85,19 +89,25 @@ namespace Homework_13.Services
             return _depositoryAccountsManager.CreateNewDepositoryAccount(depositoryAccount, bankCustomer);
         }
 
-        public void TransferToAccount(IBankCustomer bankCustomer)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Начать расчёт по депозитарным счетам
+        /// </summary>
         public void StartCalculate()
         {
-            throw new NotImplementedException();
+            _timer = new DispatcherTimer();
+            _timer.Interval = new TimeSpan(0, 0, 2);
+            _timer.Tick += _timer_Tick;
+            _timer.Start();
         }
 
+        /// <summary>
+        /// Остановить расчёт по депозитарным счетам
+        /// </summary>
         public void StopCalculate()
         {
-            throw new NotImplementedException();
+            _timer.Stop();
+            _timer.Tick -= _timer_Tick;
+            _timer = null;
         }
 
         public ProcessingOfDepositoryAccounts(DepositoryAccountsManager depositoryAccountsManager,
@@ -105,6 +115,34 @@ namespace Homework_13.Services
         {
             _depositoryAccountsManager = depositoryAccountsManager;
             _depositoryAccountDialog = depositoryAccountDialog;
+        }
+
+        /// <summary>
+        /// Обработчик события таймера
+        /// </summary>        
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            foreach (var item in DepositoryAccounts)
+            {
+                if ((item.DepositStatus == DepositStatus.WITHOUTCAPITALIZATION) && _k == 12)
+                {
+                    item.Amount = Math.Round((double)(item.Amount * (1 + item.InterestRate / 100.0)), 2, MidpointRounding.AwayFromZero);
+                }
+
+                if (item.DepositStatus == DepositStatus.WITHCAPITALIZATION)
+                {
+                    item.Amount = Math.Round((double)(item.Amount * (1 + item.InterestRate / 1200.0)), 2, MidpointRounding.AwayFromZero);
+                }                
+            }
+
+            if (_k == 12)
+            {
+                _k = 1;
+            }
+            else
+            {
+                _k++;
+            }
         }
     }
 }

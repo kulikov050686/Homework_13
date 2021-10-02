@@ -205,6 +205,8 @@ namespace Homework_13.ViewModels
             _creditAccountsManager = creditAccountsManager;
             _bankCustomerDialog = bankCustomerDialog;            
             _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
+
+            _processingOfDepositoryAccounts.StartCalculate();
         }
     }
 }
