@@ -40,7 +40,7 @@ namespace Homework_13.Services
             var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
-            return _depositoryAccountsManager.DeleteDepositoryAccount(account, bankCustomer);
+            return _depositoryAccountsManager.Delete(account, bankCustomer);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Homework_13.Services
                 return false;
             }
 
-            return _depositoryAccountsManager.CombiningDepositoryAccounts(account1, account2, bankCustomer);            
+            return _depositoryAccountsManager.Combining(account1, account2, bankCustomer);            
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Homework_13.Services
             var depositoryAccount = _depositoryAccountDialog.Create();
             if (depositoryAccount is null) return false;
 
-            return _depositoryAccountsManager.CreateNewDepositoryAccount(depositoryAccount, bankCustomer);
+            return _depositoryAccountsManager.Create(depositoryAccount, bankCustomer);
         }
 
         /// <summary>

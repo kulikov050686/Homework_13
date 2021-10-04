@@ -48,6 +48,10 @@ namespace Homework_13.Services
             return tempBankCustomer;
         }
 
+        /// <summary>
+        /// Выбор клиента банка из списка
+        /// </summary>
+        /// <param name="entities"> Список клиентов банка </param>        
         public IBankCustomer Selected(IList<IBankCustomer> entities)
         {
             throw new NotImplementedException();

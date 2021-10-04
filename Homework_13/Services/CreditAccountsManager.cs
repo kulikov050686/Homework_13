@@ -35,8 +35,8 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="creditAccount"> Кредитный счёт </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool CreateNewCreditAccount(ICreditAccount creditAccount,
-                                           IBankCustomer bankCustomer)
+        public bool Create(ICreditAccount creditAccount,
+                           IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Клиент банка не может быть null!!!");
@@ -57,8 +57,8 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="creditAccount"> Кредитный счёт </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool DeleteCreditAccount(ICreditAccount creditAccount,
-                                        IBankCustomer bankCustomer)
+        public bool Delete(ICreditAccount creditAccount,
+                           IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Клиент банка не может быть null!!!");

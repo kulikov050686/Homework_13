@@ -35,7 +35,8 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>
         /// <param name="department"> Департамент </param>        
-        public bool CreateNewBankCustomer(IBankCustomer bankCustomer, IDepartment department)
+        public bool Create(IBankCustomer bankCustomer, 
+                           IDepartment department)
         {
             if (bankCustomer is null) 
                 throw new ArgumentNullException(nameof(bankCustomer), "Добавляемый клиент банка не может быть null!!!");
@@ -56,7 +57,8 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>
         /// <param name="department"> Департамент </param>
-        public bool DeleteBankCustomer(IBankCustomer bankCustomer, IDepartment department)
+        public bool Delete(IBankCustomer bankCustomer, 
+                           IDepartment department)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Добавляемый клиент банка не может быть null!!!");
@@ -64,7 +66,6 @@ namespace Homework_13.Services
                 throw new ArgumentNullException(nameof(department), "Департамент не может быть null!!!");
 
             var selectedDepartment = _departmentRepository.Get(department.Name);
-
             if (selectedDepartment is null) return false;
             
             if(department.BankCustomers.Remove(bankCustomer))

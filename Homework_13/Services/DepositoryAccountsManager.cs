@@ -35,8 +35,8 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool CreateNewDepositoryAccount(IDepositoryAccount depositoryAccount, 
-                                               IBankCustomer bankCustomer)
+        public bool Create(IDepositoryAccount depositoryAccount, 
+                           IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Клиент банка не может быть null!!!");
@@ -57,8 +57,8 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool DeleteDepositoryAccount(IDepositoryAccount depositoryAccount, 
-                                            IBankCustomer bankCustomer)
+        public bool Delete(IDepositoryAccount depositoryAccount, 
+                           IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Клиент банка не может быть null!!!");
@@ -83,9 +83,9 @@ namespace Homework_13.Services
         /// <param name="depositoryAccount1"> Депозитарный счёт 1 </param>
         /// <param name="depositoryAccount2"> Депозитарный счёт 2 </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool CombiningDepositoryAccounts(IDepositoryAccount depositoryAccount1,
-                                                IDepositoryAccount depositoryAccount2,
-                                                IBankCustomer bankCustomer)
+        public bool Combining(IDepositoryAccount depositoryAccount1,
+                              IDepositoryAccount depositoryAccount2,
+                              IBankCustomer bankCustomer)
         {
             if(depositoryAccount1 is null)
                 throw new ArgumentNullException(nameof(depositoryAccount1), "Счёт не может быть null!!!");
@@ -108,7 +108,7 @@ namespace Homework_13.Services
             selectedDepositoryAccount1.Amount += selectedDepositoryAccount2.Amount;
             Update(selectedDepositoryAccount1);
 
-            return DeleteDepositoryAccount(depositoryAccount2, bankCustomer);
+            return Delete(depositoryAccount2, bankCustomer);
         }
 
         /// <summary>
