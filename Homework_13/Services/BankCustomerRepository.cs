@@ -21,6 +21,7 @@ namespace Homework_13.Services
         protected override void Update(IBankCustomer source, IBankCustomer destination)
         {
             destination.Id = source.Id;
+            destination.Blocking = source.Blocking;
             destination.Passport = source.Passport;
             destination.PhoneNumber = source.PhoneNumber;
             destination.Reliability = source.Reliability;

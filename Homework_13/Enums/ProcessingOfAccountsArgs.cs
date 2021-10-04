@@ -33,6 +33,16 @@
         /// <summary>
         /// Вывести со счёта
         /// </summary>
-        WITHDRAW = 5        
+        WITHDRAW = 5,
+
+        /// <summary>
+        /// Блокировать счёт
+        /// </summary>
+        BLOCK = 6,
+
+        /// <summary>
+        /// Разблокировать счёт
+        /// </summary>
+        UNBLOCK = 7
     }
 }

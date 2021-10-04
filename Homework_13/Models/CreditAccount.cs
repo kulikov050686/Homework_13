@@ -17,6 +17,12 @@ namespace Homework_13.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Блокировка кредитного чсёта
+        /// </summary>
+        [JsonPropertyName("Blocking")]
+        public bool Blocking { get; set; } = false;
+
+        /// <summary>
         /// Срок кредита
         /// </summary>
         [JsonPropertyName("CreditTerm")]
@@ -43,7 +49,7 @@ namespace Homework_13.Models
         /// <summary>
         /// Статус счёта
         /// </summary>
-        public AccountStatus AccountStatus => AccountStatus.CREDIT;
+        public AccountStatus AccountStatus => AccountStatus.CREDIT;        
 
         /// <summary>
         /// Конструктор

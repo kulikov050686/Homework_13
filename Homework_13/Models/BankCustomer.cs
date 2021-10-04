@@ -17,6 +17,11 @@ namespace Homework_13.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Блокировка
+        /// </summary>
+        public bool Blocking { get; set; } = false;
+
+        /// <summary>
         /// Паспорт
         /// </summary>
         public IPassport Passport { get; set; }
@@ -55,7 +60,7 @@ namespace Homework_13.Models
         /// Лист кредитных счетов
         /// </summary>
         public IList<ICreditAccount> CreditAccounts { get; set; } = new ObservableCollection<ICreditAccount>();
-
+        
         /// <summary>
         /// Конструктор
         /// </summary>

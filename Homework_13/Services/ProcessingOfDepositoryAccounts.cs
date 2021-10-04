@@ -8,7 +8,7 @@ using System.Windows.Threading;
 
 namespace Homework_13.Services
 {
-    public class ProcessingOfDepositoryAccounts : IProcessingOfAccounts
+    public class ProcessingOfDepositoryAccounts
     {
         #region Закрытые поля
 
@@ -40,12 +40,7 @@ namespace Homework_13.Services
             var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
-            var result = _depositoryAccountsManager.DeleteDepositoryAccount(account, bankCustomer);
-
-            if (result)
-                ProcessingOfAccountsEvent?.Invoke(bankCustomer, ProcessingOfAccountsArgs.CLOSE);
-
-            return result;
+            return _depositoryAccountsManager.DeleteDepositoryAccount(account, bankCustomer);
         }
 
         /// <summary>
@@ -63,6 +58,12 @@ namespace Homework_13.Services
             _depositoryAccountDialog.SelectTwoBankAccounts(bankCustomer.DepositoryAccounts, out account1, out account2);
             if (account1 is null || account2 is null) return false;
 
+            if (account1.Blocking || account2.Blocking)
+            {
+                MessageBox.Show("Счёт заблокирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
             return _depositoryAccountsManager.CombiningDepositoryAccounts(account1, account2, bankCustomer);            
         }
 
@@ -77,6 +78,12 @@ namespace Homework_13.Services
 
             var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
+
+            if (account.Blocking)
+            {
+                MessageBox.Show("Счёт заблокирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
 
             var tempDepositoryAccount = _depositoryAccountDialog.EditBankAccountData(account);
             if (tempDepositoryAccount is null) return false;
@@ -112,6 +119,12 @@ namespace Homework_13.Services
             var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
+            if (account.Blocking)
+            {
+                MessageBox.Show("Счёт заблокирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
             var result = _depositoryAccountDialog.ChangeAmountOfBankAccount();
             if (result is null) return false;
 
@@ -139,12 +152,18 @@ namespace Homework_13.Services
             var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
             if (account is null) return null;
 
+            if (account.Blocking)
+            {
+                MessageBox.Show("Счёт заблокирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+
             var result = _depositoryAccountDialog.ChangeAmountOfBankAccount();
             if (result is null) return null;
 
             if (result < 0)
             {
-                MessageBox.Show("Сумма не может быть меньше нуля!!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Сумма не может быть меньше нуля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
 
@@ -152,7 +171,7 @@ namespace Homework_13.Services
 
             if (result > account.Amount)
             {
-                MessageBox.Show("Нехватает суммы на счёте", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Нехватает суммы на счёте!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }             
             
@@ -198,15 +217,18 @@ namespace Homework_13.Services
         {
             foreach (var item in DepositoryAccounts)
             {
-                if ((item.DepositStatus == DepositStatus.WITHOUTCAPITALIZATION) && _k == 12)
+                if(!item.Blocking)
                 {
-                    item.Amount = Math.Round((double)(item.Amount * (1 + item.InterestRate / 100.0)), 2, MidpointRounding.AwayFromZero);
-                }
+                    if ((item.DepositStatus == DepositStatus.WITHOUTCAPITALIZATION) && _k == 12)
+                    {
+                        item.Amount = Math.Round((double)(item.Amount * (1 + item.InterestRate / 100.0)), 2, MidpointRounding.AwayFromZero);
+                    }
 
-                if (item.DepositStatus == DepositStatus.WITHCAPITALIZATION)
-                {
-                    item.Amount = Math.Round((double)(item.Amount * (1 + item.InterestRate / 1200.0)), 2, MidpointRounding.AwayFromZero);
-                }                
+                    if (item.DepositStatus == DepositStatus.WITHCAPITALIZATION)
+                    {
+                        item.Amount = Math.Round((double)(item.Amount * (1 + item.InterestRate / 1200.0)), 2, MidpointRounding.AwayFromZero);
+                    }
+                }                               
             }
 
             if (_k == 12)
@@ -217,6 +239,20 @@ namespace Homework_13.Services
             {
                 _k++;
             }
+        }
+
+        /// <summary>
+        /// Проверка блокировки счёта
+        /// </summary>
+        /// <param name="account"> Счёт </param>        
+        private bool СheckingForBlocking(IBankAccount account)
+        {
+            if (account.Blocking)
+            {                
+                return true;
+            }
+
+            return false;
         }
     }
 }

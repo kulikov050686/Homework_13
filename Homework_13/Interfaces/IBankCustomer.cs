@@ -6,7 +6,7 @@ namespace Homework_13.Interfaces
     /// <summary>
     /// Интерфейс Клиет Банка
     /// </summary>
-    public interface IBankCustomer : IEntity
+    public interface IBankCustomer : IElement
     {
         /// <summary>
         /// Паспорт

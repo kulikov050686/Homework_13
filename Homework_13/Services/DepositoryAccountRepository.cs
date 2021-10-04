@@ -20,7 +20,8 @@ namespace Homework_13.Services
         /// <param name="destination"> Обновляемые данные </param>
         protected override void Update(IDepositoryAccount source, IDepositoryAccount destination)
         {
-            destination.Id = source.Id;            
+            destination.Id = source.Id;
+            destination.Blocking = source.Blocking;
             destination.Amount = source.Amount;
             destination.InterestRate = source.InterestRate;
             destination.DepositStatus = source.DepositStatus;

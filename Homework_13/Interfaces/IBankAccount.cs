@@ -5,7 +5,7 @@ namespace Homework_13.Interfaces
     /// <summary>
     /// Интерфейс Банковский счёт
     /// </summary>
-    public interface IBankAccount : IEntity
+    public interface IBankAccount : IElement
     {
         /// <summary>
         /// Сумма на счёте
@@ -32,6 +32,7 @@ namespace Homework_13.Interfaces
             if (this == obj) return true;
 
             return (Id == obj.Id) && 
+                   (Blocking == obj.Blocking) &&
                    (Amount == obj.Amount) &&
                    (InterestRate == obj.InterestRate) &&
                    (AccountStatus == obj.AccountStatus);
