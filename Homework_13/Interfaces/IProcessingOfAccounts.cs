@@ -1,10 +1,17 @@
-﻿namespace Homework_13.Interfaces
+﻿using Homework_13.Infrastructure;
+
+namespace Homework_13.Interfaces
 {
     /// <summary>
     /// Обработка Счетов
     /// </summary>
     public interface IProcessingOfAccounts
     {
+        /// <summary>
+        /// Событие возникающее при обработке счетов
+        /// </summary>
+        event ProcessingOfAccountsEventHandler ProcessingOfAccountsEvent;
+
         /// <summary>
         /// Открыть счёт
         /// </summary>

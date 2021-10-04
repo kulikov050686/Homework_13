@@ -1,4 +1,5 @@
 ﻿using Homework_13.Enums;
+using Homework_13.Infrastructure;
 using Homework_13.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,10 @@ namespace Homework_13.Services
         #endregion
 
         /// <summary>
+        /// Событие возникающее при обработке счетов
+        public event ProcessingOfAccountsEventHandler ProcessingOfAccountsEvent;
+
+        /// <summary>
         /// Список всех депозитарных счетов
         /// </summary>
         public IList<IDepositoryAccount> DepositoryAccounts => _depositoryAccountsManager.DepositoryAccounts;
@@ -35,7 +40,12 @@ namespace Homework_13.Services
             var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
-            return _depositoryAccountsManager.DeleteDepositoryAccount(account, bankCustomer);
+            var result = _depositoryAccountsManager.DeleteDepositoryAccount(account, bankCustomer);
+
+            if (result)
+                ProcessingOfAccountsEvent?.Invoke(bankCustomer, ProcessingOfAccountsArgs.CLOSE);
+
+            return result;
         }
 
         /// <summary>
