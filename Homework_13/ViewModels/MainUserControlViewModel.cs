@@ -93,7 +93,7 @@ namespace Homework_13.ViewModels
                 var department = (Department)obj;
                 if (department is null) return;
 
-                var bankCustomer = _bankCustomerDialog.CreateNewBankCustomer(department.StatusDepartment);
+                var bankCustomer = _bankCustomerDialog.Create(department.StatusDepartment);
                 if (bankCustomer is null) return;
 
                 _bankCustomersManager.CreateNewBankCustomer(bankCustomer, department);
@@ -129,7 +129,7 @@ namespace Homework_13.ViewModels
                 var bankCustomer = (BankCustomer)obj;
                 if (bankCustomer is null) return;
 
-                var tempBankCustomer = _bankCustomerDialog.EditBankCustomerData(bankCustomer);
+                var tempBankCustomer = _bankCustomerDialog.Edit(bankCustomer);
                 if (tempBankCustomer is null) return;
 
                 _bankCustomersManager.Update(tempBankCustomer);

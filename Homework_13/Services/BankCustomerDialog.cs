@@ -3,6 +3,7 @@ using Homework_13.Interfaces;
 using Homework_13.Models;
 using Homework_13.Views;
 using System;
+using System.Collections.Generic;
 
 namespace Homework_13.Services
 {
@@ -15,7 +16,7 @@ namespace Homework_13.Services
         /// Создание нового клиента банка
         /// </summary>
         /// <param name="clientStatus"> Статус клиента банка </param>        
-        public IBankCustomer CreateNewBankCustomer(Status clientStatus)
+        public IBankCustomer Create(Status clientStatus)
         {
             var dialog = new AddBankCustomersWindow();
 
@@ -28,7 +29,7 @@ namespace Homework_13.Services
         /// Редактировать данные клиента банка
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public IBankCustomer EditBankCustomerData(IBankCustomer bankCustomer)
+        public IBankCustomer Edit(IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
                 throw new ArgumentNullException("Клиент банка не может быть null!!!");
@@ -45,6 +46,11 @@ namespace Homework_13.Services
             tempBankCustomer.CreditAccounts = bankCustomer.CreditAccounts;
 
             return tempBankCustomer;
+        }
+
+        public IBankCustomer Selected(IList<IBankCustomer> entities)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -286,6 +292,6 @@ namespace Homework_13.Services
             {
                 return null;
             }
-        }
+        }        
     }
 }

@@ -106,7 +106,8 @@ namespace Homework_13.Services
             if (selectedDepositoryAccount1.Id == selectedDepositoryAccount2.Id) return false;
 
             selectedDepositoryAccount1.Amount += selectedDepositoryAccount2.Amount;
-            
+            Update(selectedDepositoryAccount1);
+
             return DeleteDepositoryAccount(depositoryAccount2, bankCustomer);
         }
 

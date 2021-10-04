@@ -2,6 +2,7 @@
 using Homework_13.Models;
 using Homework_13.Views;
 using System;
+using System.Collections.Generic;
 
 namespace Homework_13.Services
 {
@@ -13,7 +14,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Создание нового кредитного счёта
         /// </summary>        
-        public ICreditAccount CreateNewBankAccount()
+        public ICreditAccount Create()
         {
             var dialog = new AddCreditAccountWindow();
             if (dialog.ShowDialog() != true) return null;
@@ -25,7 +26,7 @@ namespace Homework_13.Services
         /// Редактировать данные кредитного счёта
         /// </summary>
         /// <param name="bankAccount"> Кредитный счёт </param>        
-        public ICreditAccount EditBankAccountData(ICreditAccount bankAccount)
+        public ICreditAccount Edit(ICreditAccount bankAccount)
         {
             if (bankAccount is null)
                 throw new ArgumentNullException("Депозитарный счёт не может быть null!!!");
@@ -40,6 +41,11 @@ namespace Homework_13.Services
             if (dialog.ShowDialog() != true) return null;
 
             return new CreditAccount(bankAccount.Id, dialog.Amount, dialog.InterestRate, dialog.CreditTerm, dialog.SelectedCreditStatus);
+        }
+
+        public ICreditAccount Selected(IList<ICreditAccount> entities)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Homework_13.Services
             if(bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
+            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
             return _depositoryAccountsManager.DeleteDepositoryAccount(account, bankCustomer);
@@ -76,7 +76,7 @@ namespace Homework_13.Services
             if(bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
+            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
             if (account.Blocking)
@@ -85,7 +85,7 @@ namespace Homework_13.Services
                 return false;
             }
 
-            var tempDepositoryAccount = _depositoryAccountDialog.EditBankAccountData(account);
+            var tempDepositoryAccount = _depositoryAccountDialog.Edit(account);
             if (tempDepositoryAccount is null) return false;
 
             _depositoryAccountsManager.Update(tempDepositoryAccount);
@@ -101,7 +101,7 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var depositoryAccount = _depositoryAccountDialog.CreateNewBankAccount();
+            var depositoryAccount = _depositoryAccountDialog.Create();
             if (depositoryAccount is null) return false;
 
             return _depositoryAccountsManager.CreateNewDepositoryAccount(depositoryAccount, bankCustomer);
@@ -116,7 +116,7 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
+            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
             if (account.Blocking)
@@ -149,7 +149,7 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
+            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return null;
 
             if (account.Blocking)
@@ -180,6 +180,40 @@ namespace Homework_13.Services
             _depositoryAccountsManager.Update(account);
 
             return result;
+        }
+
+        /// <summary>
+        /// Блокировка счёта
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>       
+        public bool BlockAccount(IBankCustomer bankCustomer)
+        {
+            if (bankCustomer is null)
+                throw new ArgumentNullException();
+
+            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
+            if (account is null) return false;
+
+            account.Blocking = true;
+            _depositoryAccountsManager.Update(account);
+            return true;
+        }
+
+        /// <summary>
+        /// Разблокировка счёта
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>        
+        public bool UnblockAccount(IBankCustomer bankCustomer)
+        {
+            if (bankCustomer is null)
+                throw new ArgumentNullException();
+
+            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
+            if (account is null) return false;
+
+            account.Blocking = false;
+            _depositoryAccountsManager.Update(account);
+            return true;
         }
 
         /// <summary>
@@ -248,7 +282,7 @@ namespace Homework_13.Services
         private bool СheckingForBlocking(IBankAccount account)
         {
             if (account.Blocking)
-            {                
+            {
                 return true;
             }
 
