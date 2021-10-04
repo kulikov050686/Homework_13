@@ -93,7 +93,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Перевести на счёт
         /// </summary>
-        /// <param name="bankCustomer"> Клиент банка </param>        
+        /// <param name="bankCustomer"> Клиент банка </param>
         public bool TransferToAccount(IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
@@ -121,9 +121,36 @@ namespace Homework_13.Services
         /// Вывести средства со счета
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>
-        public double WithdrawFromAccount(IBankCustomer bankCustomer)
+        public double? WithdrawFromAccount(IBankCustomer bankCustomer)
         {
-            return 0;
+            if (bankCustomer is null)
+                throw new ArgumentNullException();
+
+            var account = _depositoryAccountDialog.SelectedBankAccounts(bankCustomer.DepositoryAccounts);
+            if (account is null) return null;
+
+            var result = _depositoryAccountDialog.ChangeAmountOfBankAccount();
+            if (result is null) return null;
+
+            if (result < 0)
+            {
+                MessageBox.Show("Сумма не может быть меньше нуля!!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+
+            result = Math.Round((double)result, 2, MidpointRounding.ToEven);
+
+            if (result > account.Amount)
+            {
+                MessageBox.Show("Нехватает суммы на счёте", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }             
+            
+            account.Amount -= result;
+            account.Amount = Math.Round((double)account.Amount, 2, MidpointRounding.AwayFromZero);
+            _depositoryAccountsManager.Update(account);
+
+            return result;
         }
 
         /// <summary>

@@ -204,6 +204,19 @@ namespace Homework_13.ViewModels
 
         #endregion
 
+        #region Команда вывести средства со счета
+
+        private ICommand _withdrawFromDepositoryAccount = default!;
+        public ICommand WithdrawFromDepositoryAccount
+        {
+            get => _withdrawFromDepositoryAccount ??= new RelayCommand((obj) =>
+            {
+                _processingOfDepositoryAccounts.WithdrawFromAccount(SelectedBankCustomer);
+            }, (obj) => obj is DepositoryAccount);
+        }
+
+        #endregion
+
         /// <summary>
         /// Конструктор
         /// </summary>
