@@ -18,7 +18,7 @@ namespace Homework_13.ViewModels
         private readonly BankCustomersManager _bankCustomersManager;        
         private readonly CreditAccountsManager _creditAccountsManager;
 
-        private ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;
+        private readonly ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;
 
         private BankCustomerDialog _bankCustomerDialog;              
         private Department _selectedDepartment;

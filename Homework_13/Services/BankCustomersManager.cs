@@ -35,10 +35,10 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>
         /// <param name="department"> Департамент </param>        
-        public bool Create(IBankCustomer bankCustomer, 
+        public bool Create(IBankCustomer bankCustomer,
                            IDepartment department)
         {
-            if (bankCustomer is null) 
+            if (bankCustomer is null)
                 throw new ArgumentNullException(nameof(bankCustomer), "Добавляемый клиент банка не может быть null!!!");
             if (department is null)
                 throw new ArgumentNullException(nameof(department), "Департамент не может быть null!!!");
@@ -57,7 +57,7 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>
         /// <param name="department"> Департамент </param>
-        public bool Delete(IBankCustomer bankCustomer, 
+        public bool Delete(IBankCustomer bankCustomer,
                            IDepartment department)
         {
             if (bankCustomer is null)

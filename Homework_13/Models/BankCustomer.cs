@@ -74,7 +74,7 @@ namespace Homework_13.Models
                             IPassport passport,
                             Status clientStatus,
                             Reliability reliability,
-                            string phoneNumber = null,                            
+                            string phoneNumber = null,
                             string email = null)
         {
             if(id < 0) 

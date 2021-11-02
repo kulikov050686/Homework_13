@@ -5,7 +5,7 @@ using System;
 using System.Windows;
 
 namespace Homework_13
-{    
+{
     public partial class App : Application
     {
         private static IHost _host;
@@ -21,6 +21,7 @@ namespace Homework_13
         public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
             services.RegisterServices().RegisterViewModels();
+            services.RegisterServices().RegisterServices();
         }
 
         /// <summary>

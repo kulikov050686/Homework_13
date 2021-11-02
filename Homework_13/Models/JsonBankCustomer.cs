@@ -16,6 +16,12 @@ namespace Homework_13.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Блокировка
+        /// </summary>
+        [JsonPropertyName("Blocking")]
+        public bool Blocking { get; set; }
+
+        /// <summary>
         /// Паспорт
         /// </summary>
         [JsonPropertyName("Passport")]

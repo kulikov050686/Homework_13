@@ -29,6 +29,25 @@ namespace Homework_13.Services
         public IList<IDepositoryAccount> DepositoryAccounts => _depositoryAccountsManager.DepositoryAccounts;
 
         /// <summary>
+        /// Открыть депозитарный счёт
+        /// </summary>
+        /// <param name="bankCustomer"> Клиент банка </param>        
+        public bool OpenAccount(IBankCustomer bankCustomer)
+        {
+            if (bankCustomer is null)
+                throw new ArgumentNullException();
+
+            var depositoryAccount = _depositoryAccountDialog.Create();
+            if (depositoryAccount is null) return false;
+
+            var result = _depositoryAccountsManager.Create(depositoryAccount, bankCustomer);
+
+            if (result) ProcessingOfAccountsEvent?.Invoke(this, ProcessingOfAccountsArgs.OPEN);
+
+            return result;
+        }
+
+        /// <summary>
         /// Закрыть депозитарный счёт
         /// </summary>
         /// <param name="bankCustomer"> Клиент банка </param>        
@@ -40,7 +59,41 @@ namespace Homework_13.Services
             var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
-            return _depositoryAccountsManager.Delete(account, bankCustomer);
+            if (account.Blocking)
+            {
+                MessageBox.Show("Счёт заблокирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            var result = _depositoryAccountsManager.Delete(account, bankCustomer);
+            if (result) ProcessingOfAccountsEvent?.Invoke(this, ProcessingOfAccountsArgs.CLOSE);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Редактировать депозитарный счёт
+        /// </summary>
+        /// <param name="account"> Клиент банка </param>        
+        public bool EditAccount(IBankCustomer bankCustomer)
+        {
+            if (bankCustomer is null)
+                throw new ArgumentNullException();
+
+            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
+            if (account is null) return false;
+
+            if (account.Blocking)
+            {
+                MessageBox.Show("Счёт заблокирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            var tempDepositoryAccount = _depositoryAccountDialog.Edit(account);
+            if (tempDepositoryAccount is null) return false;
+
+            _depositoryAccountsManager.Update(tempDepositoryAccount);
+            return true;
         }
 
         /// <summary>
@@ -65,46 +118,6 @@ namespace Homework_13.Services
             }
 
             return _depositoryAccountsManager.Combining(account1, account2, bankCustomer);            
-        }
-
-        /// <summary>
-        /// Редактировать депозитарный счёт
-        /// </summary>
-        /// <param name="account"> Редактируемый депозитарный счёт </param>        
-        public bool EditAccount(IBankCustomer bankCustomer)
-        {
-            if(bankCustomer is null)
-                throw new ArgumentNullException();
-
-            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
-            if (account is null) return false;
-
-            if (account.Blocking)
-            {
-                MessageBox.Show("Счёт заблокирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
-            var tempDepositoryAccount = _depositoryAccountDialog.Edit(account);
-            if (tempDepositoryAccount is null) return false;
-
-            _depositoryAccountsManager.Update(tempDepositoryAccount);
-            return true;
-        }
-
-        /// <summary>
-        /// Открыть депозитарный счёт
-        /// </summary>
-        /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool OpenAccount(IBankCustomer bankCustomer)
-        {
-            if (bankCustomer is null)
-                throw new ArgumentNullException();
-
-            var depositoryAccount = _depositoryAccountDialog.Create();
-            if (depositoryAccount is null) return false;
-
-            return _depositoryAccountsManager.Create(depositoryAccount, bankCustomer);
         }
 
         /// <summary>
@@ -223,7 +236,7 @@ namespace Homework_13.Services
         {
             _timer = new DispatcherTimer();
             _timer.Interval = new TimeSpan(0, 0, 2);
-            _timer.Tick += _timer_Tick;
+            _timer.Tick += TimerTick;
             _timer.Start();
         }
 
@@ -233,7 +246,7 @@ namespace Homework_13.Services
         public void StopCalculate()
         {
             _timer.Stop();
-            _timer.Tick -= _timer_Tick;
+            _timer.Tick -= TimerTick;
             _timer = null;
         }
 
@@ -247,7 +260,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Обработчик события таймера
         /// </summary>        
-        private void _timer_Tick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
             foreach (var item in DepositoryAccounts)
             {
@@ -273,20 +286,6 @@ namespace Homework_13.Services
             {
                 _k++;
             }
-        }
-
-        /// <summary>
-        /// Проверка блокировки счёта
-        /// </summary>
-        /// <param name="account"> Счёт </param>        
-        private bool СheckingForBlocking(IBankAccount account)
-        {
-            if (account.Blocking)
-            {
-                return true;
-            }
-
-            return false;
-        }
+        }        
     }
 }

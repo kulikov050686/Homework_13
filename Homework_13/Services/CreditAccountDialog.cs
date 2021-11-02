@@ -43,9 +43,20 @@ namespace Homework_13.Services
             return new CreditAccount(bankAccount.Id, dialog.Amount, dialog.InterestRate, dialog.CreditTerm, dialog.SelectedCreditStatus);
         }
 
-        public ICreditAccount Selected(IList<ICreditAccount> entities)
+        /// <summary>
+        /// Выбрать кредитный счёт из списка кредитных счетов
+        /// </summary>
+        /// <param name="entities"> Список кредитных счетов </param>        
+        public ICreditAccount Selected(IList<ICreditAccount> bankAccounts)
         {
-            throw new NotImplementedException();
+            if (bankAccounts is null)
+                throw new ArgumentNullException("Список счетов не может быть null!!!");
+
+            var dialog = new SelectedBankAccountWindow();
+            dialog.BankAccounts = bankAccounts;
+            if (dialog.ShowDialog() != true) return null;
+
+            return dialog.SelectedBankAccount as ICreditAccount;
         }
     }
 }

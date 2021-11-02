@@ -56,7 +56,7 @@ namespace Homework_13.Services
             dialog.BankAccounts = bankAccounts;
             if (dialog.ShowDialog() != true) return null;
 
-            return dialog.SelectedBankAccount as DepositoryAccount;
+            return dialog.SelectedBankAccount as IDepositoryAccount;
         }
 
         /// <summary>
