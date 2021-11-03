@@ -13,7 +13,7 @@ namespace Homework_13.Services
     {
         /// <summary>
         /// Создание нового кредитного счёта
-        /// </summary>        
+        /// </summary>
         public ICreditAccount Create()
         {
             var dialog = new AddCreditAccountWindow();

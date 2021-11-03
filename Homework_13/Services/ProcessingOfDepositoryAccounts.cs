@@ -21,6 +21,7 @@ namespace Homework_13.Services
 
         /// <summary>
         /// Событие возникающее при обработке счетов
+        /// <summary>
         public event ProcessingOfAccountsEventHandler ProcessingOfAccountsEvent;
 
         /// <summary>
@@ -250,6 +251,9 @@ namespace Homework_13.Services
             _timer = null;
         }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>        
         public ProcessingOfDepositoryAccounts(DepositoryAccountsManager depositoryAccountsManager,
                                               DepositoryAccountDialog depositoryAccountDialog)
         {

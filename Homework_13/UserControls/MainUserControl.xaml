@@ -254,6 +254,14 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
+            <GroupBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить" 
+                              Command="{Binding CreateNewCreditAccount}" 
+                              CommandParameter="{Binding SelectedBankCustomer}"/>
+                </ContextMenu>
+            </GroupBox.ContextMenu>
         </GroupBox>
 
         <GridSplitter Grid.Column="0" 
