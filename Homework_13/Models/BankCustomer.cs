@@ -9,47 +9,104 @@ namespace Homework_13.Models
     /// <summary>
     /// Класс Клиент Банка
     /// </summary>
-    public class BankCustomer : IBankCustomer
+    public class BankCustomer : BaseClassModelINPC, IBankCustomer
     {
+        #region Закрытые поля
+
+        private int _id = 0;
+        private bool _blocking = false;
+        private IPassport _passport = null;
+        private Status _clientStatus = Status.USUAL;
+        private Reliability _reliability = Reliability.FIRST;
+        private string _phoneNumber = null;
+        private string _email = null;
+        private string _description = null;
+
+        #endregion
+
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public int Id { get; set; }
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("Невозможный идентификатор!!!");
+
+                Set(ref _id, value);
+            }
+        }
 
         /// <summary>
         /// Блокировка
         /// </summary>
-        public bool Blocking { get; set; } = false;
+        public bool Blocking
+        {
+            get => _blocking;
+            set => Set(ref _blocking, value);            
+        }
 
         /// <summary>
         /// Паспорт
         /// </summary>
-        public IPassport Passport { get; set; }
+        public IPassport Passport
+        {
+            get => _passport;
+            set
+            {
+                if (value is null)
+                    throw new ArgumentNullException("Паспорт не может быть null!!!");
+
+                Set(ref _passport, value);
+            }
+        }
 
         /// <summary>
         /// Статус
         /// </summary>
-        public Status ClientStatus { get; set; }
+        public Status ClientStatus
+        {
+            get => _clientStatus;
+            set => Set(ref _clientStatus, value);
+        }
 
         /// <summary>
         /// Надёжность
         /// </summary>
-        public Reliability Reliability { get; set; }
+        public Reliability Reliability
+        {
+            get => _reliability;
+            set => Set(ref _reliability, value);
+        }
 
         /// <summary>
         /// Номер телефона
         /// </summary>
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set => Set(ref _phoneNumber, value);
+        }
 
         /// <summary>
         /// Адрес электронной почты
         /// </summary>
-        public string Email { get; set; }
+        public string Email
+        {
+            get => _email;
+            set => Set(ref _email, value);
+        }
 
         /// <summary>
         /// Описание
         /// </summary>
-        public string Description { get; set; }
+        public string Description
+        {
+            get => _description;
+            set => Set(ref _description, value);
+        }
 
         /// <summary>
         /// Лист депозитарных счетов
@@ -77,17 +134,11 @@ namespace Homework_13.Models
                             string phoneNumber = null,
                             string email = null)
         {
-            if(id < 0) 
-                throw new ArgumentException("Невозможный идентификатор!!!");
-            if (passport is null)
-                throw new ArgumentNullException("Паспорт не может быть null!!!");
-
             Id = id;
             Passport = passport;
             ClientStatus = clientStatus;
             Reliability = reliability;
-
-            PhoneNumber = phoneNumber;            
+            PhoneNumber = phoneNumber;
             Email = email;
         }
     }

@@ -19,6 +19,7 @@ namespace Homework_13.ViewModels
         private DepartmentRepository _departmentRepository;
         private BankCustomerRepository _bankCustomerRepository;
         private DepositoryAccountRepository _depositoryAccountRepository;
+        private CreditAccountRepository _creditAccountRepository;
 
         #endregion
 
@@ -36,6 +37,11 @@ namespace Homework_13.ViewModels
         /// Список всех депозитарных счетов
         /// </summary>
         public IList<IDepositoryAccount> DepositoryAccounts { get; set; }
+
+        /// <summary>
+        /// Список всех кредитных счетов
+        /// </summary>
+        public IList<ICreditAccount> CreditAccounts { get; set; }
 
         #region Команда сохранить в файл
 
@@ -77,6 +83,14 @@ namespace Homework_13.ViewModels
                         {
                             DepositoryAccounts = depositoryAccounts;
                             _depositoryAccountRepository.SetAll(DepositoryAccounts);
+                        }
+
+                        var creditAccounts = BankCustomers.SelectMany(d => d.CreditAccounts).ToList();
+
+                        if(creditAccounts != null)
+                        {
+                            CreditAccounts = creditAccounts;
+                            _creditAccountRepository.SetAll(CreditAccounts);
                         }
                     }             
                 }               
@@ -170,13 +184,15 @@ namespace Homework_13.ViewModels
                                             FileDialog fileDialog,
                                             DepartmentRepository departmentRepository,
                                             BankCustomerRepository bankCustomerRepository,
-                                            DepositoryAccountRepository depositoryAccountRepository)
+                                            DepositoryAccountRepository depositoryAccountRepository,
+                                            CreditAccountRepository creditAccountRepository)
         {
             _mainUserControlViewModel = mainUserControlViewModel;
             _fileDialog = fileDialog;
             _departmentRepository = departmentRepository;
             _bankCustomerRepository = bankCustomerRepository;
             _depositoryAccountRepository = depositoryAccountRepository;
+            _creditAccountRepository = creditAccountRepository;
 
             Departments = _mainUserControlViewModel.Departments;            
         }

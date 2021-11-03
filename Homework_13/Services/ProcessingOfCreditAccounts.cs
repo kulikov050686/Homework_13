@@ -3,6 +3,7 @@ using Homework_13.Infrastructure;
 using Homework_13.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Windows.Threading;
 
 namespace Homework_13.Services
 {
@@ -12,6 +13,8 @@ namespace Homework_13.Services
 
         CreditAccountsManager _creditAccountsManager;
         CreditAccountDialog _creditAccountDialog;
+        DispatcherTimer _timer;
+        byte _k = 1;
 
         #endregion
 
@@ -44,6 +47,27 @@ namespace Homework_13.Services
         }
 
         /// <summary>
+        /// Начать расчёт по счетам
+        /// </summary>
+        public void StartCalculate()
+        {
+            _timer = new DispatcherTimer();
+            _timer.Interval = new TimeSpan(0, 0, 2);
+            _timer.Tick += TimerTick;
+            _timer.Start();
+        }
+
+        /// <summary>
+        /// Остановить расчёт по счетам
+        /// </summary>
+        public void StopCalculate()
+        {
+            _timer.Stop();
+            _timer.Tick -= TimerTick;
+            _timer = null;
+        }
+
+        /// <summary>
         /// Конструктор
         /// </summary>        
         public ProcessingOfCreditAccounts(CreditAccountsManager creditAccountsManager,
@@ -51,6 +75,11 @@ namespace Homework_13.Services
         {
             _creditAccountsManager = creditAccountsManager;
             _creditAccountDialog = creditAccountDialog;
+        }
+
+        private void TimerTick(object sender, EventArgs e)
+        {
+            
         }
     }
 }

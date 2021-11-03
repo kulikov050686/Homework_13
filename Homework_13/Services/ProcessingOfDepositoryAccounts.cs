@@ -187,7 +187,7 @@ namespace Homework_13.Services
             {
                 MessageBox.Show("Нехватает суммы на счёте!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
-            }             
+            }
             
             account.Amount -= result;
             account.Amount = Math.Round((double)account.Amount, 2, MidpointRounding.AwayFromZero);
@@ -231,7 +231,7 @@ namespace Homework_13.Services
         }
 
         /// <summary>
-        /// Начать расчёт по депозитарным счетам
+        /// Начать расчёт по счетам
         /// </summary>
         public void StartCalculate()
         {
@@ -242,7 +242,7 @@ namespace Homework_13.Services
         }
 
         /// <summary>
-        /// Остановить расчёт по депозитарным счетам
+        /// Остановить расчёт по счетам
         /// </summary>
         public void StopCalculate()
         {

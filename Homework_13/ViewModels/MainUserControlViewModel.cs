@@ -15,7 +15,7 @@ namespace Homework_13.ViewModels
         #region Закрытые поля
 
         private readonly DepartmentsManager _departmentsManager;
-        private readonly BankCustomersManager _bankCustomersManager;        
+        private readonly BankCustomersManager _bankCustomersManager;
 
         private readonly ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;
         private readonly ProcessingOfCreditAccounts _processingOfCreditAccounts;

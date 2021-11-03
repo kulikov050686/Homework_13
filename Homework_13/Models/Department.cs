@@ -37,7 +37,9 @@ namespace Homework_13.Models
         /// <param name="id"> Идентификатор </param>
         /// <param name="name"> Название </param>
         /// <param name="statusDepartment"> Статус </param>
-        public Department(int id, string name, Status statusDepartment)
+        public Department(int id,
+                          string name,
+                          Status statusDepartment)
         {
             if (string.IsNullOrWhiteSpace(name)) 
                 throw new ArgumentException("Название департамента не может быть тустым или null!!!");
