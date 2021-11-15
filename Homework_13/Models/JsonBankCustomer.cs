@@ -62,11 +62,5 @@ namespace Homework_13.Models
         /// </summary>
         [JsonPropertyName("DepositoryAccounts")]
         public ObservableCollection<DepositoryAccount> DepositoryAccounts { get; set; }
-
-        /// <summary>
-        /// Лист кредитных счетов
-        /// </summary>
-        [JsonPropertyName("CreditAccounts")]
-        public ObservableCollection<CreditAccount> CreditAccounts { get; set; }
     }
 }

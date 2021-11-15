@@ -28,11 +28,6 @@ namespace Homework_13.Models
         public static IList<IDepositoryAccount> DepositoryAccounts { get; set; } = CreateDepositoryAccounts(BankCustomers);
 
         /// <summary>
-        /// Кредитные счета клиентов банка
-        /// </summary>
-        public static IList<ICreditAccount> CreditAccounts { get; set; } = CreateCreditAccounts(BankCustomers);
-
-        /// <summary>
         /// Создание департаментов банка
         /// </summary>        
         public static IList<IDepartment> CreateDepartments()
@@ -117,39 +112,6 @@ namespace Homework_13.Models
             }
                         
             return bankCustomers.SelectMany(d => d.DepositoryAccounts).ToList();                       
-        }
-
-        /// <summary>
-        /// Заполнение кредитными счетами лиентов банка
-        /// </summary>
-        /// <param name="bankCustomers"> Клиенты банка </param>        
-        private static IList<ICreditAccount> CreateCreditAccounts(IList<IBankCustomer> bankCustomers)
-        {
-            var index = 1;
-            bool key = false;
-            CreditAccount creditAccount;
-
-            foreach (var item in bankCustomers)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    if(key)
-                    {
-                        creditAccount = new CreditAccount(index, 300000, 12, 12, CreditStatus.ANNUITY);
-                        key = !key;
-                    }
-                    else
-                    {
-                        creditAccount = new CreditAccount(index, 300000, 12, 12, CreditStatus.DIFFERENTIATED);
-                        key = !key;
-                    }
-
-                    item.CreditAccounts.Add(creditAccount);
-                    index++;
-                }
-            }
-
-            return bankCustomers.SelectMany(d => d.CreditAccounts).ToList();
         }
 
         /// <summary>

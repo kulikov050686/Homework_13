@@ -100,7 +100,7 @@ namespace Homework_13.Services
         /// <summary>
         /// Объединить депозитарные счета
         /// </summary>
-        /// <param name="bankCustomer"> Клиент банка </param>             
+        /// <param name="bankCustomer"> Клиент банка </param>
         public bool CombiningAccounts(IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)

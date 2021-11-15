@@ -16,15 +16,12 @@ namespace Homework_13.ViewModels
 
         private readonly DepartmentsManager _departmentsManager;
         private readonly BankCustomersManager _bankCustomersManager;
-
-        private readonly ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;
-        private readonly ProcessingOfCreditAccounts _processingOfCreditAccounts;
+        private readonly ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;        
 
         private BankCustomerDialog _bankCustomerDialog;              
         private Department _selectedDepartment;
         private BankCustomer _selectedBankCustomer;
-        private DepositoryAccount _selectedDepositoryAccount;
-        private CreditAccount _selectedCreditAccount;
+        private DepositoryAccount _selectedDepositoryAccount;        
 
         #endregion
         
@@ -65,16 +62,7 @@ namespace Homework_13.ViewModels
         {
             get => _selectedDepositoryAccount;
             set => Set(ref _selectedDepositoryAccount, value);
-        }
-
-        /// <summary>
-        /// Выбранный кредитный счёт
-        /// </summary>
-        public CreditAccount SelectedCreditAccount
-        {
-            get => _selectedCreditAccount;
-            set => Set(ref _selectedCreditAccount, value);
-        }
+        }        
 
         #endregion
 
@@ -212,37 +200,20 @@ namespace Homework_13.ViewModels
 
         #endregion
 
-        #region Команда создание нового кредитного счёта
-
-        private ICommand _createNewCreditAccount = default!;
-        public ICommand CreateNewCreditAccount
-        {
-            get => _createNewCreditAccount ??= new RelayCommand((obj) =>
-            {
-                if (obj is BankCustomer bankCustomer)
-                    _processingOfCreditAccounts.OpenAccount(bankCustomer);
-            }, (obj) => obj is BankCustomer);
-        }
-
-        #endregion
-
         /// <summary>
         /// Конструктор
         /// </summary>
         public MainUserControlViewModel(BankCustomersManager bankCustomersManager,
                                         DepartmentsManager departmentsManager,
                                         BankCustomerDialog bankCustomerDialog,
-                                        ProcessingOfDepositoryAccounts processingOfDepositoryAccounts,
-                                        ProcessingOfCreditAccounts processingOfCreditAccounts)
+                                        ProcessingOfDepositoryAccounts processingOfDepositoryAccounts)
         {
             _departmentsManager = departmentsManager;
-            _bankCustomersManager = bankCustomersManager;            
+            _bankCustomersManager = bankCustomersManager;
             _bankCustomerDialog = bankCustomerDialog;
 
             _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
-            _processingOfCreditAccounts = processingOfCreditAccounts;
-
-            _processingOfDepositoryAccounts.StartCalculate();
+            _processingOfDepositoryAccounts.StartCalculate();            
         }
     }
 }

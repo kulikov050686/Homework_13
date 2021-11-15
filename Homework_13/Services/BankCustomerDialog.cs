@@ -42,8 +42,7 @@ namespace Homework_13.Services
 
             var tempBankCustomer = CreateBankCustomer(dialog, bankCustomer.ClientStatus);
             tempBankCustomer.Id = bankCustomer.Id;
-            tempBankCustomer.DepositoryAccounts = bankCustomer.DepositoryAccounts;
-            tempBankCustomer.CreditAccounts = bankCustomer.CreditAccounts;
+            tempBankCustomer.DepositoryAccounts = bankCustomer.DepositoryAccounts;            
 
             return tempBankCustomer;
         }

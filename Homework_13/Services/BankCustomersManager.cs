@@ -82,7 +82,7 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="bankCustomerRepository"> Хранилище клиентов банка </param>
         /// <param name="departmentRepository"> Хранилище департаментов банка </param>
-        public BankCustomersManager(BankCustomerRepository bankCustomerRepository, 
+        public BankCustomersManager(BankCustomerRepository bankCustomerRepository,
                                     DepartmentRepository departmentRepository)
         {
             _bankCustomerRepository = bankCustomerRepository;

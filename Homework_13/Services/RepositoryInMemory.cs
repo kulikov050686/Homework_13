@@ -54,7 +54,7 @@ namespace Homework_13.Services
 
             item.Id = ++_lastId;
             _items.Add(item);
-            RepositoryEvent?.Invoke(RepositoryArgs.ADD);
+            RepositoryEvent?.Invoke(item, RepositoryArgs.ADD);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Homework_13.Services
             _items.Clear();
             _lastId = 0;
 
-            foreach (var item in items) Add(item);                      
+            foreach (var item in items) Add(item);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Homework_13.Services
         { 
             var result = _items.Remove(item);
 
-            if (result) RepositoryEvent?.Invoke(RepositoryArgs.DELETE);
+            if (result) RepositoryEvent?.Invoke(item, RepositoryArgs.DELETE);
 
             return result;
         }
@@ -116,7 +116,7 @@ namespace Homework_13.Services
                 throw new InvalidOperationException("Редактируемый элемент не найден в репозитории");
 
             Update(item, db_item);
-            RepositoryEvent?.Invoke(RepositoryArgs.UPDATE);
+            RepositoryEvent?.Invoke(item, RepositoryArgs.UPDATE);
         }
         
         /// <summary>

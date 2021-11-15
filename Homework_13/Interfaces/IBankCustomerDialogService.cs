@@ -11,6 +11,6 @@ namespace Homework_13.Interfaces
         /// Создание нового клиента банка
         /// </summary>
         /// <param name="clientStatus"> Статус клиента банка </param>        
-        IBankCustomer Create(Status clientStatus); 
+        IBankCustomer Create(Status clientStatus);
     }
 }

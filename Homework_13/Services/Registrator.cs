@@ -16,21 +16,17 @@ namespace Homework_13.Services
         {
             services.AddSingleton<DepartmentRepository>();
             services.AddSingleton<BankCustomerRepository>();            
-            services.AddSingleton<DepositoryAccountRepository>();
-            services.AddSingleton<CreditAccountRepository>();
+            services.AddSingleton<DepositoryAccountRepository>();            
 
             services.AddSingleton<DepartmentsManager>();
             services.AddSingleton<BankCustomersManager>();
-            services.AddSingleton<DepositoryAccountsManager>();
-            services.AddSingleton<CreditAccountsManager>();
+            services.AddSingleton<DepositoryAccountsManager>();            
 
             services.AddTransient<FileIOService>();
             services.AddTransient<FileDialog>();
             services.AddTransient<BankCustomerDialog>();
-            services.AddTransient<DepositoryAccountDialog>();
-            services.AddTransient<CreditAccountDialog>();
-            services.AddTransient<ProcessingOfDepositoryAccounts>();
-            services.AddTransient<ProcessingOfCreditAccounts>();
+            services.AddTransient<DepositoryAccountDialog>();            
+            services.AddTransient<ProcessingOfDepositoryAccounts>();           
 
             return services;
         }

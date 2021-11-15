@@ -114,11 +114,6 @@ namespace Homework_13.Models
         public IList<IDepositoryAccount> DepositoryAccounts { get; set; } = new ObservableCollection<IDepositoryAccount>();
 
         /// <summary>
-        /// Лист кредитных счетов
-        /// </summary>
-        public IList<ICreditAccount> CreditAccounts { get; set; } = new ObservableCollection<ICreditAccount>();
-        
-        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="id"> Идентификатор </param>

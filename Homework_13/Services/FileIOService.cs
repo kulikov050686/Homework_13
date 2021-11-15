@@ -54,11 +54,6 @@ namespace Homework_13.Services
                                 departments[i].BankCustomers[k].DepositoryAccounts = ConverterDepositoryAccount(p.DepositoryAccounts);
                             }
 
-                            if(p.CreditAccounts != null && p.CreditAccounts.Count != 0)
-                            {
-                                departments[i].BankCustomers[k].CreditAccounts = ConverterCreditAccount(p.CreditAccounts);
-                            }
-
                             k++;
                         }
                     }
@@ -166,23 +161,6 @@ namespace Homework_13.Services
             }
 
             return depositoryAccounts;
-        }
-
-        /// <summary>
-        /// Конвертер листа кредитных счетов
-        /// </summary>
-        /// <param name="data"> Лист кредитных счетов </param>
-        private IList<ICreditAccount> ConverterCreditAccount(ObservableCollection<CreditAccount> data)
-        {
-            if (data is null) return null;
-
-            ObservableCollection<ICreditAccount> creditAccounts = new ObservableCollection<ICreditAccount>();
-            foreach (var item in data)
-            {
-                creditAccounts.Add(item);
-            }
-
-            return creditAccounts;
         }
 
         #endregion

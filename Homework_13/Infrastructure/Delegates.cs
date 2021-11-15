@@ -5,8 +5,9 @@ namespace Homework_13.Infrastructure
     /// <summary>
     /// Обработчик событий репозитория
     /// </summary>
+    /// <param name="sender"> Параметр события </param>
     /// <param name="args"> Действия в репозитории </param>
-    public delegate void RepositoryEventHandler(RepositoryArgs args);
+    public delegate void RepositoryEventHandler(object sender, RepositoryArgs args);
 
     /// <summary>
     /// Обработчик события при действии со счетами

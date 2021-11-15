@@ -28,8 +28,7 @@ namespace Homework_13.Services
             destination.ClientStatus = source.ClientStatus;
             destination.Description = source.Description;
             destination.Email = source.Email;
-            destination.DepositoryAccounts = source.DepositoryAccounts;
-            destination.CreditAccounts = source.CreditAccounts;
+            destination.DepositoryAccounts = source.DepositoryAccounts;            
         }
     }
 }

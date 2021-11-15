@@ -44,11 +44,6 @@ namespace Homework_13.Interfaces
         IList<IDepositoryAccount> DepositoryAccounts { get; set; }
 
         /// <summary>
-        /// Лист кредитных счетов
-        /// </summary>
-        IList<ICreditAccount> CreditAccounts { get; set; }
-
-        /// <summary>
         /// Метод сравнения
         /// </summary>
         /// <param name="obj"> Сравниваемый объект </param>
@@ -72,27 +67,6 @@ namespace Homework_13.Interfaces
                     for(int i = 0; i < DepositoryAccounts.Count && key; i++)
                     {
                         key = key && DepositoryAccounts[i].Equals(obj.DepositoryAccounts[i]);
-                    }
-                }
-                else
-                {
-                    key = false;
-                }
-            }
-
-            if((CreditAccounts == null && obj.CreditAccounts != null) ||
-               (CreditAccounts != null && obj.CreditAccounts == null))
-            {
-                key = false;
-            }
-
-            if ((CreditAccounts != null) && (obj.CreditAccounts != null) && key)
-            {
-                if (CreditAccounts.Count == obj.CreditAccounts.Count)
-                {
-                    for (int i = 0; i < CreditAccounts.Count && key; i++)
-                    {
-                        key = key && CreditAccounts[i].Equals(obj.CreditAccounts[i]);
                     }
                 }
                 else

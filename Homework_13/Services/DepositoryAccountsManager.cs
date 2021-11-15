@@ -35,7 +35,7 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool Create(IDepositoryAccount depositoryAccount, 
+        public bool Create(IDepositoryAccount depositoryAccount,
                            IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
@@ -57,7 +57,7 @@ namespace Homework_13.Services
         /// </summary>
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
         /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool Delete(IDepositoryAccount depositoryAccount, 
+        public bool Delete(IDepositoryAccount depositoryAccount,
                            IBankCustomer bankCustomer)
         {
             if (bankCustomer is null)
