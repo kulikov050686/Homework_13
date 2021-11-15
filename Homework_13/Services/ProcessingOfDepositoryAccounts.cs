@@ -43,7 +43,7 @@ namespace Homework_13.Services
 
             var result = _depositoryAccountsManager.Create(depositoryAccount, bankCustomer);
 
-            if (result) ProcessingOfAccountsEvent?.Invoke(this, ProcessingOfAccountsArgs.OPEN);
+            if (result) ProcessingOfAccountsEvent?.Invoke(depositoryAccount, ProcessingOfAccountsArgs.OPEN);
 
             return result;
         }
@@ -67,7 +67,7 @@ namespace Homework_13.Services
             }
 
             var result = _depositoryAccountsManager.Delete(account, bankCustomer);
-            if (result) ProcessingOfAccountsEvent?.Invoke(this, ProcessingOfAccountsArgs.CLOSE);
+            if (result) ProcessingOfAccountsEvent?.Invoke(account, ProcessingOfAccountsArgs.CLOSE);
 
             return result;
         }
@@ -94,6 +94,8 @@ namespace Homework_13.Services
             if (tempDepositoryAccount is null) return false;
 
             _depositoryAccountsManager.Update(tempDepositoryAccount);
+            ProcessingOfAccountsEvent?.Invoke(account, ProcessingOfAccountsArgs.EDIT);
+
             return true;
         }
 
@@ -118,7 +120,25 @@ namespace Homework_13.Services
                 return false;
             }
 
-            return _depositoryAccountsManager.Combining(account1, account2, bankCustomer);            
+            if (account1.Id == account2.Id) 
+            {
+                MessageBox.Show("Невозможная перация!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            double? tempAmount = account2.Amount;
+            bool result = _depositoryAccountsManager.Delete(account2, bankCustomer);
+
+            if(result)
+            {
+                account1.Amount += tempAmount;
+                _depositoryAccountsManager.Update(account1);
+                ProcessingOfAccountsEvent?.Invoke(account1, ProcessingOfAccountsArgs.COMBINING);
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -151,6 +171,8 @@ namespace Homework_13.Services
             account.Amount += result;
 
             _depositoryAccountsManager.Update(account);
+            ProcessingOfAccountsEvent?.Invoke(account, ProcessingOfAccountsArgs.TRANSFER);
+
             return true;
         }
 
@@ -192,6 +214,7 @@ namespace Homework_13.Services
             account.Amount -= result;
             account.Amount = Math.Round((double)account.Amount, 2, MidpointRounding.AwayFromZero);
             _depositoryAccountsManager.Update(account);
+            ProcessingOfAccountsEvent?.Invoke(account, ProcessingOfAccountsArgs.WITHDRAW);
 
             return result;
         }
@@ -210,6 +233,8 @@ namespace Homework_13.Services
 
             account.Blocking = true;
             _depositoryAccountsManager.Update(account);
+            ProcessingOfAccountsEvent?.Invoke(account, ProcessingOfAccountsArgs.BLOCK);
+
             return true;
         }
 
@@ -227,9 +252,11 @@ namespace Homework_13.Services
 
             account.Blocking = false;
             _depositoryAccountsManager.Update(account);
+            ProcessingOfAccountsEvent?.Invoke(account, ProcessingOfAccountsArgs.UNBLOCK);
+
             return true;
         }
-
+        
         /// <summary>
         /// Начать расчёт по счетам
         /// </summary>

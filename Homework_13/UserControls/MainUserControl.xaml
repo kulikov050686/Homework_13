@@ -14,8 +14,7 @@
             <ColumnDefinition Width="200" MinWidth="200"/>
             <ColumnDefinition Width="200" MinWidth="200"/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition/>            
         </Grid.ColumnDefinitions>
 
         <!--Отдел банка-->
@@ -229,41 +228,6 @@
             </GroupBox.ContextMenu>
         </GroupBox>
         
-        <!-- Кредитные счета -->        
-        <GroupBox Grid.Column="4"
-                  Header="Кредитные счета">
-            <ListBox ItemsSource="{Binding SelectedBankCustomer.CreditAccounts}"
-                     SelectedItem="{Binding SelectedCreditAccount}"
-                     SelectedIndex="0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Сумма долга "/>
-                                <TextBlock Text="{Binding Amount}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Процентная ставка "/>
-                                <TextBlock Text="{Binding InterestRate}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Схема выплат "/>
-                                <TextBlock Text="{Binding CreditStatus, Converter={converter:CreditStatusToTextConverter}}"/>
-                            </StackPanel>
-                        </StackPanel>                     
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-            <GroupBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Добавить" 
-                              Command="{Binding CreateNewCreditAccount}" 
-                              CommandParameter="{Binding SelectedBankCustomer}"/>
-                </ContextMenu>
-            </GroupBox.ContextMenu>
-        </GroupBox>
-
         <GridSplitter Grid.Column="0" 
                       HorizontalAlignment="Right" 
                       Width="3"/>

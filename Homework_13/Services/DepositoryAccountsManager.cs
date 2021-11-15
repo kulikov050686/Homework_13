@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using Homework_13.Interfaces;
+using Homework_13.Enums;
 
 namespace Homework_13.Services
 {
@@ -12,7 +13,7 @@ namespace Homework_13.Services
         #region Закрытые поля
 
         DepositoryAccountRepository _depositoryAccountRepository;
-        BankCustomerRepository _bankCustomerRepository;
+        BankCustomersManager _bankCustomersManager;
 
         #endregion
 
@@ -43,7 +44,7 @@ namespace Homework_13.Services
             if (depositoryAccount is null)
                 throw new ArgumentNullException(nameof(depositoryAccount), "Счёт не может быть null!!!");
 
-            var selectedBankCustomer = _bankCustomerRepository.Get(bankCustomer.Id);
+            var selectedBankCustomer = _bankCustomersManager.Get(bankCustomer.Id);
             if (selectedBankCustomer is null) return false;
 
             bankCustomer.DepositoryAccounts.Add(depositoryAccount);
@@ -65,7 +66,7 @@ namespace Homework_13.Services
             if (depositoryAccount is null)
                 throw new ArgumentNullException(nameof(depositoryAccount), "Счёт не может быть null!!!");
 
-            var selectedBankCustomer = _bankCustomerRepository.Get(bankCustomer.Id);
+            var selectedBankCustomer = _bankCustomersManager.Get(bankCustomer.Id);
             if (selectedBankCustomer is null) return false;
 
             if(bankCustomer.DepositoryAccounts.Remove(depositoryAccount))
@@ -78,49 +79,28 @@ namespace Homework_13.Services
         }
 
         /// <summary>
-        /// Объединение депозитарных счетов
+        /// Получить депозитарный счёт по идентификатору
         /// </summary>
-        /// <param name="depositoryAccount1"> Депозитарный счёт 1 </param>
-        /// <param name="depositoryAccount2"> Депозитарный счёт 2 </param>
-        /// <param name="bankCustomer"> Клиент банка </param>        
-        public bool Combining(IDepositoryAccount depositoryAccount1,
-                              IDepositoryAccount depositoryAccount2,
-                              IBankCustomer bankCustomer)
-        {
-            if(depositoryAccount1 is null)
-                throw new ArgumentNullException(nameof(depositoryAccount1), "Счёт не может быть null!!!");
-            if(depositoryAccount2 is null)
-                throw new ArgumentNullException(nameof(depositoryAccount2), "Счёт не может быть null!!!");
-            if (bankCustomer is null)
-                throw new ArgumentNullException(nameof(bankCustomer), "Клиент банка не может быть null!!!");
-
-            var selectedBankCustomer = _bankCustomerRepository.Get(bankCustomer.Id);
-            if (selectedBankCustomer is null) return false;
-
-            var selectedDepositoryAccount1 = _depositoryAccountRepository.Get(depositoryAccount1.Id);
-            if (selectedDepositoryAccount1 is null) return false;
-
-            var selectedDepositoryAccount2 = _depositoryAccountRepository.Get(depositoryAccount2.Id);
-            if (selectedDepositoryAccount2 is null) return false;
-
-            if (selectedDepositoryAccount1.Id == selectedDepositoryAccount2.Id) return false;
-
-            selectedDepositoryAccount1.Amount += selectedDepositoryAccount2.Amount;
-            Update(selectedDepositoryAccount1);
-
-            return Delete(depositoryAccount2, bankCustomer);
-        }
+        /// <param name="id"> Идентификатор </param>        
+        public IDepositoryAccount Get(int id) => _depositoryAccountRepository.Get(id);
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="depositoryAccountRepository"> Хранилище депозитарных счетов клиентов банка </param>
-        /// <param name="bankCustomerRepository"> Хранилище клиентов банка </param>
+        /// <param name="bankCustomersManager"> Хранилище клиентов банка </param>
         public DepositoryAccountsManager(DepositoryAccountRepository depositoryAccountRepository,
-                                         BankCustomerRepository bankCustomerRepository)
+                                         BankCustomersManager bankCustomersManager)
         {
-            _bankCustomerRepository = bankCustomerRepository;
+            _bankCustomersManager = bankCustomersManager;
             _depositoryAccountRepository = depositoryAccountRepository;
+
+            _depositoryAccountRepository.RepositoryEvent += OnDepositoryAccountRepositoryEvent;
+        }
+
+        private void OnDepositoryAccountRepositoryEvent(object sender, RepositoryArgs args)
+        {
+            /// Реализовать работу депозитарных счетов
         }
     }
 }

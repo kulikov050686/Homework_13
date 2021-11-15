@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using Homework_13.Interfaces;
+using Homework_13.Enums;
 
 namespace Homework_13.Services
 {
@@ -12,7 +13,7 @@ namespace Homework_13.Services
         #region Закрытые поля
 
         BankCustomerRepository _bankCustomerRepository;
-        DepartmentRepository _departmentRepository;
+        DepartmentsManager _departmentsManager;
 
         #endregion
 
@@ -43,7 +44,7 @@ namespace Homework_13.Services
             if (department is null)
                 throw new ArgumentNullException(nameof(department), "Департамент не может быть null!!!");
 
-            var selectedDepartment = _departmentRepository.Get(department.Name);
+            var selectedDepartment = _departmentsManager.Get(department.Name);
             if (selectedDepartment is null) return false;
 
             department.BankCustomers.Add(bankCustomer);
@@ -65,7 +66,7 @@ namespace Homework_13.Services
             if (department is null)
                 throw new ArgumentNullException(nameof(department), "Департамент не может быть null!!!");
 
-            var selectedDepartment = _departmentRepository.Get(department.Name);
+            var selectedDepartment = _departmentsManager.Get(department.Name);
             if (selectedDepartment is null) return false;
             
             if(department.BankCustomers.Remove(bankCustomer))
@@ -78,15 +79,28 @@ namespace Homework_13.Services
         }
 
         /// <summary>
+        /// Получить клиента банка по идентификатору
+        /// </summary>
+        /// <param name="id"> Идентификатор </param>        
+        public IBankCustomer Get(int id) => _bankCustomerRepository.Get(id);
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="bankCustomerRepository"> Хранилище клиентов банка </param>
-        /// <param name="departmentRepository"> Хранилище департаментов банка </param>
+        /// <param name="departmentsManager"> Хранилище департаментов банка </param>
         public BankCustomersManager(BankCustomerRepository bankCustomerRepository,
-                                    DepartmentRepository departmentRepository)
+                                    DepartmentsManager departmentsManager)
         {
             _bankCustomerRepository = bankCustomerRepository;
-            _departmentRepository = departmentRepository;
+            _departmentsManager = departmentsManager;
+
+            _bankCustomerRepository.RepositoryEvent += OnBankCustomerRepositoryEvent;
+        }
+        
+        private void OnBankCustomerRepositoryEvent(object sender, RepositoryArgs args)
+        {
+            /// реализовать действия на событие
         }
     }
 }

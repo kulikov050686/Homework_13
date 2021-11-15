@@ -178,8 +178,7 @@ namespace Homework_13.ViewModels
             _bankCustomerRepository = bankCustomerRepository;
             _depositoryAccountRepository = depositoryAccountRepository;
             
-
-            Departments = _mainUserControlViewModel.Departments;            
+            Departments = _mainUserControlViewModel.Departments;
         }
     }
 }

@@ -213,7 +213,7 @@ namespace Homework_13.ViewModels
             _bankCustomerDialog = bankCustomerDialog;
 
             _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
-            _processingOfDepositoryAccounts.StartCalculate();            
+            _processingOfDepositoryAccounts.StartCalculate();
         }
     }
 }
