@@ -1,7 +1,9 @@
 ﻿using Homework_13.Commands;
+using Homework_13.Enums;
 using Homework_13.Interfaces;
 using Homework_13.Models;
 using Homework_13.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Windows.Input;
 
@@ -21,10 +23,12 @@ namespace Homework_13.ViewModels
         private BankCustomerDialog _bankCustomerDialog;              
         private Department _selectedDepartment;
         private BankCustomer _selectedBankCustomer;
-        private DepositoryAccount _selectedDepositoryAccount;        
+        private DepositoryAccount _selectedDepositoryAccount;
 
-        #endregion
+        private BankCustomerInfoDialog BankCustomerInfoDialog => App.Host.Services.GetRequiredService<BankCustomerInfoDialog>();
         
+        #endregion
+
         #region Открытые свойства
 
         /// <summary>
@@ -211,9 +215,22 @@ namespace Homework_13.ViewModels
             _departmentsManager = departmentsManager;
             _bankCustomersManager = bankCustomersManager;
             _bankCustomerDialog = bankCustomerDialog;
-
             _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
+
+            _bankCustomersManager.ManagerEvent += BankCustomersManagerEvent;
+            _processingOfDepositoryAccounts.ProcessingOfAccountsEvent += OnProcessingOfAccountsEvent;
             _processingOfDepositoryAccounts.StartCalculate();
+        }
+
+        private void BankCustomersManagerEvent(object sender, ManagerArgs args)
+        {
+            /// реализовать
+            BankCustomerInfoDialog.Dialog((IBankCustomer)sender);
+        }        
+
+        private void OnProcessingOfAccountsEvent(object sender, ProcessingOfAccountsArgs args)
+        {
+            /// реализовать 
         }
     }
 }

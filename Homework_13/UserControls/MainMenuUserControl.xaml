@@ -42,9 +42,9 @@
                                   Command="{Binding EditDepositoryAccount}"/>
                         <MenuItem Header="Объединить"/>
                     </MenuItem>
-                    <MenuItem Header="Кредитные">
+                    <!--<MenuItem Header="Кредитные">-->
                         <!-- Реализовать работу с кредитными счетами -->
-                    </MenuItem>
+                    <!--</MenuItem>-->
                 </MenuItem>                                        
             </MenuItem>
         </Menu>

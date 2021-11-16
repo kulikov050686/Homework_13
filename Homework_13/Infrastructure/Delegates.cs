@@ -10,6 +10,13 @@ namespace Homework_13.Infrastructure
     public delegate void RepositoryEventHandler(object sender, RepositoryArgs args);
 
     /// <summary>
+    /// Обработчик событий менеджера
+    /// </summary>
+    /// <param name="sender"> Параметр события </param>
+    /// <param name="args"> Действия менеджера </param>
+    public delegate void ManagerEventHandler(object sender, ManagerArgs args);
+
+    /// <summary>
     /// Обработчик события при действии со счетами
     /// </summary>
     /// <param name="sender"> Параметр события </param>

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
 using Homework_13.Interfaces;
-using Homework_13.Enums;
 
 namespace Homework_13.Services
 {
@@ -35,7 +34,7 @@ namespace Homework_13.Services
         /// Добавить новый депозотарный счёт
         /// </summary>
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
-        /// <param name="bankCustomer"> Клиент банка </param>        
+        /// <param name="bankCustomer"> Клиент банка </param>
         public bool Create(IDepositoryAccount depositoryAccount,
                            IBankCustomer bankCustomer)
         {
@@ -57,7 +56,7 @@ namespace Homework_13.Services
         /// Удалить депозотарный счёт
         /// </summary>
         /// <param name="depositoryAccount"> Депозитарный счёт </param>
-        /// <param name="bankCustomer"> Клиент банка </param>        
+        /// <param name="bankCustomer"> Клиент банка </param>
         public bool Delete(IDepositoryAccount depositoryAccount,
                            IBankCustomer bankCustomer)
         {
@@ -94,13 +93,6 @@ namespace Homework_13.Services
         {
             _bankCustomersManager = bankCustomersManager;
             _depositoryAccountRepository = depositoryAccountRepository;
-
-            _depositoryAccountRepository.RepositoryEvent += OnDepositoryAccountRepositoryEvent;
-        }
-
-        private void OnDepositoryAccountRepositoryEvent(object sender, RepositoryArgs args)
-        {
-            /// Реализовать работу депозитарных счетов
         }
     }
 }

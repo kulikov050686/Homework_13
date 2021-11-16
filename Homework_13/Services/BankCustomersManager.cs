@@ -2,6 +2,7 @@
 using System;
 using Homework_13.Interfaces;
 using Homework_13.Enums;
+using Homework_13.Infrastructure;
 
 namespace Homework_13.Services
 {
@@ -18,6 +19,11 @@ namespace Homework_13.Services
         #endregion
 
         /// <summary>
+        /// Событие возникающее при дейтвиях менеджера
+        /// </summary>
+        public event ManagerEventHandler ManagerEvent;
+
+        /// <summary>
         /// Получить список всех клиентов
         /// </summary>
         public IList<IBankCustomer> BankCustomers => _bankCustomerRepository.GetAll();
@@ -29,6 +35,7 @@ namespace Homework_13.Services
         public void Update(IBankCustomer bankCustomer)
         {
             _bankCustomerRepository.Update(bankCustomer.Id, bankCustomer);
+            ManagerEvent?.Invoke(bankCustomer, ManagerArgs.UPDATE);
         }
 
         /// <summary>
@@ -49,6 +56,7 @@ namespace Homework_13.Services
 
             department.BankCustomers.Add(bankCustomer);
             _bankCustomerRepository.Add(bankCustomer);
+            ManagerEvent?.Invoke(bankCustomer, ManagerArgs.CREATE);
 
             return true;
         }
@@ -69,9 +77,10 @@ namespace Homework_13.Services
             var selectedDepartment = _departmentsManager.Get(department.Name);
             if (selectedDepartment is null) return false;
             
-            if(department.BankCustomers.Remove(bankCustomer))
+            if(department.BankCustomers.Remove(bankCustomer) &&
+               _bankCustomerRepository.Remove(bankCustomer))
             {
-                _bankCustomerRepository.Remove(bankCustomer);
+                ManagerEvent?.Invoke(bankCustomer, ManagerArgs.DELETE);
                 return true;
             }
 
@@ -94,13 +103,6 @@ namespace Homework_13.Services
         {
             _bankCustomerRepository = bankCustomerRepository;
             _departmentsManager = departmentsManager;
-
-            _bankCustomerRepository.RepositoryEvent += OnBankCustomerRepositoryEvent;
-        }
-        
-        private void OnBankCustomerRepositoryEvent(object sender, RepositoryArgs args)
-        {
-            /// реализовать действия на событие
         }
     }
 }
