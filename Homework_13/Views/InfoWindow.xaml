@@ -12,10 +12,12 @@
         WindowStyle="None"        
         AllowsTransparency="True"        
         Background="Transparent"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner">
     
     <i:Interaction.Behaviors>
         <bihaviors:WindowDisappearing/>
+        <bihaviors:ParentWindow/>
     </i:Interaction.Behaviors>  
 
     <Border CornerRadius="5" 
@@ -25,7 +27,13 @@
         <Grid Background="#F0EB36">
             <StackPanel Orientation="Vertical">               
 
-                <TextBlock Text="lk;sdjgl;sdg"/>
+                <TextBlock Text="lk;sdjgl;sdg" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"
+                           FontSize="14"/>
+
+                <TextBlock Text=",.mbzbnx,mn"
+                           FontSize="10"/>
             </StackPanel>
         </Grid>
     </Border>

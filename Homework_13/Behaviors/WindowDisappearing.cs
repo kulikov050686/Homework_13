@@ -29,7 +29,7 @@ namespace Homework_13.Behaviors
             Window window = sender as Window;
             window.Closing -= onWindowClosing;
             e.Cancel = true;
-            var anim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.5));
+            var anim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(2));
             anim.Completed += (s, a) => window.Close();
             window.BeginAnimation(UIElement.OpacityProperty, anim);
         }
