@@ -10,7 +10,7 @@ namespace Homework_13.Dialogues
     /// <summary>
     /// Класс сервиса диалоговых окон по работе с клиентом банка
     /// </summary>
-    public class BankCustomerDialog : IBankCustomerDialogService
+    public class BankCustomerDialog : IDialogService<IBankCustomer>
     {
         /// <summary>
         /// Создание нового клиента банка
@@ -298,6 +298,8 @@ namespace Homework_13.Dialogues
                 return null;
             }
         }
+
+        IBankCustomer IDialogService<IBankCustomer>.Create() => null;        
 
         #endregion
     }

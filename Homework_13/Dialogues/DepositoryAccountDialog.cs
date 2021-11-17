@@ -9,7 +9,7 @@ namespace Homework_13.Dialogues
     /// <summary>
     /// Cервис диалоговых окон по работе с депозитарными счетами
     /// </summary>
-    public class DepositoryAccountDialog : IBankAccountDialogService<IDepositoryAccount>
+    public class DepositoryAccountDialog : IDialogService<IDepositoryAccount>
     {
         /// <summary>
         /// Создание нового депозитарного счёта

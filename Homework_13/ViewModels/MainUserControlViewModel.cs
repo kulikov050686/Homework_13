@@ -232,7 +232,7 @@ namespace Homework_13.ViewModels
         }        
 
         private void OnProcessingOfAccountsEvent(object sender, ProcessingOfAccountsArgs args)
-        {
+        {            
             /// реализовать 
         }
     }

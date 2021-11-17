@@ -8,6 +8,11 @@ namespace Homework_13.Interfaces
     public interface IDialogService<T> where T: IEntity
     {
         /// <summary>
+        /// Создать сущность
+        /// </summary>        
+        T Create();
+
+        /// <summary>
         /// Редактировать сущность
         /// </summary>        
         T Edit(T entity);
