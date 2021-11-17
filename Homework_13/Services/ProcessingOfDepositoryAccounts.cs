@@ -9,14 +9,18 @@ using System.Windows.Threading;
 
 namespace Homework_13.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ProcessingOfDepositoryAccounts
     {
         #region Закрытые поля
 
-        DepositoryAccountsManager _depositoryAccountsManager;
-        DepositoryAccountDialog _depositoryAccountDialog;
-        DispatcherTimer _timer;
-        byte _k = 1;
+        private readonly DepositoryAccountsManager _depositoryAccountsManager;
+        private readonly DepositoryAccountDialog _depositoryAccountDialog;
+        private readonly DialogLocator _dialogLocator;
+        private DispatcherTimer _timer;
+        private byte _k = 1;
 
         #endregion
 
@@ -283,10 +287,11 @@ namespace Homework_13.Services
         /// Конструктор
         /// </summary>        
         public ProcessingOfDepositoryAccounts(DepositoryAccountsManager depositoryAccountsManager,
-                                              DepositoryAccountDialog depositoryAccountDialog)
+                                              DialogLocator dialogLocator)
         {
             _depositoryAccountsManager = depositoryAccountsManager;
-            _depositoryAccountDialog = depositoryAccountDialog;
+            _dialogLocator = dialogLocator;
+            _depositoryAccountDialog = _dialogLocator.DepositoryAccountDialog;
         }
 
         /// <summary>

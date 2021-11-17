@@ -56,6 +56,8 @@ namespace Homework_13.Dialogues
             throw new NotImplementedException();
         }
 
+        #region Закрытые методы
+
         /// <summary>
         /// Создать клиента банка
         /// </summary>
@@ -295,6 +297,8 @@ namespace Homework_13.Dialogues
             {
                 return null;
             }
-        }        
+        }
+
+        #endregion
     }
 }

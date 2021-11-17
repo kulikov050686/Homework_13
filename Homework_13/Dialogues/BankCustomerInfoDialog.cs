@@ -6,14 +6,15 @@ using System.Windows.Media;
 namespace Homework_13.Dialogues
 {
     /// <summary>
-    /// 
+    /// Класс сервиса диалоговых окон по информированию о клиенте банка
     /// </summary>
     public class BankCustomerInfoDialog : IInformationDialog<IBankCustomer>
     {
         /// <summary>
-        /// 
+        /// Диалог информации о клиенте банка
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data"> Клиент банка </param>
+        /// <param name="args"> Действия с клиентом банка </param>
         public void Dialog(IBankCustomer data, ManagerArgs args)
         {
             var dialog = new InfoWindow();

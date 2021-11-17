@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 
-namespace Homework_13.Dialogues
+namespace Homework_13.Services
 {
     /// <summary>
-    /// Класс загрузки и выгрузки данных из файла
+    /// Класс сервиса загрузки и выгрузки данных из файла
     /// </summary>    
     public class FileIOService : IFileIOService<IList<IDepartment>>
     {
