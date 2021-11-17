@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Homework_13.ViewModels;
+using Homework_13.Dialogues;
 
 namespace Homework_13.Services
 {
@@ -15,20 +16,23 @@ namespace Homework_13.Services
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddSingleton<DepartmentRepository>();
-            services.AddSingleton<BankCustomerRepository>();            
-            services.AddSingleton<DepositoryAccountRepository>();            
+            services.AddSingleton<BankCustomerRepository>();
+            services.AddSingleton<DepositoryAccountRepository>();
 
             services.AddSingleton<DepartmentsManager>();
             services.AddSingleton<BankCustomersManager>();
-            services.AddSingleton<DepositoryAccountsManager>();            
+            services.AddSingleton<DepositoryAccountsManager>();
 
-            services.AddTransient<FileIOService>();
-            services.AddTransient<FileDialog>();
+            services.AddSingleton<DialogLocator>();
             services.AddTransient<BankCustomerDialog>();
-            services.AddTransient<DepositoryAccountDialog>();            
-            services.AddTransient<ProcessingOfDepositoryAccounts>();
             services.AddTransient<BankCustomerInfoDialog>();
+            services.AddTransient<DepositoryAccountDialog>();
+            services.AddTransient<DepositoryAccountInfoDialog>();            
+            services.AddTransient<FileDialog>();
+            services.AddTransient<FileIOService>();
 
+            services.AddTransient<ProcessingOfDepositoryAccounts>();
+            
             return services;
         }
 

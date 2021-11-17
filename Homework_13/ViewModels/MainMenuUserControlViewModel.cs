@@ -1,4 +1,5 @@
 ﻿using Homework_13.Commands;
+using Homework_13.Dialogues;
 using Homework_13.Interfaces;
 using Homework_13.Services;
 using System.Collections.Generic;
@@ -14,8 +15,10 @@ namespace Homework_13.ViewModels
     {
         #region Закрытые поля
 
-        private MainUserControlViewModel _mainUserControlViewModel;
-        private FileDialog _fileDialog;
+        private readonly MainUserControlViewModel _mainUserControlViewModel;
+        private readonly DialogLocator _dialogLocator;
+        private readonly FileDialog _fileDialog;
+
         private DepartmentRepository _departmentRepository;
         private BankCustomerRepository _bankCustomerRepository;
         private DepositoryAccountRepository _depositoryAccountRepository;
@@ -167,13 +170,14 @@ namespace Homework_13.ViewModels
         /// Конструктор
         /// </summary>        
         public MainMenuUserControlViewModel(MainUserControlViewModel mainUserControlViewModel,
-                                            FileDialog fileDialog,
+                                            DialogLocator dialogLocator,
                                             DepartmentRepository departmentRepository,
                                             BankCustomerRepository bankCustomerRepository,
                                             DepositoryAccountRepository depositoryAccountRepository)
         {
             _mainUserControlViewModel = mainUserControlViewModel;
-            _fileDialog = fileDialog;
+            _dialogLocator = dialogLocator;
+            _fileDialog = _dialogLocator.FileDialog;
             _departmentRepository = departmentRepository;
             _bankCustomerRepository = bankCustomerRepository;
             _depositoryAccountRepository = depositoryAccountRepository;

@@ -5,7 +5,7 @@ using Homework_13.Views;
 using System;
 using System.Collections.Generic;
 
-namespace Homework_13.Services
+namespace Homework_13.Dialogues
 {
     /// <summary>
     /// Класс сервиса диалоговых окон по работе с клиентом банка
@@ -42,7 +42,7 @@ namespace Homework_13.Services
 
             var tempBankCustomer = CreateBankCustomer(dialog, bankCustomer.ClientStatus);
             tempBankCustomer.Id = bankCustomer.Id;
-            tempBankCustomer.DepositoryAccounts = bankCustomer.DepositoryAccounts;            
+            tempBankCustomer.DepositoryAccounts = bankCustomer.DepositoryAccounts;
 
             return tempBankCustomer;
         }

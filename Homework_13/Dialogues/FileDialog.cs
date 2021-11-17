@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Homework_13.Services
+namespace Homework_13.Dialogues
 {
     /// <summary>
     /// Класс сервиса диалоговых окон по сохранению и выгрузки данных из файла

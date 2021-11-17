@@ -4,10 +4,10 @@ using Homework_13.Views;
 using System;
 using System.Collections.Generic;
 
-namespace Homework_13.Services
+namespace Homework_13.Dialogues
 {
     /// <summary>
-    /// Интерфейс сервиса диалоговых окон по работе с депозитарными счетами
+    /// Cервис диалоговых окон по работе с депозитарными счетами
     /// </summary>
     public class DepositoryAccountDialog : IBankAccountDialogService<IDepositoryAccount>
     {

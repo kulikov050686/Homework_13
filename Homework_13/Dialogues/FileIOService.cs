@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 
-namespace Homework_13.Services
+namespace Homework_13.Dialogues
 {
     /// <summary>
     /// Класс загрузки и выгрузки данных из файла

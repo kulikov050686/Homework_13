@@ -1,4 +1,5 @@
 ﻿using Homework_13.Commands;
+using Homework_13.Dialogues;
 using Homework_13.Enums;
 using Homework_13.Interfaces;
 using Homework_13.Models;
@@ -18,14 +19,14 @@ namespace Homework_13.ViewModels
 
         private readonly DepartmentsManager _departmentsManager;
         private readonly BankCustomersManager _bankCustomersManager;
-        private readonly ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;        
+        private readonly ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;
+        private readonly DialogLocator _dialogLocator;
 
-        private BankCustomerDialog _bankCustomerDialog;              
+        private BankCustomerInfoDialog _bankCustomerInfoDialog;
+        private BankCustomerDialog _bankCustomerDialog;
         private Department _selectedDepartment;
         private BankCustomer _selectedBankCustomer;
         private DepositoryAccount _selectedDepositoryAccount;
-
-        private BankCustomerInfoDialog BankCustomerInfoDialog => App.Host.Services.GetRequiredService<BankCustomerInfoDialog>();
         
         #endregion
 
@@ -209,23 +210,25 @@ namespace Homework_13.ViewModels
         /// </summary>
         public MainUserControlViewModel(BankCustomersManager bankCustomersManager,
                                         DepartmentsManager departmentsManager,
-                                        BankCustomerDialog bankCustomerDialog,
+                                        DialogLocator dialogLocator,
                                         ProcessingOfDepositoryAccounts processingOfDepositoryAccounts)
         {
             _departmentsManager = departmentsManager;
             _bankCustomersManager = bankCustomersManager;
-            _bankCustomerDialog = bankCustomerDialog;
+            _dialogLocator = dialogLocator;
+
+            _bankCustomerDialog = _dialogLocator.BankCustomerDialog;
+            _bankCustomerInfoDialog = _dialogLocator.BankCustomerInfoDialog;
             _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
 
-            _bankCustomersManager.ManagerEvent += BankCustomersManagerEvent;
+            _bankCustomersManager.ManagerEvent += OnBankCustomersManagerEvent;
             _processingOfDepositoryAccounts.ProcessingOfAccountsEvent += OnProcessingOfAccountsEvent;
             _processingOfDepositoryAccounts.StartCalculate();
         }
 
-        private void BankCustomersManagerEvent(object sender, ManagerArgs args)
+        private void OnBankCustomersManagerEvent(object sender, ManagerArgs args)
         {
-            /// реализовать
-            BankCustomerInfoDialog.Dialog((IBankCustomer)sender);
+            _bankCustomerInfoDialog.Dialog((IBankCustomer)sender, args);
         }        
 
         private void OnProcessingOfAccountsEvent(object sender, ProcessingOfAccountsArgs args)

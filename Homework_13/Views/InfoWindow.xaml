@@ -13,7 +13,8 @@
         AllowsTransparency="True"        
         Background="Transparent"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     
     <i:Interaction.Behaviors>
         <bihaviors:WindowDisappearing/>
@@ -22,17 +23,17 @@
 
     <Border CornerRadius="5" 
             BorderThickness="5" 
-            BorderBrush="#F0EB36">
+            BorderBrush="{Binding ColorBackground}">
 
-        <Grid Background="#F0EB36">
-            <StackPanel Orientation="Vertical">               
+        <Grid Background="{Binding ColorBackground}">
+            <StackPanel Orientation="Vertical">
 
-                <TextBlock Text="lk;sdjgl;sdg" 
+                <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:InfoWindow}}" 
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Center"
                            FontSize="14"/>
 
-                <TextBlock Text=",.mbzbnx,mn"
+                <TextBlock Text="{Binding MessageText}"
                            FontSize="10"/>
             </StackPanel>
         </Grid>
