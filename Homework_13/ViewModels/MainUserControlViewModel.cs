@@ -223,7 +223,7 @@ namespace Homework_13.ViewModels
         private void OnBankCustomersManagerEvent(object sender, ManagerArgs args)
         {
             _dialogLocator.BankCustomerInfoDialog.Dialog((IBankCustomer)sender, args);
-        }        
+        }
 
         private void OnProcessingOfAccountsEvent(object sender, ProcessingOfAccountsArgs args)
         {

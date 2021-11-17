@@ -16,7 +16,7 @@ namespace Homework_13.Services
     {
         #region Закрытые поля
 
-        private readonly DepositoryAccountsManager _depositoryAccountsManager;        
+        private readonly DepositoryAccountsManager _depositoryAccountsManager;
         private readonly DialogLocator _dialogLocator;
         private DispatcherTimer _timer;
         private byte _k = 1;
