@@ -8,7 +8,7 @@ namespace Homework_13.Dialogues
     public class DialogLocator
     {
         /// <summary>
-        /// Сервиса диалоговых окон по информированию о клиенте банка
+        /// Сервис диалоговых окон по информированию о клиенте банка
         /// </summary>
         public BankCustomerInfoDialog BankCustomerInfoDialog => App.Host.Services.GetRequiredService<BankCustomerInfoDialog>();
 
@@ -23,7 +23,7 @@ namespace Homework_13.Dialogues
         public DepositoryAccountDialog DepositoryAccountDialog => App.Host.Services.GetRequiredService<DepositoryAccountDialog>();
 
         /// <summary>
-        /// Сервиса диалоговых окон по информированию о дипозитарном счёте
+        /// Сервис диалоговых окон по информированию о дипозитарном счёте
         /// </summary>
         public DepositoryAccountInfoDialog DepositoryAccountInfoDialog => App.Host.Services.GetRequiredService<DepositoryAccountInfoDialog>();
 

@@ -18,7 +18,7 @@
     
     <i:Interaction.Behaviors>
         <bihaviors:WindowDisappearing/>
-        <bihaviors:ParentWindow/>
+        <bihaviors:InfoWinowLocation/>
     </i:Interaction.Behaviors>  
 
     <Border CornerRadius="5" 
