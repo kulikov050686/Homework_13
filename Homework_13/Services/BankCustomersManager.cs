@@ -13,8 +13,8 @@ namespace Homework_13.Services
     {
         #region Закрытые поля
 
-        BankCustomerRepository _bankCustomerRepository;
-        DepartmentsManager _departmentsManager;
+        private readonly BankCustomerRepository _bankCustomerRepository;
+        private readonly DepartmentsManager _departmentsManager;
 
         #endregion
 

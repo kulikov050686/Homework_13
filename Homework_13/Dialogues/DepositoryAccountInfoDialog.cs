@@ -1,5 +1,7 @@
 ﻿using Homework_13.Enums;
 using Homework_13.Interfaces;
+using Homework_13.Views;
+using System.Windows.Media;
 
 namespace Homework_13.Dialogues
 {
@@ -15,7 +17,33 @@ namespace Homework_13.Dialogues
         /// <param name="args"> Действия со счётом </param>
         public void Dialog(IDepositoryAccount data, ProcessingOfAccountsArgs args)
         {
+            if (data is null) return;
+            var dialog = new InfoWindow();
 
+            switch (args)
+            {
+                case ProcessingOfAccountsArgs.OPEN:                    
+                    break;
+                case ProcessingOfAccountsArgs.CLOSE:
+                    dialog.ColorBackground = Brushes.Red;
+                    dialog.MessageText = $"Счёт удалён\n";
+                    break;
+                case ProcessingOfAccountsArgs.EDIT:
+                    break;
+                case ProcessingOfAccountsArgs.COMBINING:
+                    break;
+                case ProcessingOfAccountsArgs.TRANSFER:
+                    break;
+                case ProcessingOfAccountsArgs.WITHDRAW:
+                    break;
+                case ProcessingOfAccountsArgs.BLOCK:
+                    break;
+                case ProcessingOfAccountsArgs.UNBLOCK:
+                    break;
+            }
+
+            dialog.Show();
+            dialog.Close();
         }
 
         void IInformationDialog<IDepositoryAccount>.Dialog(IDepositoryAccount data) { }

@@ -4,7 +4,6 @@ using Homework_13.Enums;
 using Homework_13.Interfaces;
 using Homework_13.Models;
 using Homework_13.Services;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Windows.Input;
 
@@ -21,9 +20,7 @@ namespace Homework_13.ViewModels
         private readonly BankCustomersManager _bankCustomersManager;
         private readonly ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;
         private readonly DialogLocator _dialogLocator;
-
-        private BankCustomerInfoDialog _bankCustomerInfoDialog;
-        private BankCustomerDialog _bankCustomerDialog;
+        
         private Department _selectedDepartment;
         private BankCustomer _selectedBankCustomer;
         private DepositoryAccount _selectedDepositoryAccount;
@@ -81,7 +78,7 @@ namespace Homework_13.ViewModels
                 var department = (Department)obj;
                 if (department is null) return;
 
-                var bankCustomer = _bankCustomerDialog.Create(department.StatusDepartment);
+                var bankCustomer = _dialogLocator.BankCustomerDialog.Create(department.StatusDepartment);
                 if (bankCustomer is null) return;
 
                 _bankCustomersManager.Create(bankCustomer, department);
@@ -117,7 +114,7 @@ namespace Homework_13.ViewModels
                 var bankCustomer = (BankCustomer)obj;
                 if (bankCustomer is null) return;
 
-                var tempBankCustomer = _bankCustomerDialog.Edit(bankCustomer);
+                var tempBankCustomer = _dialogLocator.BankCustomerDialog.Edit(bankCustomer);
                 if (tempBankCustomer is null) return;
 
                 _bankCustomersManager.Update(tempBankCustomer);
@@ -215,10 +212,7 @@ namespace Homework_13.ViewModels
         {
             _departmentsManager = departmentsManager;
             _bankCustomersManager = bankCustomersManager;
-            _dialogLocator = dialogLocator;
-
-            _bankCustomerDialog = _dialogLocator.BankCustomerDialog;
-            _bankCustomerInfoDialog = _dialogLocator.BankCustomerInfoDialog;
+            _dialogLocator = dialogLocator;                  
             _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
 
             _bankCustomersManager.ManagerEvent += OnBankCustomersManagerEvent;
@@ -228,12 +222,12 @@ namespace Homework_13.ViewModels
 
         private void OnBankCustomersManagerEvent(object sender, ManagerArgs args)
         {
-            _bankCustomerInfoDialog.Dialog((IBankCustomer)sender, args);
+            _dialogLocator.BankCustomerInfoDialog.Dialog((IBankCustomer)sender, args);
         }        
 
         private void OnProcessingOfAccountsEvent(object sender, ProcessingOfAccountsArgs args)
-        {            
-            /// реализовать 
+        {
+            _dialogLocator.DepositoryAccountInfoDialog.Dialog((IDepositoryAccount)sender, args);
         }
     }
 }

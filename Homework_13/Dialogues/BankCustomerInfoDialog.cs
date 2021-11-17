@@ -17,6 +17,7 @@ namespace Homework_13.Dialogues
         /// <param name="args"> Действия с клиентом банка </param>
         public void Dialog(IBankCustomer data, ManagerArgs args)
         {
+            if (data is null) return;
             var dialog = new InfoWindow();
 
             switch (args)

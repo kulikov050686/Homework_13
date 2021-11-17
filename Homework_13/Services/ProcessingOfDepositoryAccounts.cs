@@ -10,14 +10,13 @@ using System.Windows.Threading;
 namespace Homework_13.Services
 {
     /// <summary>
-    /// 
+    /// Обработка депозитарных счетов
     /// </summary>
     public class ProcessingOfDepositoryAccounts
     {
         #region Закрытые поля
 
-        private readonly DepositoryAccountsManager _depositoryAccountsManager;
-        private readonly DepositoryAccountDialog _depositoryAccountDialog;
+        private readonly DepositoryAccountsManager _depositoryAccountsManager;        
         private readonly DialogLocator _dialogLocator;
         private DispatcherTimer _timer;
         private byte _k = 1;
@@ -43,7 +42,7 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var depositoryAccount = _depositoryAccountDialog.Create();
+            var depositoryAccount = _dialogLocator.DepositoryAccountDialog.Create();
             if (depositoryAccount is null) return false;
 
             var result = _depositoryAccountsManager.Create(depositoryAccount, bankCustomer);
@@ -62,7 +61,7 @@ namespace Homework_13.Services
             if(bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
+            var account = _dialogLocator.DepositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
             if (account.Blocking)
@@ -86,7 +85,7 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
+            var account = _dialogLocator.DepositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
             if (account.Blocking)
@@ -95,7 +94,7 @@ namespace Homework_13.Services
                 return false;
             }
 
-            var tempDepositoryAccount = _depositoryAccountDialog.Edit(account);
+            var tempDepositoryAccount = _dialogLocator.DepositoryAccountDialog.Edit(account);
             if (tempDepositoryAccount is null) return false;
 
             _depositoryAccountsManager.Update(tempDepositoryAccount);
@@ -116,7 +115,7 @@ namespace Homework_13.Services
             IDepositoryAccount account1;
             IDepositoryAccount account2;
 
-            _depositoryAccountDialog.SelectTwoBankAccounts(bankCustomer.DepositoryAccounts, out account1, out account2);
+            _dialogLocator.DepositoryAccountDialog.SelectTwoBankAccounts(bankCustomer.DepositoryAccounts, out account1, out account2);
             if (account1 is null || account2 is null) return false;
 
             if (account1.Blocking || account2.Blocking)
@@ -155,7 +154,7 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
+            var account = _dialogLocator.DepositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
             if (account.Blocking)
@@ -164,7 +163,7 @@ namespace Homework_13.Services
                 return false;
             }
 
-            var result = _depositoryAccountDialog.ChangeAmountOfBankAccount();
+            var result = _dialogLocator.DepositoryAccountDialog.ChangeAmountOfBankAccount();
             if (result is null) return false;
 
             if (result < 0)
@@ -190,7 +189,7 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
+            var account = _dialogLocator.DepositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return null;
 
             if (account.Blocking)
@@ -199,7 +198,7 @@ namespace Homework_13.Services
                 return null;
             }
 
-            var result = _depositoryAccountDialog.ChangeAmountOfBankAccount();
+            var result = _dialogLocator.DepositoryAccountDialog.ChangeAmountOfBankAccount();
             if (result is null) return null;
 
             if (result < 0)
@@ -233,7 +232,7 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
+            var account = _dialogLocator.DepositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
             account.Blocking = true;
@@ -252,7 +251,7 @@ namespace Homework_13.Services
             if (bankCustomer is null)
                 throw new ArgumentNullException();
 
-            var account = _depositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
+            var account = _dialogLocator.DepositoryAccountDialog.Selected(bankCustomer.DepositoryAccounts);
             if (account is null) return false;
 
             account.Blocking = false;
@@ -290,8 +289,7 @@ namespace Homework_13.Services
                                               DialogLocator dialogLocator)
         {
             _depositoryAccountsManager = depositoryAccountsManager;
-            _dialogLocator = dialogLocator;
-            _depositoryAccountDialog = _dialogLocator.DepositoryAccountDialog;
+            _dialogLocator = dialogLocator;            
         }
 
         /// <summary>

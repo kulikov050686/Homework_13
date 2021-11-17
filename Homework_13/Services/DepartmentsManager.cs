@@ -10,7 +10,7 @@ namespace Homework_13.Services
     {
         #region Закрытые поля
 
-        private DepartmentRepository _departmentRepository;
+        private readonly DepartmentRepository _departmentRepository;
 
         #endregion
 
