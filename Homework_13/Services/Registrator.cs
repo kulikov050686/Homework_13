@@ -11,8 +11,7 @@ namespace Homework_13.Services
     {
         /// <summary>
         /// Регистрация всех сервисов
-        /// </summary>
-        /// <param name="services"></param>        
+        /// </summary>              
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddSingleton<DepartmentRepository>();
@@ -27,9 +26,11 @@ namespace Homework_13.Services
             services.AddTransient<BankCustomerDialog>();
             services.AddTransient<BankCustomerInfoDialog>();
             services.AddTransient<DepositoryAccountDialog>();
-            services.AddTransient<DepositoryAccountInfoDialog>();            
+            services.AddTransient<DepositoryAccountInfoDialog>();
+            services.AddTransient<DepartmentFileIOService>();
             services.AddTransient<FileDialog>();
-            services.AddTransient<FileIOService>();
+            services.AddTransient<ActionLog>();
+            
 
             services.AddTransient<ProcessingOfDepositoryAccounts>();
             
@@ -38,8 +39,7 @@ namespace Homework_13.Services
 
         /// <summary>
         /// Регистрация всех моделей-представления
-        /// </summary>
-        /// <param name="services"></param>        
+        /// </summary>           
         public static IServiceCollection RegisterViewModels(this IServiceCollection services)
         {
             services.AddSingleton<MainWindowViewModel>();

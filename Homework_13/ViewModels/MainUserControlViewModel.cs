@@ -20,10 +20,11 @@ namespace Homework_13.ViewModels
         private readonly BankCustomersManager _bankCustomersManager;
         private readonly ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;
         private readonly DialogLocator _dialogLocator;
-        
-        private Department _selectedDepartment;
-        private BankCustomer _selectedBankCustomer;
-        private DepositoryAccount _selectedDepositoryAccount;
+        private readonly ActionLog _actionLog;
+
+        private IDepartment _selectedDepartment;
+        private IBankCustomer _selectedBankCustomer;
+        private IDepositoryAccount _selectedDepositoryAccount;
         
         #endregion
 
@@ -42,7 +43,7 @@ namespace Homework_13.ViewModels
         /// <summary>
         /// Выбранный департамент
         /// </summary>
-        public Department SelectedDepartment
+        public IDepartment SelectedDepartment
         {
             get => _selectedDepartment;
             set => Set(ref _selectedDepartment, value);
@@ -51,7 +52,7 @@ namespace Homework_13.ViewModels
         /// <summary>
         /// Выбранный клиент
         /// </summary>
-        public BankCustomer SelectedBankCustomer
+        public IBankCustomer SelectedBankCustomer
         {
             get => _selectedBankCustomer;
             set => Set(ref _selectedBankCustomer, value);
@@ -60,7 +61,7 @@ namespace Homework_13.ViewModels
         /// <summary>
         /// Выбранный депозитарный счёт
         /// </summary>
-        public DepositoryAccount SelectedDepositoryAccount
+        public IDepositoryAccount SelectedDepositoryAccount
         {
             get => _selectedDepositoryAccount;
             set => Set(ref _selectedDepositoryAccount, value);
@@ -208,12 +209,14 @@ namespace Homework_13.ViewModels
         public MainUserControlViewModel(BankCustomersManager bankCustomersManager,
                                         DepartmentsManager departmentsManager,
                                         DialogLocator dialogLocator,
-                                        ProcessingOfDepositoryAccounts processingOfDepositoryAccounts)
+                                        ProcessingOfDepositoryAccounts processingOfDepositoryAccounts,
+                                        ActionLog actionLog)
         {
             _departmentsManager = departmentsManager;
             _bankCustomersManager = bankCustomersManager;
             _dialogLocator = dialogLocator;                  
             _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
+            _actionLog = actionLog;
 
             _bankCustomersManager.ManagerEvent += OnBankCustomersManagerEvent;
             _processingOfDepositoryAccounts.ProcessingOfAccountsEvent += OnProcessingOfAccountsEvent;
@@ -223,6 +226,7 @@ namespace Homework_13.ViewModels
         private void OnBankCustomersManagerEvent(object sender, ManagerArgs args)
         {
             _dialogLocator.BankCustomerInfoDialog.Dialog((IBankCustomer)sender, args);
+            _actionLog.AddAnEntry("bankCustomer.json", (IBankCustomer)sender);
         }
 
         private void OnProcessingOfAccountsEvent(object sender, ProcessingOfAccountsArgs args)

@@ -1,28 +1,27 @@
 ﻿using Homework_13.Interfaces;
-using Homework_13.Models;
+using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
+using Homework_13.Models;
 
 namespace Homework_13.Services
 {
     /// <summary>
-    /// Класс сервиса загрузки и выгрузки данных из файла
+    /// Класс сервиса загрузки и выгрузки департаментов из файла
     /// </summary>    
-    public class FileIOService : IFileIOService<IList<IDepartment>>
+    public class DepartmentFileIOService : IFileIOServiceJSON<IList<IDepartment>>
     {
         /// <summary>
         /// Сохранить данные в файл формата JSON
         /// </summary>
         /// <param name="pathFile"> Путь к файлу </param>
-        /// <param name="data"> Сохраняемые данные </param>
+        /// <param name="data"> Сохраняемые данные </param>        
         public void SaveAsJSON(string pathFile, IList<IDepartment> data)
         {
             using (StreamWriter writer = new StreamWriter(pathFile, false))
-            {
-                string output = JsonConvert.SerializeObject(data, Formatting.Indented);
-                writer.Write(output);
+            {                
+                writer.Write(JsonConvert.SerializeObject(data, Formatting.Indented));
             }
         }
 
@@ -34,22 +33,22 @@ namespace Homework_13.Services
         {
             using (var reader = File.OpenText(pathFile))
             {
-                var fileTaxt = reader.ReadToEnd();        
+                var fileTaxt = reader.ReadToEnd();
                 var dataTemp = JsonConvert.DeserializeObject<ObservableCollection<JsonDepartment>>(fileTaxt);
                 var departments = ConverterDepartments(dataTemp);
 
                 int i = 0;
 
                 foreach (var item in dataTemp)
-                {                    
-                    if(item.BankCustomers != null && item.BankCustomers.Count != 0)
+                {
+                    if (item.BankCustomers != null && item.BankCustomers.Count != 0)
                     {
                         departments[i].BankCustomers = ConverterBankCustomers(item.BankCustomers);
 
                         int k = 0;
                         foreach (var p in item.BankCustomers)
                         {
-                            if(p.DepositoryAccounts != null && p.DepositoryAccounts.Count != 0)
+                            if (p.DepositoryAccounts != null && p.DepositoryAccounts.Count != 0)
                             {
                                 departments[i].BankCustomers[k].DepositoryAccounts = ConverterDepositoryAccount(p.DepositoryAccounts);
                             }

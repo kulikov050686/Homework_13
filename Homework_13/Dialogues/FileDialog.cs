@@ -15,7 +15,7 @@ namespace Homework_13.Dialogues
         #region Закрытые поля
 
         private string _pathFile;
-        private FileIOService _fileIOService;
+        private DepartmentFileIOService _fileIOService;
 
         #endregion
 
@@ -42,7 +42,7 @@ namespace Homework_13.Dialogues
 
                 if (Path.GetExtension(PathFile) == ".json")
                 {
-                    _fileIOService.SaveAsJSON(PathFile, data);                    
+                    _fileIOService.SaveAsJSON(PathFile, data);
                 }
             };
         }
@@ -52,7 +52,7 @@ namespace Homework_13.Dialogues
         /// </summary>  
         public IList<IDepartment> OpenFileDialog()
         {
-            OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.Title = "Открыть файл";
             openFileDialog.Filter = "files (*.json)|*.json";
@@ -74,9 +74,9 @@ namespace Homework_13.Dialogues
         /// <summary>
         /// Конструктор
         /// </summary>
-        public FileDialog(FileIOService fileIOService)
+        public FileDialog(DepartmentFileIOService fileIOService)
         {
             _fileIOService = fileIOService;
-        }
+        }       
     }
 }
