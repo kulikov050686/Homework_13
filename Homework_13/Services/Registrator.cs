@@ -29,8 +29,8 @@ namespace Homework_13.Services
             services.AddTransient<DepositoryAccountInfoDialog>();
             services.AddTransient<DepartmentFileIOService>();
             services.AddTransient<FileDialog>();
-            services.AddTransient<ActionLog>();
-            
+            services.AddTransient<ActionLogBankCustomers>();
+            services.AddTransient<ActionLogBankAccounts>();
 
             services.AddTransient<ProcessingOfDepositoryAccounts>();
             

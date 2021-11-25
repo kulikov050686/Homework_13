@@ -30,7 +30,7 @@ namespace Homework_13.Services
         /// <param name="destination"> Обновляемый департамент </param>
         protected override void Update(IDepartment source, IDepartment destination)
         {
-            destination.BankCustomers = source.BankCustomers;            
+            destination.BankCustomers = source.BankCustomers;
             destination.Id = source.Id;
             destination.Name = source.Name;
         }

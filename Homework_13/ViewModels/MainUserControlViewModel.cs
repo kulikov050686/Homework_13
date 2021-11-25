@@ -20,7 +20,8 @@ namespace Homework_13.ViewModels
         private readonly BankCustomersManager _bankCustomersManager;
         private readonly ProcessingOfDepositoryAccounts _processingOfDepositoryAccounts;
         private readonly DialogLocator _dialogLocator;
-        private readonly ActionLog _actionLog;
+        private readonly ActionLogBankCustomers _actionLogBankCustomers;
+        private readonly ActionLogBankAccounts _actionLogBankAccounts;
 
         private IDepartment _selectedDepartment;
         private IBankCustomer _selectedBankCustomer;
@@ -210,13 +211,15 @@ namespace Homework_13.ViewModels
                                         DepartmentsManager departmentsManager,
                                         DialogLocator dialogLocator,
                                         ProcessingOfDepositoryAccounts processingOfDepositoryAccounts,
-                                        ActionLog actionLog)
+                                        ActionLogBankCustomers actionLogBankCustomers,
+                                        ActionLogBankAccounts actionLogBankAccounts)
         {
             _departmentsManager = departmentsManager;
             _bankCustomersManager = bankCustomersManager;
             _dialogLocator = dialogLocator;                  
             _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
-            _actionLog = actionLog;
+            _actionLogBankCustomers = actionLogBankCustomers;
+            _actionLogBankAccounts = actionLogBankAccounts;
 
             _bankCustomersManager.ManagerEvent += OnBankCustomersManagerEvent;
             _processingOfDepositoryAccounts.ProcessingOfAccountsEvent += OnProcessingOfAccountsEvent;
@@ -226,12 +229,13 @@ namespace Homework_13.ViewModels
         private void OnBankCustomersManagerEvent(object sender, ManagerArgs args)
         {
             _dialogLocator.BankCustomerInfoDialog.Dialog((IBankCustomer)sender, args);
-            _actionLog.AddAnEntry("bankCustomer.json", (IBankCustomer)sender);
+            _actionLogBankCustomers.AddAnEntry("bankCustomer.txt", (IBankCustomer)sender, args);
         }
 
         private void OnProcessingOfAccountsEvent(object sender, ProcessingOfAccountsArgs args)
         {
             _dialogLocator.DepositoryAccountInfoDialog.Dialog((IDepositoryAccount)sender, args);
+            _actionLogBankAccounts.AddAnEntry("bankAccounts.txt", (IDepositoryAccount)sender, args);
         }
     }
 }
