@@ -17,6 +17,9 @@ namespace Homework_13.UserControls
                                         typeof(PersonUserControl),
                                         new PropertyMetadata(default(string)));
 
+        /// <summary>
+        /// Название
+        /// </summary>
         [Description("Название")]
         public string TitleUC
         {
@@ -34,6 +37,9 @@ namespace Homework_13.UserControls
                                         typeof(PersonUserControl),
                                         new PropertyMetadata(default(string)));
 
+        /// <summary>
+        /// Имя
+        /// </summary>
         [Description("Имя")]
         public string NameUC
         {
@@ -51,6 +57,9 @@ namespace Homework_13.UserControls
                                         typeof(PersonUserControl),
                                         new PropertyMetadata(default(string)));
 
+        /// <summary>
+        /// Фамилия
+        /// </summary>
         [Description("Фамилия")]
         public string SurnameUC 
         {
@@ -68,6 +77,9 @@ namespace Homework_13.UserControls
                                         typeof(PersonUserControl),
                                         new PropertyMetadata(default(string)));
 
+        /// <summary>
+        /// Отчество
+        /// </summary>
         [Description("Отчество")]
         public string PatronymicUC
         {
@@ -85,6 +97,9 @@ namespace Homework_13.UserControls
                                         typeof(PersonUserControl),
                                         new PropertyMetadata(default(string)));
 
+        /// <summary>
+        /// Место рождения
+        /// </summary>
         [Description("Место рождения")]
         public string PlaceOfBirthUC
         {
@@ -96,6 +111,9 @@ namespace Homework_13.UserControls
 
         #region Список полов
 
+        /// <summary>
+        /// Список полов
+        /// </summary>
         [Description("Список полов")]
         public List<string> GenderListUC { get; set; } = new List<string> { "муж", "жен" };
 
@@ -109,6 +127,9 @@ namespace Homework_13.UserControls
                                         typeof(PersonUserControl),
                                         new PropertyMetadata(default(Gender)));
 
+        /// <summary>
+        /// Выбранный пол
+        /// </summary>
         [Description("Выбранный пол")]
         public Gender GenderUC
         {
@@ -126,6 +147,9 @@ namespace Homework_13.UserControls
                                         typeof(PersonUserControl),
                                         new PropertyMetadata(default(DateTime?)));
 
+        /// <summary>
+        /// Дата рождения
+        /// </summary>
         [Description("Дата рождения")]
         public DateTime? DateOfBirthrUC
         {

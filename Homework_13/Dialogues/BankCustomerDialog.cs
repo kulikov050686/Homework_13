@@ -137,8 +137,7 @@ namespace Homework_13.Dialogues
                 throw new ArgumentNullException(nameof(bankCustomer));
 
             dialog.PhoneNumber = bankCustomer.PhoneNumber;
-            dialog.Email = bankCustomer.Email;
-            dialog.Description = bankCustomer.Description;
+            dialog.Email = bankCustomer.Email;            
             dialog.Reliability = bankCustomer.Reliability;
 
             dialog.NameBankCustomer = bankCustomer.Passport.Holder.Name;

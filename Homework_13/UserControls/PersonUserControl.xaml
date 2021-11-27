@@ -5,61 +5,85 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Homework_13.UserControls"
              xmlns:converter ="clr-namespace:Homework_13.Converters"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             Width="130"
+             Height="290">
 
-    <GroupBox Header="{Binding TitleUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}}">
-        <StackPanel>
-            
-            <!-- Имя -->
-            <GroupBox Header="Имя">
-                <TextBox Text="{Binding NameUC,RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
-                         FontSize="16"                         
-                         VerticalAlignment="Center"/>
-            </GroupBox>
-            
-            <!-- Фамилия --> 
-            <GroupBox Header="Фамилия">
-                <TextBox Text="{Binding SurnameUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
-                         FontSize="16"                         
-                         VerticalAlignment="Center"/>
-            </GroupBox>
-            
-            <!-- Отчество -->
-            <GroupBox Header="Отчество">
-                <TextBox Text="{Binding PatronymicUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
-                         FontSize="16"                         
-                         VerticalAlignment="Center"/>
-            </GroupBox>
-            
-            <!-- Дата рождения и пол -->
-            <StackPanel Orientation="Horizontal">
+    <Viewbox>
+        <GroupBox Header="{Binding TitleUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}}"
+                  FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}">
+            <Grid>
 
-                <!-- Дата рождения -->
-                <GroupBox Header="Дата рождения">
-                    <DatePicker FontSize="16"
-                                Width="210"
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Имя-->
+                <GroupBox Grid.Row="0"
+                          Grid.ColumnSpan="2"
+                          Header="Имя" 
+                          Margin="5">
+                    <TextBox Text="{Binding NameUC,RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"/>
+                </GroupBox>
+
+                <!--Фамилия-->
+                <GroupBox Grid.Row="1" 
+                          Grid.ColumnSpan="2" 
+                          Header="Фамилия"
+                          Margin="5">
+                    <TextBox Text="{Binding SurnameUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"/>
+                </GroupBox>
+
+                <!--Отчество-->
+                <GroupBox Grid.Row="2" 
+                          Grid.ColumnSpan="2" 
+                          Header="Отчество"
+                          Margin="5">
+                    <TextBox Text="{Binding PatronymicUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"/>
+                </GroupBox>
+
+                <!--Дата рождения-->
+                <GroupBox Grid.Row="3"
+                          Grid.Column="0"
+                          Header="Дата рождения"
+                          Margin="5">
+                    <DatePicker FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
                                 SelectedDate="{Binding DateOfBirthrUC,RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"/>
                 </GroupBox>
-                
-                <!-- Пол -->
-                <GroupBox Header="Пол" Margin="15 0 0 0">
-                    <ComboBox FontSize="16" 
+
+                <!--Пол-->
+                <GroupBox Grid.Row="3"
+                          Grid.Column="1"
+                          Header="Пол"
+                          Margin="5">
+                    <ComboBox FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
                               ItemsSource="{Binding GenderListUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}}"
                               SelectedIndex="{Binding GenderUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Converter={converter:IntToGenderConverter}, Mode=TwoWay}"/>
                 </GroupBox>
-                
-            </StackPanel>
-            
-            <!-- Место рожнения -->
-            <GroupBox Header="Место рождения" 
-                      Height="100" 
-                      Width="300">
 
-                <TextBox Text="{Binding PlaceOfBirthUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
-                         FontSize="16"
-                         TextWrapping="Wrap"/>
-            </GroupBox>
-            
-        </StackPanel>        
-    </GroupBox>
+                <!--Место рожнения-->
+                <GroupBox Grid.Row="4" 
+                          Grid.ColumnSpan="2"  
+                          Header="Место рождения"
+                          Margin="5">
+
+                    <TextBox Text="{Binding PlaceOfBirthUC, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:PersonUserControl}, Mode=TwoWay}"
+                             TextWrapping="Wrap"/>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+    </Viewbox>
 </UserControl>

@@ -4,58 +4,79 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Homework_13.UserControls"
-             mc:Ignorable="d">
-    
-    <GroupBox Header="{Binding TitleUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}">
-        <StackPanel>
-            
-            <!-- Область и край -->
-            <GroupBox Header="Область или край">
-                <TextBox Text="{Binding RegionUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
-                         FontSize="16"/>
-            </GroupBox>
-            
-            <!-- Город -->
-            <GroupBox Header="Город">
-                <TextBox Text="{Binding CityUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
-                         FontSize="16"/>
-            </GroupBox>
-            
-            <!-- Район -->
-            <Expander Header="Район">
-                <TextBox Text="{Binding DistrictUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
-                         FontSize="16"/>
-            </Expander>
-            
-            <!-- Улица -->
-            <GroupBox Header="Улица">
-                <TextBox Text="{Binding StreetUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
-                         FontSize="16"/>
-            </GroupBox>
-            
-            <!-- Номер дома -->
-            <GroupBox Header="Дом">
-                <TextBox Text="{Binding HouseNumberUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
-                         FontSize="16"/>
-            </GroupBox>
-            
-            <!-- Корпус -->
-            <Expander Header="Корпус">
-                <TextBox Text="{Binding HousingUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
-                         FontSize="16"/>
-            </Expander>
-            
-            <!-- Номер квартиры -->
-            <Expander Header="Квартира">
-                <TextBox Text="{Binding ApartmentNumberUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
-                         FontSize="16"/>
-            </Expander>
+             mc:Ignorable="d"
+             Width="127"
+             Height="457">
 
-            <!--Дата регистрации-->
-            <GroupBox Header="Дата регистраци">
-                <DatePicker FontSize="16"
-                            SelectedDate="{Binding RegistrationDateUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}"/>
-            </GroupBox>
-        </StackPanel>
-    </GroupBox>
+    <Viewbox>
+        <GroupBox Header="{Binding TitleUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                  FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}">
+            <StackPanel>
+
+                <!--Область и край-->
+                <GroupBox Header="Область или край"
+                          FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                          Margin="5">
+                    <TextBox Text="{Binding RegionUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"/>
+                </GroupBox>
+
+                <!--Город-->
+                <GroupBox Header="Город"
+                          FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                          Margin="5">
+                    <TextBox Text="{Binding CityUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"/>
+                </GroupBox>
+
+                <!--Район-->
+                <Expander Header="Район"
+                          FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                          Margin="5">
+                    <TextBox Text="{Binding DistrictUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"/>
+                </Expander>
+
+                <!--Улица-->
+                <GroupBox Header="Улица"
+                          FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                          Margin="5">
+                    <TextBox Text="{Binding StreetUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"/>
+                </GroupBox>
+
+                <!--Номер дома-->
+                <GroupBox Header="Дом"
+                          FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                          Margin="5">
+                    <TextBox Text="{Binding HouseNumberUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
+                             FontSize="16"/>
+                </GroupBox>
+
+                <!--Корпус-->
+                <Expander Header="Корпус"
+                          FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                          Margin="5">
+                    <TextBox Text="{Binding HousingUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"/>
+                </Expander>
+
+                <!--Номер квартиры-->
+                <Expander Header="Квартира"
+                          FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                          Margin="5">
+                    <TextBox Text="{Binding ApartmentNumberUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}" 
+                             FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"/>
+                </Expander>
+
+                <!--Дата регистрации-->
+                <GroupBox Header="Дата регистраци"
+                          FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                          Margin="5">
+                    <DatePicker FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}}"
+                                SelectedDate="{Binding RegistrationDateUC, RelativeSource={RelativeSource AncestorType=local:AddressUserControl}, Mode=TwoWay}"/>
+                </GroupBox>
+            </StackPanel>
+        </GroupBox>
+    </Viewbox>
 </UserControl>

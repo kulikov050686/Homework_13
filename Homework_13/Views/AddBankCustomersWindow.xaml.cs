@@ -1,6 +1,5 @@
 ﻿using Homework_13.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 
@@ -64,26 +63,6 @@ namespace Homework_13.Views
         {
             get => (Reliability)GetValue(ReliabilityProperty);
             set => SetValue(ReliabilityProperty, value);
-        }
-
-        #endregion
-
-        #region Описание
-
-        public static readonly DependencyProperty DescriptionProperty =
-            DependencyProperty.Register(nameof(Description),
-                                        typeof(string),
-                                        typeof(AddBankCustomersWindow),
-                                        new PropertyMetadata(default(string)));
-
-        /// <summary>
-        /// Описание
-        /// </summary>
-        [Description("Описание")]
-        public string Description
-        {
-            get => (string)GetValue(DescriptionProperty);
-            set => SetValue(DescriptionProperty, value);
         }
 
         #endregion
@@ -647,16 +626,12 @@ namespace Homework_13.Views
         }
 
         #endregion
+                
+        public AddBankCustomersWindow() => InitializeComponent();
 
-        #region Лист надёжности
+        private void TERUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
 
-        [Description("Лист надёжности")]
-        public List<string> ReliabilityList { get; set; } = new List<string> { "Низкая",
-                                                                               "Средняя",
-                                                                               "Высокая" };
-
-        #endregion
-        
-        public AddBankCustomersWindow() => InitializeComponent();        
+        }
     }
 }
