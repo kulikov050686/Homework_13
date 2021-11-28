@@ -25,17 +25,16 @@
             BorderThickness="5" 
             BorderBrush="{Binding ColorBackground}">
 
-        <Grid Background="{Binding ColorBackground}">
-            <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" 
+                    Background="{Binding ColorBackground}">
 
-                <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:InfoWindow}}" 
-                           VerticalAlignment="Center" 
-                           HorizontalAlignment="Center"
-                           FontSize="14"/>
+            <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:InfoWindow}}" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       FontSize="14"/>
 
-                <TextBlock Text="{Binding MessageText}"
-                           FontSize="10"/>
-            </StackPanel>
-        </Grid>
+            <TextBlock Text="{Binding MessageText}"
+                       FontSize="10"/>
+        </StackPanel>        
     </Border>
 </Window>

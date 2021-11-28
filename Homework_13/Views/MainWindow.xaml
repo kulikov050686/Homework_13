@@ -10,7 +10,8 @@
         Height="450" 
         Width="800"
         DataContext="{Binding MainWindowVM, Source={StaticResource Locator}}">
-    <StackPanel>
+    
+    <StackPanel Margin="5">
         <uc:MainMenuUserControl/>
         <uc:MainUserControl/>
     </StackPanel>
