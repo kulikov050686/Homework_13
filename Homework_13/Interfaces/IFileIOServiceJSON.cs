@@ -16,6 +16,6 @@
         /// Загрузить данные из файла JSON
         /// </summary>
         /// <param name="pathFile"> Путь к файлу </param>
-        T OpenAsJSON(string pathFile);             
+        T OpenAsJSON(string pathFile);
     }
 }
