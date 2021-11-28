@@ -216,7 +216,7 @@ namespace Homework_13.ViewModels
         {
             _departmentsManager = departmentsManager;
             _bankCustomersManager = bankCustomersManager;
-            _dialogLocator = dialogLocator;                  
+            _dialogLocator = dialogLocator;
             _processingOfDepositoryAccounts = processingOfDepositoryAccounts;
             _actionLogBankCustomers = actionLogBankCustomers;
             _actionLogBankAccounts = actionLogBankAccounts;

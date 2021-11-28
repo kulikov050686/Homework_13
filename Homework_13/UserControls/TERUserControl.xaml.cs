@@ -75,8 +75,8 @@ namespace Homework_13.UserControls
         /// </summary>
         [Description("Лист надёжности")]
         public List<string> ReliabilityListUC { get; set; } = new List<string> { "Низкая",
-                                                                               "Средняя",
-                                                                               "Высокая" };
+                                                                                 "Средняя",
+                                                                                 "Высокая" };
 
         #endregion
 

@@ -53,7 +53,7 @@ namespace Homework_13.Views
             DependencyProperty.Register(nameof(Reliability),
                                         typeof(Reliability),
                                         typeof(AddBankCustomersWindow),
-                                        new PropertyMetadata(default(Reliability)));        
+                                        new PropertyMetadata(default(Reliability)));
 
         /// <summary>
         /// Рейтинг

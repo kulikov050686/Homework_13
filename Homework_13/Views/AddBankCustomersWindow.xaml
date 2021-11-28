@@ -19,11 +19,13 @@
         <uc:TERUserControl Grid.Column="0"
                            Grid.Row="0"
                            Grid.ColumnSpan="2"
-                           PhoneNumberUC="{Binding PhoneNumber}"
-                           EmailUC="{Binding Email}"
-                           ReliabilityUC="{Binding Reliability}"
+                           PhoneNumberUC="{Binding PhoneNumber, Mode=TwoWay}"
+                           EmailUC="{Binding Email, Mode=TwoWay}"
+                           ReliabilityUC="{Binding Reliability, Mode=TwoWay}"
                            FontSize="16"
-                           HorizontalAlignment="Left" Height="70" Width="399"/>
+                           HorizontalAlignment="Left" 
+                           Height="70" 
+                           Width="399"/>
 
         <StackPanel Orientation="Horizontal">
 
